@@ -1,0 +1,9 @@
+{
+  "schema_version": "0.1.0",
+  "last_updated": "2026-09-09",
+  "status": "framework",
+  "purpose": "Store reproducible test cases only after sources, expected outputs, applicable rule versions, and review status are recorded.",
+  "privacy_note": "Use synthetic inputs unless explicitly approved otherwise.",
+  "cases": []
+}
+
