@@ -1,21 +1,20 @@
 {
-  "schema_version": "0.2.0",
+  "schema_version": "0.3.0",
   "last_updated": "2026-09-10",
-  "status": "phase_1_in_progress",
+  "status": "t003_complete_mvp_baseline",
   "task_id": "T-003",
-  "purpose": "为八字确定性计算层保存可重复、可追溯的金标、暂定金标和证据不足案例。候选实现不得自证正确。",
+  "purpose": "为八字确定性计算层保存可重复、可追溯的独立金标与产品口径金标。候选实现不得自证正确。",
   "privacy_note": "全部使用公开资料中的时刻或合成输入，不含真实用户出生资料。",
   "assertion_policy": {
     "independent_gold": "预期结果来自独立历法、天文、政府或时区权威资料，可用于判定候选实现。",
-    "provisional_gold": "来源可复算且独立，但生产算法或精度尚未由 Chat 批准；仅验证结构或稳健边界。",
-    "not_gold": "只记录候选库输出或传统口径差异，不判定正确。",
-    "partial_pass": "只有独立来源覆盖的断言通过；同一案例中的命理派生值仍可能不是金标。"
+    "product_convention_gold": "预期结果来自 Chat 已批准且来源可复算的产品固定口径，可用于回归，但不宣称统一所有命理流派。",
+    "partial_pass": "只有独立来源覆盖的断言通过；同一案例中的命理派生值仍可能只是产品口径。"
   },
   "implementation_snapshots": {
     "lunar_javascript": {
       "version": "1.7.7",
       "commit": "4c45a59f79b856125516f31aefa8295035c16afd",
-      "role": "candidate_implementation_not_gold_source"
+      "role": "locked_candidate_implementation"
     },
     "runtime_observation": {
       "node": "24.19.0",
@@ -23,19 +22,14 @@
       "tzdata": "2026b",
       "role": "observation_environment_not_source_of_truth"
     },
-    "project_rules": [
-      "BR-001",
-      "BR-002",
-      "BR-003",
-      "BR-004"
-    ]
+    "project_rules": ["BR-001", "BR-002", "BR-003", "BR-004", "BR-005"]
   },
   "source_catalog": {
     "HKO_ALMANAC_2024": {
       "publisher": "Hong Kong Observatory",
       "url": "https://www.hko.gov.hk/en/gts/astron2024/files/HKO_almanac_2024.pdf",
       "independent_of_candidate": true,
-      "coverage": "2024 年节气事件的香港民用时间；立春为 2024-02-04 16:27"
+      "coverage": "2024 年节气事件的香港民用时间；立春 02-04 16:27，惊蛰 03-05 10:23"
     },
     "HKO_SOLAR_TERMS": {
       "publisher": "Hong Kong Observatory",
@@ -49,10 +43,10 @@
       "independent_of_candidate": true,
       "coverage": "官方农历与命理使用立春换干支年的口径差异"
     },
-    "IANA_TZDB_2025B": {
+    "IANA_TZDB_2026B": {
       "publisher": "IANA",
       "url": "https://www.iana.org/time-zones",
-      "version": "2025b",
+      "version": "2026b",
       "independent_of_candidate": true,
       "coverage": "历史 UTC offset、时区与 DST 规则"
     },
@@ -60,7 +54,7 @@
       "publisher": "GOV.UK",
       "url": "https://www.gov.uk/when-do-the-clocks-change",
       "independent_of_candidate": true,
-      "coverage": "英国三月最后一个星期日和十月最后一个星期日的时钟切换规则"
+      "coverage": "英国三月和十月时钟切换规则"
     },
     "NIST_DST": {
       "publisher": "National Institute of Standards and Technology",
@@ -68,11 +62,11 @@
       "independent_of_candidate": true,
       "coverage": "美国 2007 年后的 DST 起止规则"
     },
-    "NOAA_SOLAR": {
-      "publisher": "NOAA Global Monitoring Laboratory",
-      "url": "https://gml.noaa.gov/grad/solcalc/solareqns.PDF",
+    "USNO_SOLAR_COORDINATES": {
+      "publisher": "United States Naval Observatory",
+      "url": "https://aa.usno.navy.mil/faq/sun_approx",
       "independent_of_candidate": true,
-      "coverage": "近似均时差及真太阳时换算公式"
+      "coverage": "以 Julian Date 计算太阳视黄经、赤经和均时差；2000 年前后各两个世纪约 1 角分精度"
     },
     "USNO_EQTIME": {
       "publisher": "United States Naval Observatory",
@@ -80,226 +74,213 @@
       "independent_of_candidate": true,
       "coverage": "视太阳时、平太阳时与均时差定义"
     },
-    "LUNAR_JS_TESTS": {
+    "GEONAMES_DUMP": {
+      "publisher": "GeoNames",
+      "url": "https://www.geonames.org/export/",
+      "license": "CC BY 4.0",
+      "independent_of_candidate": true,
+      "coverage": "可版本化下载的 WGS84 地名、经纬度与时区 ID 数据"
+    },
+    "SANMING_DAYUN": {
+      "publisher": "《三命通会·论大运》，《钦定古今图书集成》收录本",
+      "url": "https://zh.wikisource.org/zh-hans/%E6%AC%BD%E5%AE%9A%E5%8F%A4%E4%BB%8A%E5%9C%96%E6%9B%B8%E9%9B%86%E6%88%90/%E5%8D%9A%E7%89%A9%E5%BD%99%E7%B7%A8/%E8%97%9D%E8%A1%93%E5%85%B8/%E7%AC%AC598%E5%8D%B7",
+      "independent_of_candidate": true,
+      "coverage": "阳男阴女顺、阴男阳女逆，数至前后节并按三日一岁、余数折月日"
+    },
+    "LUNAR_JS_SOURCE_TESTS": {
       "publisher": "6tail/lunar-javascript",
-      "url": "https://github.com/6tail/lunar-javascript/tree/4c45a59f79b856125516f31aefa8295035c16afd/__tests__",
+      "url": "https://github.com/6tail/lunar-javascript/tree/4c45a59f79b856125516f31aefa8295035c16afd",
       "independent_of_candidate": false,
-      "coverage": "候选实现自身测试，只能记录行为"
+      "coverage": "候选实现源码与自身测试，只用于行为与集成回归"
     }
   },
   "summary": {
-    "case_count": 9,
-    "independent_gold": 6,
-    "provisional_gold": 1,
-    "not_gold": 2,
-    "pass_or_partial_pass": 7,
-    "blocked_no_gold": 2
+    "case_count": 15,
+    "independent_gold": 8,
+    "product_convention_gold": 7,
+    "pass_or_partial_pass": 15,
+    "blocked_no_gold": 0
   },
   "cases": [
     {
       "id": "T003-ST-LICHUN-2024-BEFORE-1M",
       "category": ["solar_term_boundary", "lichun_year_boundary"],
       "gold_status": "independent_gold_for_event_only",
-      "input": {
-        "local_datetime": "2024-02-04T16:26:00",
-        "time_zone": "Asia/Hong_Kong",
-        "utc_offset": "+08:00",
-        "utc_instant": "2024-02-04T08:26:00Z"
-      },
-      "expected": {
-        "lichun_reached": false,
-        "next_solar_term": "立春",
-        "official_boundary_local_minute": "2024-02-04T16:27+08:00",
-        "candidate_bazi_not_gold": "癸卯 乙丑 戊戌 庚申"
-      },
+      "input": {"local_datetime": "2024-02-04T16:26:00", "time_zone": "Asia/Hong_Kong", "utc_offset": "+08:00", "utc_instant": "2024-02-04T08:26:00Z"},
+      "expected": {"lichun_reached": false, "next_solar_term": "立春", "official_boundary_local_minute": "2024-02-04T16:27+08:00", "candidate_bazi_product_convention": "癸卯 乙丑 戊戌 庚申"},
       "sources": ["HKO_ALMANAC_2024", "HKO_SOLAR_TERMS", "HKO_GANZHI_YEAR_NOTE"],
-      "rule_or_convention": "节气事件按 HKO 香港民用时间精确到分钟；年柱换界仅记录 lunar-javascript 候选行为。",
+      "rule_or_convention": "节气事件按 HKO 香港民用时间精确到分钟；四柱按 BR-001/BR-005。",
       "implementation": "lunar-javascript@1.7.7 commit 4c45a59f79b856125516f31aefa8295035c16afd",
-      "verification": {
-        "observed": "候选库返回前一节气为大寒、下一节气为立春",
-        "status": "partial_pass",
-        "verified_at": "2026-09-09"
-      },
-      "differences": "HKO 官方农历以正月初一换干支年；命理常以立春换年，年柱断言尚不是官方金标。"
+      "verification": {"observed": "候选库返回前一节气大寒、下一节气立春", "status": "partial_pass", "verified_at": "2026-09-10"},
+      "differences": "HKO 可独立证明事件时刻；由节气到子平年/月柱的映射属于产品命理口径。"
     },
     {
       "id": "T003-ST-LICHUN-2024-AFTER-1M",
       "category": ["solar_term_boundary", "lichun_year_boundary"],
       "gold_status": "independent_gold_for_event_only",
-      "input": {
-        "local_datetime": "2024-02-04T16:28:00",
-        "time_zone": "Asia/Hong_Kong",
-        "utc_offset": "+08:00",
-        "utc_instant": "2024-02-04T08:28:00Z"
-      },
-      "expected": {
-        "lichun_reached": true,
-        "previous_solar_term": "立春",
-        "official_boundary_local_minute": "2024-02-04T16:27+08:00",
-        "candidate_bazi_not_gold": "甲辰 丙寅 戊戌 庚申"
-      },
+      "input": {"local_datetime": "2024-02-04T16:28:00", "time_zone": "Asia/Hong_Kong", "utc_offset": "+08:00", "utc_instant": "2024-02-04T08:28:00Z"},
+      "expected": {"lichun_reached": true, "previous_solar_term": "立春", "official_boundary_local_minute": "2024-02-04T16:27+08:00", "candidate_bazi_product_convention": "甲辰 丙寅 戊戌 庚申"},
       "sources": ["HKO_ALMANAC_2024", "HKO_SOLAR_TERMS", "HKO_GANZHI_YEAR_NOTE"],
-      "rule_or_convention": "节气事件按 HKO 香港民用时间精确到分钟；年/月柱切换只记录候选实现。",
+      "rule_or_convention": "节气事件按 HKO 香港民用时间精确到分钟；四柱按 BR-001/BR-005。",
       "implementation": "lunar-javascript@1.7.7 commit 4c45a59f79b856125516f31aefa8295035c16afd",
-      "verification": {
-        "observed": "候选库返回前一节气为立春、下一节气为雨水",
-        "status": "partial_pass",
-        "verified_at": "2026-09-09"
-      },
-      "differences": "立春事件通过分钟边界核验；由事件到子平年/月柱的映射仍需独立传统口径与纪日来源。"
+      "verification": {"observed": "候选库返回前一节气立春、下一节气雨水", "status": "partial_pass", "verified_at": "2026-09-10"},
+      "differences": "事件边界独立通过；命理柱切换是已固定产品口径。"
+    },
+    {
+      "id": "T003-ST-JINGZHE-2024-BEFORE-1M",
+      "category": ["solar_term_boundary", "month_pillar_boundary"],
+      "gold_status": "independent_gold_for_event_only",
+      "input": {"local_datetime": "2024-03-05T10:22:00", "time_zone": "Asia/Hong_Kong", "utc_offset": "+08:00", "utc_instant": "2024-03-05T02:22:00Z"},
+      "expected": {"jingzhe_reached": false, "official_boundary_local_minute": "2024-03-05T10:23+08:00", "candidate_bazi_product_convention": "甲辰 丙寅 戊辰 丁巳"},
+      "sources": ["HKO_ALMANAC_2024", "HKO_SOLAR_TERMS"],
+      "rule_or_convention": "精确到分钟验证非立春的月令节界。",
+      "implementation": "lunar-javascript@1.7.7 commit 4c45a59f79b856125516f31aefa8295035c16afd",
+      "verification": {"status": "partial_pass", "verified_at": "2026-09-10"},
+      "differences": "事件时刻为独立金标；月柱映射为产品口径。"
+    },
+    {
+      "id": "T003-ST-JINGZHE-2024-AFTER-1M",
+      "category": ["solar_term_boundary", "month_pillar_boundary"],
+      "gold_status": "independent_gold_for_event_only",
+      "input": {"local_datetime": "2024-03-05T10:24:00", "time_zone": "Asia/Hong_Kong", "utc_offset": "+08:00", "utc_instant": "2024-03-05T02:24:00Z"},
+      "expected": {"jingzhe_reached": true, "official_boundary_local_minute": "2024-03-05T10:23+08:00", "candidate_bazi_product_convention": "甲辰 丁卯 戊辰 丁巳"},
+      "sources": ["HKO_ALMANAC_2024", "HKO_SOLAR_TERMS"],
+      "rule_or_convention": "精确到分钟验证非立春的月令节界。",
+      "implementation": "lunar-javascript@1.7.7 commit 4c45a59f79b856125516f31aefa8295035c16afd",
+      "verification": {"status": "partial_pass", "verified_at": "2026-09-10"},
+      "differences": "事件时刻为独立金标；月柱映射为产品口径。"
     },
     {
       "id": "T003-TZ-LONDON-DST-GAP-2024",
       "category": ["time_zone", "dst", "nonexistent_local_time"],
       "gold_status": "independent_gold",
-      "input": {
-        "time_zone": "Europe/London",
-        "instants": ["2024-03-31T00:59:00Z", "2024-03-31T01:00:00Z"]
-      },
-      "expected": {
-        "local_results": [
-          {"instant": "2024-03-31T00:59:00Z", "local": "2024-03-31T00:59:00", "offset": "+00:00"},
-          {"instant": "2024-03-31T01:00:00Z", "local": "2024-03-31T02:00:00", "offset": "+01:00"}
-        ],
-        "nonexistent_local_interval": "2024-03-31T01:00:00/01:59:59"
-      },
-      "sources": ["UK_CLOCK_CHANGES", "IANA_TZDB_2025B"],
+      "input": {"time_zone": "Europe/London", "instants": ["2024-03-31T00:59:00Z", "2024-03-31T01:00:00Z"]},
+      "expected": {"local_results": [{"instant": "2024-03-31T00:59:00Z", "local": "2024-03-31T00:59:00", "offset": "+00:00"}, {"instant": "2024-03-31T01:00:00Z", "local": "2024-03-31T02:00:00", "offset": "+01:00"}], "nonexistent_local_interval": "2024-03-31T01:00:00/01:59:59"},
+      "sources": ["UK_CLOCK_CHANGES", "IANA_TZDB_2026B"],
       "rule_or_convention": "本地输入落入 gap 时必须报错或要求用户确认，不得静默平移。",
       "implementation": "Node Intl observation: node 24.19.0 / ICU 78.3 / tz 2026b",
-      "verification": {"status": "pass", "verified_at": "2026-09-09"},
-      "differences": "无命理流派差异；属于时间标准化问题。"
+      "verification": {"status": "pass", "verified_at": "2026-09-10"},
+      "differences": "无命理流派差异。"
     },
     {
       "id": "T003-TZ-LONDON-DST-FOLD-2024",
       "category": ["time_zone", "dst", "ambiguous_local_time"],
       "gold_status": "independent_gold",
-      "input": {
-        "time_zone": "Europe/London",
-        "instants": ["2024-10-27T00:30:00Z", "2024-10-27T01:30:00Z"]
-      },
-      "expected": {
-        "local_results": [
-          {"instant": "2024-10-27T00:30:00Z", "local": "2024-10-27T01:30:00", "offset": "+01:00", "fold": 0},
-          {"instant": "2024-10-27T01:30:00Z", "local": "2024-10-27T01:30:00", "offset": "+00:00", "fold": 1}
-        ],
-        "ambiguous_local_time": "2024-10-27T01:30:00"
-      },
-      "sources": ["UK_CLOCK_CHANGES", "IANA_TZDB_2025B"],
+      "input": {"time_zone": "Europe/London", "instants": ["2024-10-27T00:30:00Z", "2024-10-27T01:30:00Z"]},
+      "expected": {"local_results": [{"instant": "2024-10-27T00:30:00Z", "local": "2024-10-27T01:30:00", "offset": "+01:00", "fold": 0}, {"instant": "2024-10-27T01:30:00Z", "local": "2024-10-27T01:30:00", "offset": "+00:00", "fold": 1}], "ambiguous_local_time": "2024-10-27T01:30:00"},
+      "sources": ["UK_CLOCK_CHANGES", "IANA_TZDB_2026B"],
       "rule_or_convention": "重复本地时刻必须保留 fold/offset 或让用户选择较早、较晚 instant。",
       "implementation": "Node Intl observation: node 24.19.0 / ICU 78.3 / tz 2026b",
-      "verification": {"status": "pass", "verified_at": "2026-09-09"},
-      "differences": "两个不同 UTC instant 映射到相同墙上时间，不能只保存本地字符串。"
+      "verification": {"status": "pass", "verified_at": "2026-09-10"},
+      "differences": "两个 UTC instant 映射到相同墙上时间，不能只保存本地字符串。"
     },
     {
       "id": "T003-TZ-NEW-YORK-DST-GAP-2024",
       "category": ["time_zone", "dst", "overseas_birth"],
       "gold_status": "independent_gold",
-      "input": {
-        "time_zone": "America/New_York",
-        "instants": ["2024-03-10T06:59:00Z", "2024-03-10T07:00:00Z"]
-      },
-      "expected": {
-        "local_results": [
-          {"instant": "2024-03-10T06:59:00Z", "local": "2024-03-10T01:59:00", "offset": "-05:00"},
-          {"instant": "2024-03-10T07:00:00Z", "local": "2024-03-10T03:00:00", "offset": "-04:00"}
-        ],
-        "nonexistent_local_interval": "2024-03-10T02:00:00/02:59:59"
-      },
-      "sources": ["NIST_DST", "IANA_TZDB_2025B"],
-      "rule_or_convention": "海外出生必须先用出生地 IANA 时区解析成唯一 instant，再进入候选历法层。",
+      "input": {"time_zone": "America/New_York", "instants": ["2024-03-10T06:59:00Z", "2024-03-10T07:00:00Z"]},
+      "expected": {"local_results": [{"instant": "2024-03-10T06:59:00Z", "local": "2024-03-10T01:59:00", "offset": "-05:00"}, {"instant": "2024-03-10T07:00:00Z", "local": "2024-03-10T03:00:00", "offset": "-04:00"}], "nonexistent_local_interval": "2024-03-10T02:00:00/02:59:59"},
+      "sources": ["NIST_DST", "IANA_TZDB_2026B"],
+      "rule_or_convention": "海外出生先用出生地 IANA 时区解析成唯一 instant。",
       "implementation": "Node Intl observation: node 24.19.0 / ICU 78.3 / tz 2026b",
-      "verification": {"status": "pass", "verified_at": "2026-09-09"},
-      "differences": "`lunar-javascript` 不处理 IANA 时区，不能直接接收此类用户输入。"
+      "verification": {"status": "pass", "verified_at": "2026-09-10"},
+      "differences": "底座不处理 IANA 时区，必须由适配器完成。"
     },
     {
       "id": "T003-TZ-KATHMANDU-NON-HOUR-OFFSET",
       "category": ["time_zone", "overseas_birth", "non_hour_offset"],
       "gold_status": "independent_gold",
-      "input": {
-        "local_datetime": "2024-01-01T00:15:00",
-        "time_zone": "Asia/Kathmandu"
-      },
-      "expected": {
-        "utc_offset": "+05:45",
-        "utc_instant": "2023-12-31T18:30:00Z"
-      },
-      "sources": ["IANA_TZDB_2025B"],
-      "rule_or_convention": "不得假设时区偏移一定是整小时，也不得丢失跨公历日信息。",
+      "input": {"local_datetime": "2024-01-01T00:15:00", "time_zone": "Asia/Kathmandu"},
+      "expected": {"utc_offset": "+05:45", "utc_instant": "2023-12-31T18:30:00Z"},
+      "sources": ["IANA_TZDB_2026B"],
+      "rule_or_convention": "不得假设时区偏移为整小时，也不得丢失跨公历日信息。",
       "implementation": "Node Intl observation: node 24.19.0 / ICU 78.3 / tz 2026b",
-      "verification": {"status": "pass", "verified_at": "2026-09-09"},
-      "differences": "无命理流派差异；属于输入规范。"
+      "verification": {"status": "pass", "verified_at": "2026-09-10"},
+      "differences": "无命理流派差异。"
     },
     {
-      "id": "T003-LATE-ZI-1988-DUAL-CANDIDATE",
+      "id": "T003-LATE-ZI-1988-BOUNDARY",
       "category": ["late_zi", "day_pillar", "hour_pillar"],
-      "gold_status": "not_gold",
-      "input": {
-        "local_datetime": "1988-02-15T23:30:00",
-        "time_zone": "Asia/Shanghai",
-        "utc_offset": "+08:00"
-      },
-      "expected": {
-        "allowed_candidates": [
-          {"policy": "same_day_consistent", "day_pillar": "庚子", "hour_pillar": "丙子", "status": "requires_independent_source"},
-          {"policy": "next_day_consistent", "day_pillar": "辛丑", "hour_pillar": "戊子", "status": "requires_independent_source"}
-        ],
-        "prohibited": {"policy": "mixed_legacy", "day_pillar": "庚子", "hour_pillar": "戊子"}
-      },
-      "sources": ["LUNAR_JS_TESTS"],
-      "rule_or_convention": "同日/次日尚未决定；日柱与时干必须来自同一日界口径；混合模式按 D-005 排除。",
-      "implementation": "lunar-javascript@1.7.7: sect=1 -> 戊辰 甲寅 辛丑 戊子; sect=2(default) -> 戊辰 甲寅 庚子 戊子",
-      "verification": {"status": "blocked_no_gold", "verified_at": "2026-09-09"},
-      "differences": "候选库默认 sect=2 产生已排除的混合结果；同日一致模式需在适配器层自行实现。"
+      "gold_status": "product_convention_gold",
+      "input": {"time_zone": "Asia/Shanghai", "boundary_samples": ["1988-02-15T22:59:00+08:00", "1988-02-15T23:00:00+08:00", "1988-02-15T23:30:00+08:00"]},
+      "expected": {"results": [{"local_datetime": "1988-02-15T22:59:00+08:00", "day_pillar": "庚子", "hour_pillar": "丁亥"}, {"local_datetime": "1988-02-15T23:00:00+08:00", "day_pillar": "辛丑", "hour_pillar": "戊子"}, {"local_datetime": "1988-02-15T23:30:00+08:00", "day_pillar": "辛丑", "hour_pillar": "戊子"}], "prohibited_result": {"day_pillar": "庚子", "hour_pillar": "戊子"}},
+      "sources": ["LUNAR_JS_SOURCE_TESTS"],
+      "rule_or_convention": "D-009/BR-005：23:00 子初换日；日柱与时干同步换日。",
+      "implementation": "lunar-javascript@1.7.7 EightChar.setSect(1)",
+      "verification": {"status": "pass", "verified_at": "2026-09-10"},
+      "differences": "这是产品固定口径；其他流派可采用 00:00 换日，但不作为本产品默认。"
+    },
+    {
+      "id": "T003-DAYUN-DIRECTION-MATRIX",
+      "category": ["dayun", "direction"],
+      "gold_status": "product_convention_gold",
+      "input": {"combinations": [{"year_stem_polarity": "yang", "gender_rule_parameter": "male"}, {"year_stem_polarity": "yang", "gender_rule_parameter": "female"}, {"year_stem_polarity": "yin", "gender_rule_parameter": "male"}, {"year_stem_polarity": "yin", "gender_rule_parameter": "female"}]},
+      "expected": {"directions": ["forward", "reverse", "reverse", "forward"], "forward_boundary": "next_jie", "reverse_boundary": "previous_jie"},
+      "sources": ["SANMING_DAYUN", "LUNAR_JS_SOURCE_TESTS"],
+      "rule_or_convention": "D-010/BR-003：阳男阴女顺，阴男阳女逆。",
+      "implementation": "lunar-javascript@1.7.7 getYun(gender, 1)",
+      "verification": {"status": "pass", "verified_at": "2026-09-10"},
+      "differences": "年干阴阳与传统二元性别参数是产品所选口径，不宣称覆盖所有流派。"
+    },
+    {
+      "id": "T003-DAYUN-START-TRADITIONAL-SECT1",
+      "category": ["dayun", "precise_start_datetime"],
+      "gold_status": "product_convention_gold",
+      "input": {"local_datetime": "2022-03-09T20:51:00", "time_zone": "Asia/Shanghai", "gender_rule_parameter": "male", "year_stem_polarity": "yang"},
+      "expected": {"direction": "forward", "target_jie_local_datetime": "2022-04-05T03:20:14+08:00", "start_components": {"years": 8, "months": 9, "days": 10, "hours": 0}, "start_local_datetime": "2030-12-19T20:51:00+08:00", "storage_precision": "year-month-day-hour", "display_free": "约 8 岁 9 个月起运"},
+      "sources": ["SANMING_DAYUN", "LUNAR_JS_SOURCE_TESTS"],
+      "rule_or_convention": "D-010/BR-003：取下一节，三日一岁、一日四月、一时辰十日；锁定 sect=1。",
+      "implementation": "lunar-javascript@1.7.7 commit 4c45a59f79b856125516f31aefa8295035c16afd",
+      "verification": {"observed": "getYun(1,1) 返回 8年9月10日0时，起运 2030-12-19 20:51", "status": "pass", "verified_at": "2026-09-10"},
+      "differences": "sect=2 连续分钟法会得到 2030-12-12 06:51；已明确不采用。"
     },
     {
       "id": "T003-TRUE-SOLAR-CHONGQING-SHIFT",
       "category": ["true_solar_time", "hour_pillar_change"],
-      "gold_status": "provisional_gold",
-      "input": {
-        "civil_datetime": "2024-06-15T01:20:00+08:00",
-        "time_zone": "Asia/Shanghai",
-        "longitude_east_degrees": 106.55,
-        "zone_meridian_east_degrees": 120.0,
-        "day_of_year": 167
-      },
-      "expected": {
-        "noaa_approx_equation_of_time_minutes": -0.046,
-        "longitude_and_equation_offset_minutes": -53.846,
-        "apparent_solar_time_approx": "2024-06-15T00:26:09+08:00",
-        "civil_hour_branch": "丑",
-        "true_solar_hour_branch": "子",
-        "hour_branch_changes": true,
-        "ui_action": "提示用户存在两种候选盘，并允许高级模式启用真太阳时"
-      },
-      "sources": ["NOAA_SOLAR", "USNO_EQTIME"],
-      "rule_or_convention": "采用 NOAA 近似公式仅验证 BR-002 的跨时辰触发逻辑，不批准生产算法。",
-      "implementation": "独立复算 NOAA 公式；未调用 lunar-javascript",
-      "verification": {"status": "pass_provisional", "verified_at": "2026-09-09"},
-      "differences": "真太阳时定义有天文基础，但命理是否启用及精度属于产品/流派选择；默认关闭。"
+      "gold_status": "product_convention_gold",
+      "input": {"civil_datetime": "2024-06-15T01:20:00+08:00", "utc_instant": "2024-06-14T17:20:00Z", "time_zone": "Asia/Shanghai", "longitude_east_degrees": 106.55},
+      "expected": {"usno_equation_of_time_minutes": -0.457109, "longitude_correction_from_utc_minutes": 426.2, "apparent_solar_time": "2024-06-15T00:25:45", "civil_hour_branch": "丑", "true_solar_hour_branch": "子", "hour_branch_changes": true, "ui_action": "提示并允许高级模式启用"},
+      "sources": ["USNO_SOLAR_COORDINATES", "USNO_EQTIME", "GEONAMES_DUMP", "IANA_TZDB_2026B"],
+      "rule_or_convention": "D-011/BR-002：从 UTC instant、东经度和 USNO 均时差计算。",
+      "implementation": "独立复算 USNO 公式；未调用 lunar-javascript",
+      "verification": {"status": "pass", "verified_at": "2026-09-10"},
+      "differences": "真太阳时是否启用仍是产品选择，默认关闭。"
     },
     {
-      "id": "T003-DAYUN-START-SECT-DIFFERENCE",
-      "category": ["dayun", "precise_start_datetime"],
-      "gold_status": "not_gold",
-      "input": {
-        "local_datetime": "2022-03-09T20:51:00",
-        "time_zone": "Asia/Shanghai",
-        "gender_parameter": 1
-      },
-      "expected": {
-        "candidate_outputs": [
-          {"library_sect": 1, "start_components": {"years": 8, "months": 9, "days": 10, "hours": 0}, "start_local_datetime": "2030-12-19T20:51:00+08:00"},
-          {"library_sect": 2, "start_components": {"years": 8, "months": 9, "days": 2, "hours": 10}, "start_local_datetime": "2030-12-12T06:51:00+08:00"}
-        ],
-        "storage_precision": "year-month-day-hour",
-        "display_free": "约 8 岁 9 个月起运",
-        "display_detailed": "必须显示所选口径对应的完整时间轴"
-      },
-      "sources": ["LUNAR_JS_TESTS"],
-      "rule_or_convention": "D-007 只确认存储/展示精度；两种起运折算尚未决定，均不可作为金标。",
-      "implementation": "lunar-javascript@1.7.7 commit 4c45a59f79b856125516f31aefa8295035c16afd",
-      "verification": {"status": "blocked_no_gold", "verified_at": "2026-09-09"},
-      "differences": "同一输入在 library sect=1/2 下相差约 7.6 天，必须先选定口径并找到独立可复算来源。"
+      "id": "T003-TRUE-SOLAR-BEIJING-NO-SHIFT",
+      "category": ["true_solar_time", "no_hour_pillar_change"],
+      "gold_status": "product_convention_gold",
+      "input": {"civil_datetime": "2024-06-15T10:00:00+08:00", "utc_instant": "2024-06-15T02:00:00Z", "time_zone": "Asia/Shanghai", "longitude_east_degrees": 116.4074},
+      "expected": {"usno_equation_of_time_minutes": -0.534343, "longitude_correction_from_utc_minutes": 465.6296, "apparent_solar_time": "2024-06-15T09:45:06", "civil_hour_branch": "巳", "true_solar_hour_branch": "巳", "hour_branch_changes": false, "ui_action": "不提示"},
+      "sources": ["USNO_SOLAR_COORDINATES", "USNO_EQTIME", "GEONAMES_DUMP", "IANA_TZDB_2026B"],
+      "rule_or_convention": "D-011/BR-002。",
+      "implementation": "独立复算 USNO 公式；未调用 lunar-javascript",
+      "verification": {"status": "pass", "verified_at": "2026-09-10"},
+      "differences": "验证未跨时辰时不打扰用户。"
+    },
+    {
+      "id": "T003-TRUE-SOLAR-SHANGHAI-SHIFT",
+      "category": ["true_solar_time", "hour_pillar_change", "positive_equation_of_time"],
+      "gold_status": "product_convention_gold",
+      "input": {"civil_datetime": "2024-11-03T08:50:00+08:00", "utc_instant": "2024-11-03T00:50:00Z", "time_zone": "Asia/Shanghai", "longitude_east_degrees": 121.4737},
+      "expected": {"usno_equation_of_time_minutes": 16.446126, "longitude_correction_from_utc_minutes": 485.8948, "apparent_solar_time": "2024-11-03T09:12:20", "civil_hour_branch": "辰", "true_solar_hour_branch": "巳", "hour_branch_changes": true, "ui_action": "提示并允许高级模式启用"},
+      "sources": ["USNO_SOLAR_COORDINATES", "USNO_EQTIME", "GEONAMES_DUMP", "IANA_TZDB_2026B"],
+      "rule_or_convention": "D-011/BR-002。",
+      "implementation": "独立复算 USNO 公式；未调用 lunar-javascript",
+      "verification": {"status": "pass", "verified_at": "2026-09-10"},
+      "differences": "覆盖正均时差及向后一个时辰的边界。"
+    },
+    {
+      "id": "T003-TRUE-SOLAR-LONDON-DST-SHIFT",
+      "category": ["true_solar_time", "dst", "overseas_birth", "hour_pillar_change"],
+      "gold_status": "product_convention_gold",
+      "input": {"civil_datetime": "2024-06-15T13:00:00+01:00", "utc_instant": "2024-06-15T12:00:00Z", "time_zone": "Europe/London", "longitude_east_degrees": -0.1276},
+      "expected": {"usno_equation_of_time_minutes": -0.623739, "longitude_correction_from_utc_minutes": -0.5104, "apparent_solar_time": "2024-06-15T11:58:52", "civil_hour_branch": "未", "true_solar_hour_branch": "午", "hour_branch_changes": true, "ui_action": "提示并允许高级模式启用"},
+      "sources": ["USNO_SOLAR_COORDINATES", "USNO_EQTIME", "GEONAMES_DUMP", "IANA_TZDB_2026B", "UK_CLOCK_CHANGES"],
+      "rule_or_convention": "先以 IANA DST 解析唯一 UTC instant，再计算太阳时；不得手工减一个固定标准时区。",
+      "implementation": "独立复算 USNO 公式；未调用 lunar-javascript",
+      "verification": {"status": "pass", "verified_at": "2026-09-10"},
+      "differences": "覆盖海外 DST；UTC-first 避免把夏令时重复修正。"
     }
   ]
 }
