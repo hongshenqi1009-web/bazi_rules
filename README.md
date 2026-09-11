@@ -23,13 +23,16 @@
 - `knowledge/github_bazi_audit.md`：外部代码/算法候选的审计记录，不自动升级为正式规则。
 - `knowledge/city_element_methodology.md`：城市五行方法论、证据和版本规范。
 - `knowledge/matching_engine_methodology.md`：个人需要向量、城市匹配、指数标定、大运/方位修正及覆盖审计。
+- `knowledge/matching_manual_regression.md`：T-005 的 15 例人工命盘回归、分层问题归因与参数锁定结论。
 - `product/PRD.md`：产品范围、目标和验收框架。
 - `product/user_flow.md`：用户流程框架。
 - `product/monetisation.md`：商业化假设与验证框架。
 - `data/cities.csv`：城市数据结构。
 - `data/test_cases.json`：可重复验证的测试案例。
 - `data/matching_simulation_results.json`：T-005 三种匹配方法、3,000 组模拟和全部 100 城推荐次数。
+- `data/matching_manual_regression_cases.json`：15 个构造命盘案例的完整解释、需要向量、区间、大运前后、Top 10、Top 3 解释、冲突及辅助方案。
 - `analysis/t005_matching_simulation.py`：T-005 可重复模拟与集中度审计程序，不是前端应用代码。
+- `analysis/t005_manual_chart_regression.py`：人工案例匹配回归程序；`analysis/t005_verify_manual_case_pillars.js` 用锁定候选库复算四柱。
 - `design/design_system.md`：视觉与文案规范。
 
 ## 状态标签
@@ -49,4 +52,4 @@
 
 ## 当前边界
 
-当前已完成 T-004 城市自然模型，T-005 Matching Engine 候选正在审核。仓库暂不开发前端、不扩展商业化，也不把候选匹配参数写成正式命理规则；具体状态以 `PROJECT_STATUS.md` 与 `TASKS.md` 为准。
+当前已完成 T-004 城市自然模型及 T-005 设计、模拟与人工案例回归。T-005 的五档结构、大运和方位闸门可保留，但数值锚点、preferred ranges、强忌过量曲线和指数标定尚未通过锁定。仓库暂不开发前端、不扩展商业化，也不把候选匹配参数写成正式命理规则；具体状态以 `PROJECT_STATUS.md` 与 `TASKS.md` 为准。

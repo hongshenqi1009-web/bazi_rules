@@ -16,16 +16,19 @@
 
 - 类型：产品/算法/测试
 - 负责人：Chat/Work
-- 状态：Done（设计与模拟审计完成；具体数值参数仍为候选）
+- 状态：Done（设计、模拟审计和 15 例人工回归完成；具体数值参数未通过锁定闸门）
 - 开始日期：2026-09-11
 - 完成日期：2026-09-11
 - 前置：T-003、T-004 已完成；City Engine 当前候选为 `city-elements-v0.2.1-scheme-c-candidate`
-- 工作文件：`knowledge/matching_engine_methodology.md`、`data/matching_simulation_results.json`、`analysis/t005_matching_simulation.py`
+- 工作文件：`knowledge/matching_engine_methodology.md`、`knowledge/matching_manual_regression.md`、`data/matching_simulation_results.json`、`data/matching_manual_regression_cases.json`、`analysis/t005_matching_simulation.py`、`analysis/t005_manual_chart_regression.py`、`analysis/t005_verify_manual_case_pillars.js`
 - 验收：固定五行顺序和版本链；基于完整连续向量计算；大运、相对方位、现实筛选与 `City Profile` 边界清楚；匹配指数经过独立标定且不冒充概率；同一输入可重复；用 1,000–5,000 组模拟需求完成 100 城推荐覆盖与集中度审计。
 - 结果：形成 `personal-need-v0.1-candidate` 与 `matching-engine-v0.1-candidate`。比较非对称理想区间、满足度 + 过量惩罚及 Jensen–Shannon 三种方案后，推荐非对称理想区间法。
 - 模拟证据：固定种子 3,000 组、100 城、300,000 个组合。推荐方案下 100 城均进入过 Top 5/Top 10；Top 5 最高单城占 3.14%，前十城占 27.09%，HHI 167.35。水主喜 600 组产生 40 个不同 Top 1，Top 10 合集覆盖 79 城。
 - 修正闸门：大运单维最多 3 点、L1 最多 8 点且不翻转主喜/强忌；方位默认关闭，候选上限 `±1.0` 点，只在相同 1.0 点基础契合梯队内重排。
-- 剩余审核：五档数值锚点与区间、非对称区间公式、P5/P50/P95 指数标定、方位保守上限尚未升级为正式发布参数；后续锁定需新增 Chat 决策。
+- 人工回归：15 个构造压力案例覆盖五种主喜、高/中/低置信度、10 个明显调候案例和 4 个辅助方案；四柱由锁定候选库复算 15/15 通过。主喜元素最高城市在 11/15 案例不是 Top 1，证明组合排序有效。
+- 回归缺陷：150 个 Top 10 席位中 134 个强忌超候选上限，36 个超 10 点，17 个在超 10 点时指数仍至少 80；15/15 没有城市五项全部落入 preferred ranges。当前 ranges、过量曲线和指数标定不得锁定。
+- 回归通过项：大运最大 L1 变化 4.440 点、前后 Top 10 平均 Jaccard 0.939，无主喜/强忌翻转；方位未跨越 1 点以上基础差距。五档语义、主辅方案、置信度、版本链及大运/方位闸门可保留。
+- 剩余审核：先决定是否把 `need_strength` 与 `preferred_city_exposure` 解耦，再分层校准 ranges、强忌过量曲线与指数；`personal-need-v0.1-candidate` 和 `matching-engine-v0.1-candidate` 保持候选名。
 
 ### T-004 城市五行方法论调研
 
