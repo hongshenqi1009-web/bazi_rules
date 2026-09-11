@@ -1,10 +1,10 @@
 # Matching Engine 方法论 v0.1 候选
 
 - 任务：T-005 个人需要向量与城市向量匹配引擎设计
-- 状态：T-005 设计、3,000 组合成模拟及 15 例人工命盘回归已完成；结构方向保留，候选数值参数未通过锁定闸门
+- 状态：T-005 结构方向保留；T-006 已完成 `need_strength` / `preferred_city_exposure` 解耦和三套 ranges 校准，推荐 R2 待 Chat 审核
 - 最后更新：2026-09-11
 - 输入城市版本：`city-elements-v0.2.1-scheme-c-candidate`
-- 候选版本：`personal-need-v0.1-candidate`、`matching-engine-v0.1-candidate`、`matching-index-calibration-v0.1-candidate`、`dayun-adjustment-v0.1-candidate`、`direction-adjustment-v0.1-candidate`
+- 候选版本：`personal-need-v0.1-candidate`、`preferred-exposure-r2-balanced-candidate`（推荐、未锁定）、`matching-engine-v0.1-candidate`、`matching-index-calibration-v0.1-candidate`、`dayun-adjustment-v0.1-candidate`、`direction-adjustment-v0.1-candidate`
 - 适用范围：娱乐型城市五行契合指数、推荐梯队与解释
 - 不适用范围：迁居、投资、就业、签证、医疗或其他现实决策
 
@@ -47,7 +47,7 @@ BaZi Interpretation Engine 依照 BR-004 分别保存月令/格局、旺衰扶�
 
 特殊格局只有在 BR-004 要求的充分条件满足时才能改变普通格处理；否则回落普通格或“证据不足”。具体命理阈值仍由 BaZi Engine 的版本化规则负责，本文件不新增未经批准的身强弱数字门槛。
 
-### 3.2 五档到连续向量
+### 3.2 五档到连续需要强度
 
 每一档先取得正的原始需要锚点，再在五维上归一化为总和 100 的 `base_need_vector`。模拟使用三档“需要集中程度”来覆盖不同命盘结构；它们是产品标定值，不是传统术数定量结论：
 
@@ -59,9 +59,11 @@ BaZi Interpretation Engine 依照 BR-004 分别保存月令/格局、旺衰扶�
 
 生产接口允许多个元素同档，也允许某一档为空；排序标签与连续值必须同时保存。`primary_element` 应与最终主方案的最高需要维一致，`strong_avoid` 不得被数值投影意外变成高需要维。
 
-### 3.3 理想区间
+经 T-006 明确，以上向量的语义是 `need_strength`：描述元素对个人解释的相对重要程度。它不再直接充当理想城市五行构成，也不能把 40% 的需要强度翻译成城市需要 40% 该元素。
 
-对归一化后的目标 `T_i∈[0,1]`，候选区间 `[L_i,T_i,U_i]` 如下：
+### 3.3 城市暴露区间
+
+T-005 旧候选曾从归一化目标 `T_i∈[0,1]` 机械生成下列区间：
 
 | 档位 | 下限 `L_i` | 上限 `U_i` |
 |---|---:|---:|
@@ -71,20 +73,27 @@ BaZi Interpretation Engine 依照 BR-004 分别保存月令/格局、旺衰扶�
 | 忌 | `0` | `min(0.20,T_i+0.075)` |
 | 强忌 | `0` | `min(0.12,T_i+0.045)` |
 
-区间解决“喜用并非越多越好”：城市在主喜维达到合适范围后，继续增加只产生很小收益，超过上限开始扣分；忌与强忌则主要约束上界。全部数值应随 `personal_need_version` 保存，后续只通过模拟与人工案例回归修改。
+这组旧公式已被 15 例回归判定为不可锁定：15/15 没有城市五项全部落入范围。T-006 改用 100 城各元素的经验分位生成 `preferred_city_exposure`，并用档内 `need_strength` 位置作最多 ±4～5 个分位点的小幅平移。推荐候选 R2 的主喜、次喜、中性、忌、强忌分别使用 `50/85/100`、`25/62/92`、`10/50/90`、`0/20/70`、`0/8/60` 分位区间。
+
+R2 让 15/15 人工案例和 99.5% 合成需求拥有至少一个五维全合格城市，主喜目标保持在 19.9%–33.8%。详细公式、三方案与审计见 `knowledge/preferred_ranges_calibration.md`。R2 仍是候选，Chat 批准前不替换正式版本名。
 
 ### 3.4 建议接口
 
 ```json
 {
   "element_order": ["wood", "fire", "earth", "metal", "water"],
+  "need_strength": {
+    "base_vector": [0, 0, 0, 0, 0],
+    "current_vector": [0, 0, 0, 0, 0],
+    "version": "personal-need-v0.1-candidate"
+  },
   "base_need_vector": [0, 0, 0, 0, 0],
-  "preferred_ranges": {
-    "wood": {"tier": "prefer", "low": 0, "target": 0, "high": 0, "importance": 0},
-    "fire": {"tier": "neutral", "low": 0, "target": 0, "high": 0, "importance": 0},
-    "earth": {"tier": "avoid", "low": 0, "target": 0, "high": 0, "importance": 0},
-    "metal": {"tier": "strong_avoid", "low": 0, "target": 0, "high": 0, "importance": 0},
-    "water": {"tier": "strong_prefer", "low": 0, "target": 0, "high": 0, "importance": 0}
+  "preferred_city_exposure": {
+    "wood": {"tier": "prefer", "low": 0, "target": 0, "high": 0, "low_quantile": 0, "target_quantile": 0, "high_quantile": 0},
+    "fire": {"tier": "neutral", "low": 0, "target": 0, "high": 0, "low_quantile": 0, "target_quantile": 0, "high_quantile": 0},
+    "earth": {"tier": "avoid", "low": 0, "target": 0, "high": 0, "low_quantile": 0, "target_quantile": 0, "high_quantile": 0},
+    "metal": {"tier": "strong_avoid", "low": 0, "target": 0, "high": 0, "low_quantile": 0, "target_quantile": 0, "high_quantile": 0},
+    "water": {"tier": "strong_prefer", "low": 0, "target": 0, "high": 0, "low_quantile": 0, "target_quantile": 0, "high_quantile": 0}
   },
   "primary_element": "water",
   "secondary_element": "wood",
@@ -93,11 +102,13 @@ BaZi Interpretation Engine 依照 BR-004 分别保存月令/格局、旺衰扶�
   "current_need_vector": [0, 0, 0, 0, 0],
   "confidence": {"level": "high|medium|low", "reasons": [], "boundary_flags": []},
   "candidate_scenarios": [],
-  "rule_version": "personal-need-v0.1-candidate"
+  "rule_version": "personal-need-v0.1-candidate",
+  "preferred_exposure_version": "preferred-exposure-r2-balanced-candidate"
 }
 ```
 
 所有向量固定使用 `[木,火,土,金,水]` 顺序。数组用于计算，带元素键的对象用于校验和解释；入口必须验证两者一致。
+迁移期保留顶层 `base_need_vector`、`current_need_vector` 作为兼容别名；新实现以 `need_strength` 为语义所有者，禁止再由这两个数组直接生成城市目标占比。
 
 ### 3.5 低置信度与流派分歧
 
@@ -292,8 +303,8 @@ City Profile 不进入城市自然向量或五行契合指数。候选标签包�
 ### 风险
 
 1. 3,000 组模拟需求是分层合成样本，不是真实命盘分布；15 例人工回归也是构造压力测试，不是经授权真人金标。
-2. 现有数值锚点归一化后把强忌压到约 1%–5%，再机械生成约 5.8%–8.9% 的上限；15 例均无全维可行城市，不能锁定。
-3. 强忌过量曲线衰减不足，强忌超过上限 10 点时局部契合仍不低于 0.691；当前指数标定会把明显冲突映射到 80–93 分。
+2. T-006 已解决人工集的五维可行性；推荐 R2 在合成集仍有 15/3,000 个“木主、金次、土水忌”组合缺少全维合格城市，但每个最少只差一维。
+3. 强忌过量曲线仍未校准。R2 已把尺度性越界大幅降低，但该曲线和指数标定继续保持原候选，不能由本轮结果推断为通过。
 4. 高频城市仍有中等集中；真实用户若偏向某类命盘，集中度可能高于本轮均衡样本。
 5. 城市向量密集区会产生大并列梯队；这是诚实表达不确定性，不应靠随机扰动强行打散。
 6. 人工回归的 4 个低置信度主辅方案 Top 10 平均 Jaccard 为 0.280，前台必须显式提示口径敏感性。
@@ -301,10 +312,10 @@ City Profile 不进入城市自然向量或五行契合指数。候选标签包�
 
 ## 12. 给 Chat 的审核点
 
-1. 是否批准保留五档标签、主辅方案与置信度接口，同时把 `need_strength` 与 `preferred_city_exposure` 解耦。
-2. 是否启动 preferred ranges 专项校准，先解决五维可行性和忌/强忌暴露阈值，再单独调整匹配曲线。
-3. 是否暂时保留已通过的大运和方位闸门，不与 ranges 调整混改。
-4. 是否提供 5–10 个经授权匿名真人案例，用于下一轮专家/人工复核；在此之前不升级候选版本。
+1. 是否批准 R2 `preferred-exposure-r2-balanced-candidate` 作为下一轮强忌曲线校准的固定 ranges 输入，但仍不升级为正式发布参数。
+2. 是否接受 R2 的 99.5% 合成联合可行率，不为了剩余 0.5% 而采用平均 28.6 城全合格的过宽 R3。
+3. 是否启动强忌过量惩罚曲线专项校准，并继续把指数标定留到其后。
+4. 是否提供 5–10 个经授权匿名真人案例，用于未来专家/人工复核；在此之前不升级整体候选版本。
 
 ## 13. 可复现文件
 
@@ -325,3 +336,15 @@ City Profile 不进入城市自然向量或五行契合指数。候选标签包�
 - **不通过锁定**：把归一化 `base_need_vector` 直接当城市理想配比、现有 preferred ranges、强忌过量曲线、P5/P50/P95 当前显示标定。
 - **下一轮顺序**：先语义解耦，再校准 ranges，再调匹配曲线，最后重建指数；每一步同时复跑 15 例与 3,000 组合成集。
 - **真人证据边界**：本轮 15 例全部是人工构造输入，四柱 15/15 经锁定候选库复算通过，但人工喜忌仍不是专家金标。
+
+## 15. T-006 preferred ranges 校准
+
+T-006 只替换区间生成器，保留 T-005 的需求强度、命理标签、`model_interval`、五档重要性、大运、方位和指数标定。三套候选中：
+
+- R1 选择性较强：合成联合可行率 84.23%，人工案例 12/15，不足以解决原问题。
+- R2 平衡重叠：合成联合可行率 99.50%，人工案例 15/15；100 城全部进入过 Top 10，Top 5 HHI 从 167.35 降至 146.92；推荐交 Chat 审核。
+- R3 可行性优先：两组测试均 100% 可行，但平均每个合成需求有 28.63 城全合格，主喜区分度较弱。
+
+R2 的 Top 10 强忌越界从旧 ranges 的 24,660/30,000 降至 3,814/30,000，超 10 点从 7,863 降至 0；人工集从 134/150 降至 13/150，且无一超 5 点。同主喜、不同次喜或忌神的 Top 10 平均 Jaccard 为 0.222，未损失组合区分度。
+
+这些结果只支持把 R2 作为下一轮候选输入，不代表强忌曲线或娱乐指数已经通过。完整审计见 `knowledge/preferred_ranges_calibration.md` 和 `data/preferred_ranges_calibration_results.json`。

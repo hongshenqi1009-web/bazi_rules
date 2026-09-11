@@ -12,6 +12,21 @@
 
 ## Done
 
+### T-006 Personal Need 语义解耦与 preferred ranges 专项校准
+
+- 类型：产品/算法/测试
+- 负责人：Chat/Work
+- 状态：Done（三套候选完成审计；推荐 R2 待 Chat 审核，未锁定）
+- 开始日期：2026-09-11
+- 完成日期：2026-09-11
+- 前置：T-005 已完成结构设计、3,000 组合成审计和 15 例人工回归；Chat 已批准保留结构方向并只校准城市暴露区间
+- 工作文件：`knowledge/matching_engine_methodology.md`、`knowledge/preferred_ranges_calibration.md`、`data/preferred_ranges_calibration_results.json`、`analysis/t006_preferred_ranges_calibration.py`
+- 验收：明确区分 `need_strength` 与 `preferred_city_exposure`；提出三套 ranges 候选；基于锁定 100 城验证五维联合可行性，并复跑 3,000 组合成需求和 15 个构造命盘压力案例；未修改命理解释、强忌曲线、指数标定、大运、方位、City Profile 或前端。
+- 结果：R1 合成联合可行率 84.23%、人工 12/15；R2 为 99.50%、人工 15/15；R3 为 100%、人工 15/15，但平均每个合成需求有 28.63 城全合格，选择性过弱。
+- 推荐：`preferred-exposure-r2-balanced-candidate`。R2 主喜目标为 19.9%–33.8%；100 城全部进入过 Top 10；Top 5 HHI 从旧 ranges 的 167.35 降至 146.92，同主喜不同次喜/忌的 Top 10 平均 Jaccard 为 0.222。
+- 强忌暴露：R2 合成 Top 10 超上限由 24,660/30,000 降至 3,814/30,000，超 10 点从 7,863 降至 0；人工集由 134/150 降至 13/150，且无一超 5 点。本轮未改过量曲线。
+- 剩余审核：Chat 是否接受 R2 的 99.5% 联合可行率并将其作为下一轮强忌过量曲线校准的固定候选输入；R2 本身尚未锁定。
+
 ### T-005 个人需要向量与城市向量匹配引擎设计
 
 - 类型：产品/算法/测试
