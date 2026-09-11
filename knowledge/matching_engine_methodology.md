@@ -1,10 +1,10 @@
 # Matching Engine 方法论 v0.1 候选
 
 - 任务：T-005 个人需要向量与城市向量匹配引擎设计
-- 状态：T-005 结构方向保留；T-006 已完成 `need_strength` / `preferred_city_exposure` 解耦和三套 ranges 校准，推荐 R2 待 Chat 审核
+- 状态：T-005 结构方向保留；R2 已由 Chat 批准作为免费娱乐版 MVP 当前采用方案，其他候选参数继续保留原状态
 - 最后更新：2026-09-11
 - 输入城市版本：`city-elements-v0.2.1-scheme-c-candidate`
-- 候选版本：`personal-need-v0.1-candidate`、`preferred-exposure-r2-balanced-candidate`（推荐、未锁定）、`matching-engine-v0.1-candidate`、`matching-index-calibration-v0.1-candidate`、`dayun-adjustment-v0.1-candidate`、`direction-adjustment-v0.1-candidate`
+- 候选版本：`personal-need-v0.1-candidate`、`preferred-exposure-r2-balanced-candidate`（D-018 批准用于免费 MVP，保留审计标识）、`matching-engine-v0.1-candidate`、`matching-index-calibration-v0.1-candidate`、`dayun-adjustment-v0.1-candidate`、`direction-adjustment-v0.1-candidate`
 - 适用范围：娱乐型城市五行契合指数、推荐梯队与解释
 - 不适用范围：迁居、投资、就业、签证、医疗或其他现实决策
 
@@ -75,7 +75,7 @@ T-005 旧候选曾从归一化目标 `T_i∈[0,1]` 机械生成下列区间：
 
 这组旧公式已被 15 例回归判定为不可锁定：15/15 没有城市五项全部落入范围。T-006 改用 100 城各元素的经验分位生成 `preferred_city_exposure`，并用档内 `need_strength` 位置作最多 ±4～5 个分位点的小幅平移。推荐候选 R2 的主喜、次喜、中性、忌、强忌分别使用 `50/85/100`、`25/62/92`、`10/50/90`、`0/20/70`、`0/8/60` 分位区间。
 
-R2 让 15/15 人工案例和 99.5% 合成需求拥有至少一个五维全合格城市，主喜目标保持在 19.9%–33.8%。详细公式、三方案与审计见 `knowledge/preferred_ranges_calibration.md`。R2 仍是候选，Chat 批准前不替换正式版本名。
+R2 让 15/15 人工案例和 99.5% 合成需求拥有至少一个五维全合格城市，主喜目标保持在 19.9%–33.8%。详细公式、三方案与审计见 `knowledge/preferred_ranges_calibration.md`。Chat 已通过 D-018 批准 R2 用于免费娱乐版 MVP；为保持审计链，当前不改其 `candidate` 版本标识。
 
 ### 3.4 建议接口
 
@@ -310,12 +310,12 @@ City Profile 不进入城市自然向量或五行契合指数。候选标签包�
 6. 人工回归的 4 个低置信度主辅方案 Top 10 平均 Jaccard 为 0.280，前台必须显式提示口径敏感性。
 7. `City Profile` 尚未采集，当前不能验证基于事实标签的同梯队二次排序。
 
-## 12. 给 Chat 的审核点
+## 12. 当前采用状态与后续边界
 
-1. 是否批准 R2 `preferred-exposure-r2-balanced-candidate` 作为下一轮强忌曲线校准的固定 ranges 输入，但仍不升级为正式发布参数。
-2. 是否接受 R2 的 99.5% 合成联合可行率，不为了剩余 0.5% 而采用平均 28.6 城全合格的过宽 R3。
-3. 是否启动强忌过量惩罚曲线专项校准，并继续把指数标定留到其后。
-4. 是否提供 5–10 个经授权匿名真人案例，用于未来专家/人工复核；在此之前不升级整体候选版本。
+1. D-018 已批准 R2 `preferred-exposure-r2-balanced-candidate` 作为免费娱乐版 MVP 当前 ranges；R1、R3 和全部审计证据继续保留。
+2. D-019 将项目优先级切换为免费娱乐传播版 MVP 产品定义；当前不启动强忌曲线或指数标定专项研究。
+3. 强忌曲线和指数仍保留候选状态。结果层必须展示主要冲突点；只有出现明显反直觉 bug 时，才重新打开相应参数层并单独回归。
+4. 专业解释、主辅方案和真人复核能力继续保留为后续专业版基础，不进入当前免费 MVP 的深度开发范围。
 
 ## 13. 可复现文件
 
@@ -342,9 +342,9 @@ City Profile 不进入城市自然向量或五行契合指数。候选标签包�
 T-006 只替换区间生成器，保留 T-005 的需求强度、命理标签、`model_interval`、五档重要性、大运、方位和指数标定。三套候选中：
 
 - R1 选择性较强：合成联合可行率 84.23%，人工案例 12/15，不足以解决原问题。
-- R2 平衡重叠：合成联合可行率 99.50%，人工案例 15/15；100 城全部进入过 Top 10，Top 5 HHI 从 167.35 降至 146.92；推荐交 Chat 审核。
+- R2 平衡重叠：合成联合可行率 99.50%，人工案例 15/15；100 城全部进入过 Top 10，Top 5 HHI 从 167.35 降至 146.92；已由 D-018 批准用于免费 MVP。
 - R3 可行性优先：两组测试均 100% 可行，但平均每个合成需求有 28.63 城全合格，主喜区分度较弱。
 
 R2 的 Top 10 强忌越界从旧 ranges 的 24,660/30,000 降至 3,814/30,000，超 10 点从 7,863 降至 0；人工集从 134/150 降至 13/150，且无一超 5 点。同主喜、不同次喜或忌神的 Top 10 平均 Jaccard 为 0.222，未损失组合区分度。
 
-这些结果只支持把 R2 作为下一轮候选输入，不代表强忌曲线或娱乐指数已经通过。完整审计见 `knowledge/preferred_ranges_calibration.md` 和 `data/preferred_ranges_calibration_results.json`。
+这些结果支持当前免费 MVP 采用 R2，但不代表强忌曲线或娱乐指数已经通过；两者继续保留候选状态。完整审计见 `knowledge/preferred_ranges_calibration.md` 和 `data/preferred_ranges_calibration_results.json`。

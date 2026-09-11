@@ -158,13 +158,33 @@
 - 版本链：每个推荐必须能追溯 BaZi Engine、Personal Need、City Engine、Matching Engine、Dayun adjustment 和 Direction adjustment 版本。
 - 关联任务/文件：T-005、`knowledge/matching_engine_methodology.md`、`data/matching_simulation_results.json`
 
+### D-018 免费娱乐版 MVP 采用 R2 preferred exposure
+
+- 日期：2026-09-11
+- 状态：已确认
+- 决策：采用 R2 `preferred-exposure-r2-balanced-candidate` 作为免费娱乐版 MVP 当前使用的 `preferred_city_exposure` 方案。该批准只锁定 R2 在当前免费 MVP 中的采用，不等同于批准或改名其他仍为候选的五档锚点、匹配曲线、指数标定或发布版本。
+- 证据边界：R2 在固定 3,000 组合成需求中实现 2,985/3,000 五维联合可行，在 15 个构造命盘压力案例中为 15/15；100 城均进入过 Top 10，Top 5 HHI 为 146.92。以上是产品回归证据，不是命理或科学金标。
+- 保留要求：此前的专业研究、三套 ranges、模拟测试、命盘回归、脚本、结果和版本记录全部保留，不删除、不覆盖，供后续付费版、专业版和问题追踪继续使用。当前沿用 `candidate` 标识以保持审计链，发布命名另行决定。
+- 影响：免费 MVP 以 R2 生成城市暴露区间；大运轻修正、方位轻修正、主/辅助方案、置信度与完整版本链继续保留。
+- 关联任务/文件：T-006、T-007、`knowledge/preferred_ranges_calibration.md`、`knowledge/matching_engine_methodology.md`
+
+### D-019 免费娱乐传播版 MVP 优先
+
+- 日期：2026-09-11
+- 状态：已确认
+- 决策：当前阶段明确为“免费娱乐传播版 MVP 优先，专业付费版延后”。保留 BaZi / City / Matching 三层架构及现有专业解释接口；免费版优先做到稳定、可解释、有差异、好玩、好分享。
+- 当前范围：优先定义免费版结果结构、Top 3–5 城市展示、轻量个人五行画像、城市简短适配解释、City Profile 基础标签、当前阶段提示、分享卡、免费用户流程、免责声明和前端实现接口。
+- 延后范围：暂不开发付费版，不继续追求复杂惩罚曲线或数学最优解，也不因阶段切换删除月令、旺衰、格局、调候、完整大运、主辅方案和城市深度比较等专业积累。只有发现明显反直觉 bug 时，才重启针对性的参数校准。
+- 影响：T-007 接替算法校准成为当前进行中任务；前端开发须等待免费 MVP 产品与接口规格完成并通过审核。
+- 关联任务/文件：T-007、`PROJECT_STATUS.md`、`TASKS.md`、后续 `product/` 与 `design/` 文件
+
 ## 待决定
 
 - Git 分支与合并策略。
 - 是否将回归通过的 `city-elements-v0.2.1-scheme-c-candidate` 改名为娱乐型 MVP 自然模型正式发布版本；当前建议锁定，但发布命名仍留给 Chat 审核。
-- 是否批准 T-005 候选的五档数值锚点与区间、非对称理想区间函数、P5/P50/P95 娱乐指数标定，以及方位 `±1.0` 点同梯队重排规则。
+- R2 的免费 MVP 使用范围已由 D-018 批准；其他仍为候选的五档数值锚点、匹配曲线和 P5/P50/P95 娱乐指数标定是否在未来改称发布版本。
 - 是否接受 NASA POWER 作为娱乐型 MVP 气候快照，或发布前升级 ERA5/ERA5-Land。
-- 产品形态、发布路径与商业化方案。
+- 免费 MVP 的具体产品形态、品牌与分享设计、首发路径；专业付费版的商业化方案延后。
 
 ## 新决策记录模板
 
