@@ -134,10 +134,21 @@
 - 影响：v0.1 作为审计基线保留；v0.2 的具体原型、组合公式、权重和响应矩阵属于 T-004 候选结果，须经 Chat 审核后才能改称发布锁定版。
 - 关联任务/文件：T-004、`knowledge/city_element_methodology.md`、`data/cities.csv`
 
+### D-016 City Engine v0.2 采用土属性方案 C
+
+- 日期：2026-09-11
+- 状态：已确认
+- 决策：采用土属性专项校准方案 C。只调整 `sunlit_plateau`、`humid_mountain_coast`、`humid_inland_basin`、`inland_water_rich` 四个原型的五行响应；不改变锁定的 100 城事实、自然原型隶属逻辑、原型权重、城市名单或其他已确认方法。
+- 正式参数：`sunlit_plateau=[7,23,53,13,4]`、`humid_mountain_coast=[34,7,26,6,27]`、`humid_inland_basin=[30,7,44,6,13]`、`inland_water_rich=[29,6,16,8,41]`，顺序均为 `[木,火,土,金,水]`，每个响应合计 100。`dry_continental_steppe` 保持 `[6,14,16,52,12]`，不得通过干燥或大陆性重新抬土。
+- 版本与审计：重算候选版本为 `city-elements-v0.2.1-scheme-c-candidate`。`city-elements-v0.1.0` 和原始 `city-elements-v0.2.0-candidate` 必须保留为逐城审计基线，不得被当前主输出覆盖后丢失。
+- 验收结果：100 城重算后主五行为木 26、火 11、土 4、金 26、水 33；土主城市为 Lhasa、Cusco、Mexico City、Kunming。最干四分位仅 Lhasa 土主，最高海拔四分位 4 城土主，事实子集哈希保持 `958EFA3C0D6852475543902EFB01E26A0618D1C6D8DC35EB6F87D33F120571B4`。
+- 边界：这是已批准的映射参数，不把城市五行描述为科学事实。Mexico City 与 Kunming 的土领先幅度较 Lhasa、Cusco 小，匹配与文案层必须读取完整向量和领先差值，不得只把主五行当强标签。
+- 关联任务/文件：T-004、`knowledge/city_element_methodology.md`、`data/cities.csv`
+
 ## 待决定
 
 - Git 分支与合并策略。
-- 是否把 `city-elements-v0.2.0-candidate` 的 12 个原型、组合公式与响应矩阵锁定为娱乐型 MVP 自然模型正式版本。
+- 是否将回归通过的 `city-elements-v0.2.1-scheme-c-candidate` 改名为娱乐型 MVP 自然模型正式发布版本；当前建议锁定，但发布命名仍留给 Chat 审核。
 - 个人需要向量与城市向量的匹配指数采用何种标定；L1 当前仅用于模型差异审计。
 - 是否接受 NASA POWER 作为娱乐型 MVP 气候快照，或发布前升级 ERA5/ERA5-Land。
 - 产品形态、发布路径与商业化方案。
