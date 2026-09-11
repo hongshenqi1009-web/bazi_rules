@@ -1,0 +1,4778 @@
+{
+  "task": "T-005",
+  "generated_on": "2026-09-11",
+  "seed": 20260911,
+  "profile_count": 3000,
+  "element_order": [
+    "wood",
+    "fire",
+    "earth",
+    "metal",
+    "water"
+  ],
+  "input": {
+    "cities": 100,
+    "city_mapping_version": "city-elements-v0.2.1-scheme-c-candidate",
+    "city_source": "data/cities.csv",
+    "city_vectors_changed": false
+  },
+  "versions": {
+    "bazi_engine_version": "not-applicable-synthetic-need-input",
+    "personal_need_version": "personal-need-v0.1-candidate",
+    "city_engine_version": "city-elements-v0.2.1-scheme-c-candidate",
+    "matching_engine_version": "matching-engine-v0.1-candidate",
+    "index_calibration_version": "matching-index-calibration-v0.1-candidate",
+    "dayun_adjustment_version": "dayun-adjustment-v0.1-candidate",
+    "direction_adjustment_version": "direction-adjustment-v0.1-candidate"
+  },
+  "population_design": {
+    "primary_element_counts": {
+      "wood": 600,
+      "fire": 600,
+      "earth": 600,
+      "metal": 600,
+      "water": 600
+    },
+    "secondary_element_counts": {
+      "fire": 600,
+      "wood": 600,
+      "earth": 600,
+      "metal": 600,
+      "water": 600
+    },
+    "intensity_counts": {
+      "soft": 1000,
+      "standard": 1000,
+      "concentrated": 1000
+    },
+    "climate_need_counts": {
+      "balanced": 600,
+      "cold_need_warmth": 600,
+      "hot_need_cooling": 600,
+      "dry_need_moisture": 600,
+      "wet_need_drying": 600
+    },
+    "confidence_counts": {
+      "high": 1200,
+      "medium": 900,
+      "low": 900
+    },
+    "dayun_nonzero_profiles": 2400,
+    "dayun_max_l1_shift_points": 7.563807455741742,
+    "dayun_max_single_element_shift_points": 3.000000000000008,
+    "dayun_primary_element_flips": 0,
+    "dayun_strong_avoid_floor_flips": 0,
+    "origin_count": 12
+  },
+  "method_comparison": {
+    "target_range": {
+      "raw_score_quantiles": {
+        "q05": 0.660507724936153,
+        "q50": 0.7836200143429652,
+        "q95": 0.8942541484781287
+      },
+      "top5": {
+        "slots": 15000,
+        "cities_with_zero": 0,
+        "max_city_count": 471,
+        "max_city_share": 0.0314,
+        "top_10_cities_share": 0.27086666666666664,
+        "hhi_10000": 167.3480888888889,
+        "normalized_entropy": 0.927203805840659,
+        "gini": 0.4520426666666666
+      },
+      "top10": {
+        "slots": 30000,
+        "cities_with_zero": 0,
+        "max_city_count": 626,
+        "max_city_share": 0.020866666666666665,
+        "top_10_cities_share": 0.19266666666666665,
+        "hhi_10000": 130.82871111111112,
+        "normalized_entropy": 0.9635060875463574,
+        "gini": 0.31935933333333333
+      }
+    },
+    "satisfaction_excess": {
+      "raw_score_quantiles": {
+        "q05": 0.47935388518259925,
+        "q50": 0.6611327139959986,
+        "q95": 0.8403354693219831
+      },
+      "top5": {
+        "slots": 15000,
+        "cities_with_zero": 8,
+        "max_city_count": 523,
+        "max_city_share": 0.034866666666666664,
+        "top_10_cities_share": 0.2876666666666667,
+        "hhi_10000": 192.9270222222222,
+        "normalized_entropy": 0.8909585576926556,
+        "gini": 0.5321226666666667
+      },
+      "top10": {
+        "slots": 30000,
+        "cities_with_zero": 3,
+        "max_city_count": 740,
+        "max_city_share": 0.024666666666666667,
+        "top_10_cities_share": 0.21903333333333333,
+        "hhi_10000": 146.14755555555556,
+        "normalized_entropy": 0.941929972893586,
+        "gini": 0.3897546666666667
+      }
+    },
+    "jensen_shannon": {
+      "raw_score_quantiles": {
+        "q05": 0.7570849061677636,
+        "q50": 0.8809169901899156,
+        "q95": 0.9621984472568729
+      },
+      "top5": {
+        "slots": 15000,
+        "cities_with_zero": 3,
+        "max_city_count": 481,
+        "max_city_share": 0.03206666666666667,
+        "top_10_cities_share": 0.27526666666666666,
+        "hhi_10000": 175.19955555555558,
+        "normalized_entropy": 0.9154019699212589,
+        "gini": 0.48083600000000004
+      },
+      "top10": {
+        "slots": 30000,
+        "cities_with_zero": 0,
+        "max_city_count": 658,
+        "max_city_share": 0.021933333333333332,
+        "top_10_cities_share": 0.20843333333333333,
+        "hhi_10000": 137.30255555555556,
+        "normalized_entropy": 0.9554946469229009,
+        "gini": 0.34964533333333336
+      }
+    }
+  },
+  "selected_method": "target_range",
+  "index_calibration": {
+    "q05": 0.660507724936153,
+    "q50": 0.7836200143429652,
+    "q95": 0.8942541484781287,
+    "display_anchors": {
+      "q05": 45,
+      "q50": 70,
+      "q95": 92,
+      "min": 35,
+      "max": 96
+    }
+  },
+  "coverage": {
+    "base_without_direction": {
+      "top5": {
+        "slots": 15000,
+        "cities_with_zero": 0,
+        "max_city_count": 471,
+        "max_city_share": 0.0314,
+        "top_10_cities_share": 0.27086666666666664,
+        "hhi_10000": 167.3480888888889,
+        "normalized_entropy": 0.927203805840659,
+        "gini": 0.4520426666666666
+      },
+      "top10": {
+        "slots": 30000,
+        "cities_with_zero": 0,
+        "max_city_count": 626,
+        "max_city_share": 0.020866666666666665,
+        "top_10_cities_share": 0.19266666666666665,
+        "hhi_10000": 130.82871111111112,
+        "normalized_entropy": 0.9635060875463574,
+        "gini": 0.31935933333333333
+      }
+    },
+    "final_with_direction": {
+      "top5": {
+        "slots": 15000,
+        "cities_with_zero": 0,
+        "max_city_count": 473,
+        "max_city_share": 0.03153333333333333,
+        "top_10_cities_share": 0.26993333333333336,
+        "hhi_10000": 166.00391111111114,
+        "normalized_entropy": 0.9285366864332218,
+        "gini": 0.44820133333333323
+      },
+      "top10": {
+        "slots": 30000,
+        "cities_with_zero": 0,
+        "max_city_count": 631,
+        "max_city_share": 0.021033333333333334,
+        "top_10_cities_share": 0.1928,
+        "hhi_10000": 130.82353333333333,
+        "normalized_entropy": 0.9636712341245081,
+        "gini": 0.3193999999999999
+      }
+    },
+    "direction_audit": {
+      "cap_points": 1.0,
+      "ranking_gate": "direction may reorder only within the same 1.0-point base-match tier",
+      "large_gap_threshold_points": 2.0,
+      "overtakes_across_gap_over_2": 0,
+      "maximum_overtaken_base_gap": 0.9971570239942764,
+      "ungated_top5_cities_with_zero": 0,
+      "ungated_top10_cities_with_zero": 0
+    },
+    "close_match_tiers": {
+      "rule": "include every city within 1.0 calibrated index point of the strict rank cutoff",
+      "mean_top5_tier_size": 4.922,
+      "max_top5_tier_size": 41,
+      "mean_top10_tier_size": 5.040666666666667,
+      "max_top10_tier_size": 41
+    },
+    "low_confidence_alternative_top10_jaccard_mean": 0.3780121869492355,
+    "same_primary_water": {
+      "profiles": 600,
+      "unique_top1_cities": 40,
+      "unique_top10_cities": 79,
+      "mean_top10_jaccard_across_different_secondary_elements": 0.06169450107996225,
+      "top1_counts": {
+        "Manila": 65,
+        "Singapore": 56,
+        "Kyoto": 49,
+        "Helsinki": 45,
+        "Reykjavik": 42,
+        "Quito": 38,
+        "St Petersburg": 35,
+        "Miami": 35,
+        "Chicago": 28,
+        "Belfast": 21,
+        "New Orleans": 18,
+        "Buenos Aires": 18,
+        "Seattle": 14,
+        "New York": 14,
+        "Qingdao": 14,
+        "Kuala Lumpur": 13,
+        "Vancouver": 12,
+        "Toronto": 11,
+        "Istanbul": 10,
+        "Taipei": 7,
+        "Stockholm": 6,
+        "Amsterdam": 6,
+        "Oslo": 4,
+        "Dublin": 4,
+        "Edinburgh": 4,
+        "Wuhan": 4,
+        "Murmansk": 3,
+        "Yakutsk": 3,
+        "Bangkok": 3,
+        "Kunming": 3,
+        "Changsha": 2,
+        "Rio de Janeiro": 2,
+        "Zurich": 2,
+        "Sapporo": 2,
+        "Moscow": 2,
+        "Dalian": 1,
+        "Cusco": 1,
+        "Hohhot": 1,
+        "Harbin": 1,
+        "Guilin": 1
+      }
+    }
+  },
+  "per_city_recommendation_counts": [
+    {
+      "city_id": "4164138",
+      "city_name_en": "Miami",
+      "city_name_zh": "迈阿密",
+      "top5_base_count": 470,
+      "top10_base_count": 581,
+      "top5_final_count": 473,
+      "top10_final_count": 586
+    },
+    {
+      "city_id": "1609350",
+      "city_name_en": "Bangkok",
+      "city_name_zh": "曼谷",
+      "top5_base_count": 471,
+      "top10_base_count": 626,
+      "top5_final_count": 462,
+      "top10_final_count": 631
+    },
+    {
+      "city_id": "3941584",
+      "city_name_en": "Cusco",
+      "city_name_zh": "库斯科",
+      "top5_base_count": 458,
+      "top10_base_count": 587,
+      "top5_final_count": 453,
+      "top10_final_count": 586
+    },
+    {
+      "city_id": "1880252",
+      "city_name_en": "Singapore",
+      "city_name_zh": "新加坡",
+      "top5_base_count": 430,
+      "top10_base_count": 615,
+      "top5_final_count": 423,
+      "top10_final_count": 621
+    },
+    {
+      "city_id": "1280737",
+      "city_name_en": "Lhasa",
+      "city_name_zh": "拉萨",
+      "top5_base_count": 387,
+      "top10_base_count": 458,
+      "top5_final_count": 387,
+      "top10_final_count": 459
+    },
+    {
+      "city_id": "5856195",
+      "city_name_en": "Honolulu",
+      "city_name_zh": "檀香山",
+      "top5_base_count": 384,
+      "top10_base_count": 525,
+      "top5_final_count": 383,
+      "top10_final_count": 522
+    },
+    {
+      "city_id": "3871336",
+      "city_name_en": "Santiago",
+      "city_name_zh": "圣地亚哥",
+      "top5_base_count": 367,
+      "top10_base_count": 525,
+      "top5_final_count": 376,
+      "top10_final_count": 530
+    },
+    {
+      "city_id": "184745",
+      "city_name_en": "Nairobi",
+      "city_name_zh": "内罗毕",
+      "top5_base_count": 372,
+      "top10_base_count": 545,
+      "top5_final_count": 374,
+      "top10_final_count": 546
+    },
+    {
+      "city_id": "3530597",
+      "city_name_en": "Mexico City",
+      "city_name_zh": "墨西哥城",
+      "top5_base_count": 378,
+      "top10_base_count": 510,
+      "top5_final_count": 363,
+      "top10_final_count": 507
+    },
+    {
+      "city_id": "3369157",
+      "city_name_en": "Cape Town",
+      "city_name_zh": "开普敦",
+      "top5_base_count": 346,
+      "top10_base_count": 531,
+      "top5_final_count": 355,
+      "top10_final_count": 538
+    },
+    {
+      "city_id": "1701668",
+      "city_name_en": "Manila",
+      "city_name_zh": "马尼拉",
+      "top5_base_count": 343,
+      "top10_base_count": 545,
+      "top5_final_count": 336,
+      "top10_final_count": 552
+    },
+    {
+      "city_id": "1809461",
+      "city_name_en": "Guiyang",
+      "city_name_zh": "贵阳",
+      "top5_base_count": 329,
+      "top10_base_count": 466,
+      "top5_final_count": 326,
+      "top10_final_count": 469
+    },
+    {
+      "city_id": "1809498",
+      "city_name_en": "Guilin",
+      "city_name_zh": "桂林",
+      "top5_base_count": 330,
+      "top10_base_count": 457,
+      "top5_final_count": 319,
+      "top10_final_count": 443
+    },
+    {
+      "city_id": "1804651",
+      "city_name_en": "Kunming",
+      "city_name_zh": "昆明",
+      "top5_base_count": 292,
+      "top10_base_count": 559,
+      "top5_final_count": 295,
+      "top10_final_count": 561
+    },
+    {
+      "city_id": "2036892",
+      "city_name_en": "Hohhot",
+      "city_name_zh": "呼和浩特",
+      "top5_base_count": 300,
+      "top10_base_count": 437,
+      "top5_final_count": 293,
+      "top10_final_count": 434
+    },
+    {
+      "city_id": "2063523",
+      "city_name_en": "Perth",
+      "city_name_zh": "珀斯",
+      "top5_base_count": 267,
+      "top10_base_count": 498,
+      "top5_final_count": 290,
+      "top10_final_count": 517
+    },
+    {
+      "city_id": "1804430",
+      "city_name_en": "Lanzhou",
+      "city_name_zh": "兰州",
+      "top5_base_count": 267,
+      "top10_base_count": 440,
+      "top5_final_count": 273,
+      "top10_final_count": 451
+    },
+    {
+      "city_id": "498817",
+      "city_name_en": "St Petersburg",
+      "city_name_zh": "圣彼得堡",
+      "top5_base_count": 249,
+      "top10_base_count": 340,
+      "top5_final_count": 265,
+      "top10_final_count": 346
+    },
+    {
+      "city_id": "3451190",
+      "city_name_en": "Rio de Janeiro",
+      "city_name_zh": "里约热内卢",
+      "top5_base_count": 319,
+      "top10_base_count": 610,
+      "top5_final_count": 264,
+      "top10_final_count": 581
+    },
+    {
+      "city_id": "1788852",
+      "city_name_en": "Xining",
+      "city_name_zh": "西宁",
+      "top5_base_count": 250,
+      "top10_base_count": 425,
+      "top5_final_count": 261,
+      "top10_final_count": 431
+    },
+    {
+      "city_id": "1814906",
+      "city_name_en": "Chongqing",
+      "city_name_zh": "重庆",
+      "top5_base_count": 273,
+      "top10_base_count": 445,
+      "top5_final_count": 260,
+      "top10_final_count": 452
+    },
+    {
+      "city_id": "1796556",
+      "city_name_en": "Sanya",
+      "city_name_zh": "三亚",
+      "top5_base_count": 245,
+      "top10_base_count": 539,
+      "top5_final_count": 257,
+      "top10_final_count": 529
+    },
+    {
+      "city_id": "3936456",
+      "city_name_en": "Lima",
+      "city_name_zh": "利马",
+      "top5_base_count": 229,
+      "top10_base_count": 573,
+      "top5_final_count": 242,
+      "top10_final_count": 563
+    },
+    {
+      "city_id": "2037013",
+      "city_name_en": "Harbin",
+      "city_name_zh": "哈尔滨",
+      "top5_base_count": 245,
+      "top10_base_count": 334,
+      "top5_final_count": 230,
+      "top10_final_count": 334
+    },
+    {
+      "city_id": "1526273",
+      "city_name_en": "Astana",
+      "city_name_zh": "阿斯塔纳",
+      "top5_base_count": 216,
+      "top10_base_count": 340,
+      "top5_final_count": 227,
+      "top10_final_count": 346
+    },
+    {
+      "city_id": "1735161",
+      "city_name_en": "Kuala Lumpur",
+      "city_name_zh": "吉隆坡",
+      "top5_base_count": 228,
+      "top10_base_count": 456,
+      "top5_final_count": 222,
+      "top10_final_count": 457
+    },
+    {
+      "city_id": "2013159",
+      "city_name_en": "Yakutsk",
+      "city_name_zh": "雅库茨克",
+      "top5_base_count": 215,
+      "top10_base_count": 334,
+      "top5_final_count": 216,
+      "top10_final_count": 334
+    },
+    {
+      "city_id": "3652462",
+      "city_name_en": "Quito",
+      "city_name_zh": "基多",
+      "top5_base_count": 220,
+      "top10_base_count": 431,
+      "top5_final_count": 213,
+      "top10_final_count": 418
+    },
+    {
+      "city_id": "360630",
+      "city_name_en": "Cairo",
+      "city_name_zh": "开罗",
+      "top5_base_count": 220,
+      "top10_base_count": 357,
+      "top5_final_count": 209,
+      "top10_final_count": 355
+    },
+    {
+      "city_id": "993800",
+      "city_name_en": "Johannesburg",
+      "city_name_zh": "约翰内斯堡",
+      "top5_base_count": 163,
+      "top10_base_count": 532,
+      "top5_final_count": 207,
+      "top10_final_count": 557
+    },
+    {
+      "city_id": "524901",
+      "city_name_en": "Moscow",
+      "city_name_zh": "莫斯科",
+      "top5_base_count": 205,
+      "top10_base_count": 293,
+      "top5_final_count": 205,
+      "top10_final_count": 296
+    },
+    {
+      "city_id": "108410",
+      "city_name_en": "Riyadh",
+      "city_name_zh": "利雅得",
+      "top5_base_count": 195,
+      "top10_base_count": 380,
+      "top5_final_count": 199,
+      "top10_final_count": 379
+    },
+    {
+      "city_id": "2542997",
+      "city_name_en": "Marrakech",
+      "city_name_zh": "马拉喀什",
+      "top5_base_count": 198,
+      "top10_base_count": 459,
+      "top5_final_count": 193,
+      "top10_final_count": 455
+    },
+    {
+      "city_id": "3413829",
+      "city_name_en": "Reykjavik",
+      "city_name_zh": "雷克雅未克",
+      "top5_base_count": 144,
+      "top10_base_count": 288,
+      "top5_final_count": 178,
+      "top10_final_count": 310
+    },
+    {
+      "city_id": "5308655",
+      "city_name_en": "Phoenix",
+      "city_name_zh": "凤凰城",
+      "top5_base_count": 207,
+      "top10_base_count": 363,
+      "top5_final_count": 172,
+      "top10_final_count": 348
+    },
+    {
+      "city_id": "1815577",
+      "city_name_en": "Changsha",
+      "city_name_zh": "长沙",
+      "top5_base_count": 149,
+      "top10_base_count": 383,
+      "top5_final_count": 169,
+      "top10_final_count": 394
+    },
+    {
+      "city_id": "524305",
+      "city_name_en": "Murmansk",
+      "city_name_zh": "摩尔曼斯克",
+      "top5_base_count": 151,
+      "top10_base_count": 268,
+      "top5_final_count": 169,
+      "top10_final_count": 302
+    },
+    {
+      "city_id": "292223",
+      "city_name_en": "Dubai",
+      "city_name_zh": "迪拜",
+      "top5_base_count": 169,
+      "top10_base_count": 378,
+      "top5_final_count": 163,
+      "top10_final_count": 376
+    },
+    {
+      "city_id": "1581130",
+      "city_name_en": "Hanoi",
+      "city_name_zh": "河内",
+      "top5_base_count": 164,
+      "top10_base_count": 341,
+      "top5_final_count": 160,
+      "top10_final_count": 339
+    },
+    {
+      "city_id": "1529102",
+      "city_name_en": "Urumqi",
+      "city_name_zh": "乌鲁木齐",
+      "top5_base_count": 144,
+      "top10_base_count": 418,
+      "top5_final_count": 155,
+      "top10_final_count": 426
+    },
+    {
+      "city_id": "5368361",
+      "city_name_en": "Los Angeles",
+      "city_name_zh": "洛杉矶",
+      "top5_base_count": 187,
+      "top10_base_count": 524,
+      "top5_final_count": 154,
+      "top10_final_count": 509
+    },
+    {
+      "city_id": "658225",
+      "city_name_en": "Helsinki",
+      "city_name_zh": "赫尔辛基",
+      "top5_base_count": 152,
+      "top10_base_count": 285,
+      "top5_final_count": 152,
+      "top10_final_count": 301
+    },
+    {
+      "city_id": "3143244",
+      "city_name_en": "Oslo",
+      "city_name_zh": "奥斯陆",
+      "top5_base_count": 137,
+      "top10_base_count": 261,
+      "top5_final_count": 148,
+      "top10_final_count": 279
+    },
+    {
+      "city_id": "2657896",
+      "city_name_en": "Zurich",
+      "city_name_zh": "苏黎世",
+      "top5_base_count": 148,
+      "top10_base_count": 398,
+      "top5_final_count": 147,
+      "top10_final_count": 393
+    },
+    {
+      "city_id": "1280849",
+      "city_name_en": "Kashgar",
+      "city_name_zh": "喀什",
+      "top5_base_count": 137,
+      "top10_base_count": 336,
+      "top5_final_count": 141,
+      "top10_final_count": 338
+    },
+    {
+      "city_id": "1816670",
+      "city_name_en": "Beijing",
+      "city_name_zh": "北京",
+      "top5_base_count": 137,
+      "top10_base_count": 286,
+      "top5_final_count": 137,
+      "top10_final_count": 291
+    },
+    {
+      "city_id": "5419384",
+      "city_name_en": "Denver",
+      "city_name_zh": "丹佛",
+      "top5_base_count": 163,
+      "top10_base_count": 427,
+      "top5_final_count": 133,
+      "top10_final_count": 387
+    },
+    {
+      "city_id": "1814087",
+      "city_name_en": "Dalian",
+      "city_name_zh": "大连",
+      "top5_base_count": 140,
+      "top10_base_count": 286,
+      "top5_final_count": 125,
+      "top10_final_count": 276
+    },
+    {
+      "city_id": "2655984",
+      "city_name_en": "Belfast",
+      "city_name_zh": "贝尔法斯特",
+      "top5_base_count": 109,
+      "top10_base_count": 207,
+      "top5_final_count": 123,
+      "top10_final_count": 207
+    },
+    {
+      "city_id": "1273294",
+      "city_name_en": "New Delhi",
+      "city_name_zh": "新德里",
+      "top5_base_count": 119,
+      "top10_base_count": 460,
+      "top5_final_count": 121,
+      "top10_final_count": 464
+    },
+    {
+      "city_id": "2673730",
+      "city_name_en": "Stockholm",
+      "city_name_zh": "斯德哥尔摩",
+      "top5_base_count": 110,
+      "top10_base_count": 207,
+      "top5_final_count": 114,
+      "top10_final_count": 221
+    },
+    {
+      "city_id": "1790630",
+      "city_name_en": "Xi'an",
+      "city_name_zh": "西安",
+      "top5_base_count": 111,
+      "top10_base_count": 302,
+      "top5_final_count": 111,
+      "top10_final_count": 306
+    },
+    {
+      "city_id": "4887398",
+      "city_name_en": "Chicago",
+      "city_name_zh": "芝加哥",
+      "top5_base_count": 105,
+      "top10_base_count": 296,
+      "top5_final_count": 105,
+      "top10_final_count": 289
+    },
+    {
+      "city_id": "3435910",
+      "city_name_en": "Buenos Aires",
+      "city_name_zh": "布宜诺斯艾利斯",
+      "top5_base_count": 102,
+      "top10_base_count": 258,
+      "top5_final_count": 104,
+      "top10_final_count": 257
+    },
+    {
+      "city_id": "1857910",
+      "city_name_en": "Kyoto",
+      "city_name_zh": "京都",
+      "top5_base_count": 101,
+      "top10_base_count": 317,
+      "top5_final_count": 97,
+      "top10_final_count": 306
+    },
+    {
+      "city_id": "1668341",
+      "city_name_en": "Taipei",
+      "city_name_zh": "台北",
+      "top5_base_count": 91,
+      "top10_base_count": 251,
+      "top5_final_count": 97,
+      "top10_final_count": 255
+    },
+    {
+      "city_id": "2128295",
+      "city_name_en": "Sapporo",
+      "city_name_zh": "札幌",
+      "top5_base_count": 87,
+      "top10_base_count": 266,
+      "top5_final_count": 95,
+      "top10_final_count": 264
+    },
+    {
+      "city_id": "1797929",
+      "city_name_en": "Qingdao",
+      "city_name_zh": "青岛",
+      "top5_base_count": 102,
+      "top10_base_count": 157,
+      "top5_final_count": 92,
+      "top10_final_count": 151
+    },
+    {
+      "city_id": "2648579",
+      "city_name_en": "Glasgow",
+      "city_name_zh": "格拉斯哥",
+      "top5_base_count": 93,
+      "top10_base_count": 190,
+      "top5_final_count": 91,
+      "top10_final_count": 198
+    },
+    {
+      "city_id": "2643123",
+      "city_name_en": "Manchester",
+      "city_name_zh": "曼彻斯特",
+      "top5_base_count": 83,
+      "top10_base_count": 217,
+      "top5_final_count": 88,
+      "top10_final_count": 212
+    },
+    {
+      "city_id": "3117735",
+      "city_name_en": "Madrid",
+      "city_name_zh": "马德里",
+      "top5_base_count": 56,
+      "top10_base_count": 287,
+      "top5_final_count": 86,
+      "top10_final_count": 299
+    },
+    {
+      "city_id": "6167865",
+      "city_name_en": "Toronto",
+      "city_name_zh": "多伦多",
+      "top5_base_count": 84,
+      "top10_base_count": 210,
+      "top5_final_count": 86,
+      "top10_final_count": 217
+    },
+    {
+      "city_id": "745044",
+      "city_name_en": "Istanbul",
+      "city_name_zh": "伊斯坦布尔",
+      "top5_base_count": 84,
+      "top10_base_count": 151,
+      "top5_final_count": 86,
+      "top10_final_count": 154
+    },
+    {
+      "city_id": "2964574",
+      "city_name_en": "Dublin",
+      "city_name_zh": "都柏林",
+      "top5_base_count": 75,
+      "top10_base_count": 178,
+      "top5_final_count": 81,
+      "top10_final_count": 181
+    },
+    {
+      "city_id": "1815286",
+      "city_name_en": "Chengdu",
+      "city_name_zh": "成都",
+      "top5_base_count": 77,
+      "top10_base_count": 266,
+      "top5_final_count": 79,
+      "top10_final_count": 269
+    },
+    {
+      "city_id": "3164603",
+      "city_name_en": "Venice",
+      "city_name_zh": "威尼斯",
+      "top5_base_count": 74,
+      "top10_base_count": 100,
+      "top5_final_count": 72,
+      "top10_final_count": 102
+    },
+    {
+      "city_id": "6173331",
+      "city_name_en": "Vancouver",
+      "city_name_zh": "温哥华",
+      "top5_base_count": 49,
+      "top10_base_count": 131,
+      "top5_final_count": 70,
+      "top10_final_count": 130
+    },
+    {
+      "city_id": "2650225",
+      "city_name_en": "Edinburgh",
+      "city_name_zh": "爱丁堡",
+      "top5_base_count": 53,
+      "top10_base_count": 153,
+      "top5_final_count": 65,
+      "top10_final_count": 164
+    },
+    {
+      "city_id": "2147714",
+      "city_name_en": "Sydney",
+      "city_name_zh": "悉尼",
+      "top5_base_count": 56,
+      "top10_base_count": 280,
+      "top5_final_count": 62,
+      "top10_final_count": 290
+    },
+    {
+      "city_id": "1819729",
+      "city_name_en": "Hong Kong",
+      "city_name_zh": "香港",
+      "top5_base_count": 36,
+      "top10_base_count": 444,
+      "top5_final_count": 57,
+      "top10_final_count": 440
+    },
+    {
+      "city_id": "1795565",
+      "city_name_en": "Shenzhen",
+      "city_name_zh": "深圳",
+      "top5_base_count": 44,
+      "top10_base_count": 383,
+      "top5_final_count": 56,
+      "top10_final_count": 377
+    },
+    {
+      "city_id": "2759794",
+      "city_name_en": "Amsterdam",
+      "city_name_zh": "阿姆斯特丹",
+      "top5_base_count": 66,
+      "top10_base_count": 174,
+      "top5_final_count": 53,
+      "top10_final_count": 185
+    },
+    {
+      "city_id": "2761369",
+      "city_name_en": "Vienna",
+      "city_name_zh": "维也纳",
+      "top5_base_count": 50,
+      "top10_base_count": 179,
+      "top5_final_count": 51,
+      "top10_final_count": 182
+    },
+    {
+      "city_id": "1791247",
+      "city_name_en": "Wuhan",
+      "city_name_zh": "武汉",
+      "top5_base_count": 49,
+      "top10_base_count": 121,
+      "top5_final_count": 50,
+      "top10_final_count": 134
+    },
+    {
+      "city_id": "5809844",
+      "city_name_en": "Seattle",
+      "city_name_zh": "西雅图",
+      "top5_base_count": 34,
+      "top10_base_count": 106,
+      "top5_final_count": 50,
+      "top10_final_count": 106
+    },
+    {
+      "city_id": "5128581",
+      "city_name_en": "New York",
+      "city_name_zh": "纽约",
+      "top5_base_count": 60,
+      "top10_base_count": 93,
+      "top5_final_count": 49,
+      "top10_final_count": 88
+    },
+    {
+      "city_id": "4335045",
+      "city_name_en": "New Orleans",
+      "city_name_zh": "新奥尔良",
+      "top5_base_count": 50,
+      "top10_base_count": 157,
+      "top5_final_count": 46,
+      "top10_final_count": 129
+    },
+    {
+      "city_id": "1809858",
+      "city_name_en": "Guangzhou",
+      "city_name_zh": "广州",
+      "top5_base_count": 39,
+      "top10_base_count": 169,
+      "top5_final_count": 39,
+      "top10_final_count": 169
+    },
+    {
+      "city_id": "1850147",
+      "city_name_en": "Tokyo",
+      "city_name_zh": "东京",
+      "top5_base_count": 43,
+      "top10_base_count": 93,
+      "top5_final_count": 38,
+      "top10_final_count": 78
+    },
+    {
+      "city_id": "5391959",
+      "city_name_en": "San Francisco",
+      "city_name_zh": "旧金山",
+      "top5_base_count": 34,
+      "top10_base_count": 142,
+      "top5_final_count": 37,
+      "top10_final_count": 150
+    },
+    {
+      "city_id": "3128760",
+      "city_name_en": "Barcelona",
+      "city_name_zh": "巴塞罗那",
+      "top5_base_count": 33,
+      "top10_base_count": 81,
+      "top5_final_count": 35,
+      "top10_final_count": 76
+    },
+    {
+      "city_id": "2640729",
+      "city_name_en": "Oxford",
+      "city_name_zh": "牛津",
+      "top5_base_count": 38,
+      "top10_base_count": 142,
+      "top5_final_count": 33,
+      "top10_final_count": 137
+    },
+    {
+      "city_id": "2267057",
+      "city_name_en": "Lisbon",
+      "city_name_zh": "里斯本",
+      "top5_base_count": 32,
+      "top10_base_count": 165,
+      "top5_final_count": 32,
+      "top10_final_count": 155
+    },
+    {
+      "city_id": "3833367",
+      "city_name_en": "Ushuaia",
+      "city_name_zh": "乌斯怀亚",
+      "top5_base_count": 122,
+      "top10_base_count": 262,
+      "top5_final_count": 31,
+      "top10_final_count": 152
+    },
+    {
+      "city_id": "264371",
+      "city_name_en": "Athens",
+      "city_name_zh": "雅典",
+      "top5_base_count": 30,
+      "top10_base_count": 186,
+      "top5_final_count": 28,
+      "top10_final_count": 188
+    },
+    {
+      "city_id": "1808926",
+      "city_name_en": "Hangzhou",
+      "city_name_zh": "杭州",
+      "top5_base_count": 18,
+      "top10_base_count": 31,
+      "top5_final_count": 25,
+      "top10_final_count": 43
+    },
+    {
+      "city_id": "4930956",
+      "city_name_en": "Boston",
+      "city_name_zh": "波士顿",
+      "top5_base_count": 27,
+      "top10_base_count": 156,
+      "top5_final_count": 24,
+      "top10_final_count": 164
+    },
+    {
+      "city_id": "2653941",
+      "city_name_en": "Cambridge",
+      "city_name_zh": "剑桥",
+      "top5_base_count": 26,
+      "top10_base_count": 90,
+      "top5_final_count": 24,
+      "top10_final_count": 97
+    },
+    {
+      "city_id": "1796236",
+      "city_name_en": "Shanghai",
+      "city_name_zh": "上海",
+      "top5_base_count": 19,
+      "top10_base_count": 101,
+      "top5_final_count": 24,
+      "top10_final_count": 94
+    },
+    {
+      "city_id": "1835848",
+      "city_name_en": "Seoul",
+      "city_name_zh": "首尔",
+      "top5_base_count": 26,
+      "top10_base_count": 161,
+      "top5_final_count": 22,
+      "top10_final_count": 158
+    },
+    {
+      "city_id": "1790645",
+      "city_name_en": "Xiamen",
+      "city_name_zh": "厦门",
+      "top5_base_count": 15,
+      "top10_base_count": 89,
+      "top5_final_count": 20,
+      "top10_final_count": 106
+    },
+    {
+      "city_id": "2950159",
+      "city_name_en": "Berlin",
+      "city_name_zh": "柏林",
+      "top5_base_count": 19,
+      "top10_base_count": 88,
+      "top5_final_count": 16,
+      "top10_final_count": 81
+    },
+    {
+      "city_id": "3176959",
+      "city_name_en": "Florence",
+      "city_name_zh": "佛罗伦萨",
+      "top5_base_count": 11,
+      "top10_base_count": 164,
+      "top5_final_count": 14,
+      "top10_final_count": 170
+    },
+    {
+      "city_id": "2988507",
+      "city_name_en": "Paris",
+      "city_name_zh": "巴黎",
+      "top5_base_count": 17,
+      "top10_base_count": 39,
+      "top5_final_count": 13,
+      "top10_final_count": 47
+    },
+    {
+      "city_id": "3173435",
+      "city_name_en": "Milan",
+      "city_name_zh": "米兰",
+      "top5_base_count": 11,
+      "top10_base_count": 44,
+      "top5_final_count": 13,
+      "top10_final_count": 45
+    },
+    {
+      "city_id": "2193733",
+      "city_name_en": "Auckland",
+      "city_name_zh": "奥克兰",
+      "top5_base_count": 12,
+      "top10_base_count": 81,
+      "top5_final_count": 12,
+      "top10_final_count": 64
+    },
+    {
+      "city_id": "3169070",
+      "city_name_en": "Rome",
+      "city_name_zh": "罗马",
+      "top5_base_count": 13,
+      "top10_base_count": 65,
+      "top5_final_count": 11,
+      "top10_final_count": 62
+    },
+    {
+      "city_id": "1799962",
+      "city_name_en": "Nanjing",
+      "city_name_zh": "南京",
+      "top5_base_count": 4,
+      "top10_base_count": 26,
+      "top5_final_count": 10,
+      "top10_final_count": 36
+    },
+    {
+      "city_id": "2643743",
+      "city_name_en": "London",
+      "city_name_zh": "伦敦",
+      "top5_base_count": 5,
+      "top10_base_count": 27,
+      "top5_final_count": 5,
+      "top10_final_count": 40
+    },
+    {
+      "city_id": "1838524",
+      "city_name_en": "Busan",
+      "city_name_zh": "釜山",
+      "top5_base_count": 6,
+      "top10_base_count": 62,
+      "top5_final_count": 3,
+      "top10_final_count": 56
+    }
+  ],
+  "sample_profiles": [
+    {
+      "profile_id": "sim-0001",
+      "primary_element": "wood",
+      "secondary_element": "fire",
+      "avoid_elements": [
+        "metal",
+        "water"
+      ],
+      "intensity": "soft",
+      "climate_need": "balanced",
+      "confidence": "high",
+      "base_need_vector": [
+        33.350157,
+        30.090786,
+        21.622012,
+        10.154302,
+        4.782743
+      ],
+      "dayun_adjustment_vector": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "top10": [
+        {
+          "city": "Sanya",
+          "index": 90.003,
+          "base_index": 89.675,
+          "direction_adjustment": 0.328
+        },
+        {
+          "city": "Kuala Lumpur",
+          "index": 89.709,
+          "base_index": 89.453,
+          "direction_adjustment": 0.257
+        },
+        {
+          "city": "Manila",
+          "index": 88.444,
+          "base_index": 87.862,
+          "direction_adjustment": 0.581
+        },
+        {
+          "city": "Shenzhen",
+          "index": 87.892,
+          "base_index": 87.459,
+          "direction_adjustment": 0.433
+        },
+        {
+          "city": "Singapore",
+          "index": 87.518,
+          "base_index": 87.215,
+          "direction_adjustment": 0.303
+        },
+        {
+          "city": "Hong Kong",
+          "index": 87.346,
+          "base_index": 86.908,
+          "direction_adjustment": 0.437
+        },
+        {
+          "city": "Bangkok",
+          "index": 87.29,
+          "base_index": 87.138,
+          "direction_adjustment": 0.152
+        },
+        {
+          "city": "Hanoi",
+          "index": 86.945,
+          "base_index": 86.745,
+          "direction_adjustment": 0.199
+        },
+        {
+          "city": "Rio de Janeiro",
+          "index": 86.899,
+          "base_index": 87.602,
+          "direction_adjustment": -0.703
+        },
+        {
+          "city": "Miami",
+          "index": 84.453,
+          "base_index": 84.794,
+          "direction_adjustment": -0.341
+        }
+      ],
+      "top5_tier_size": 0,
+      "top10_tier_size": 0
+    },
+    {
+      "profile_id": "sim-0002",
+      "primary_element": "fire",
+      "secondary_element": "wood",
+      "avoid_elements": [
+        "water",
+        "metal"
+      ],
+      "intensity": "soft",
+      "climate_need": "balanced",
+      "confidence": "high",
+      "base_need_vector": [
+        28.578189,
+        35.290619,
+        20.989726,
+        4.678625,
+        10.462841
+      ],
+      "dayun_adjustment_vector": [
+        0.562628,
+        0.616905,
+        -0.188101,
+        -0.40974,
+        -0.581692
+      ],
+      "top10": [
+        {
+          "city": "Honolulu",
+          "index": 89.076,
+          "base_index": 88.714,
+          "direction_adjustment": 0.362
+        },
+        {
+          "city": "Bangkok",
+          "index": 85.631,
+          "base_index": 85.723,
+          "direction_adjustment": -0.092
+        },
+        {
+          "city": "Nairobi",
+          "index": 85.577,
+          "base_index": 86.042,
+          "direction_adjustment": -0.465
+        },
+        {
+          "city": "Miami",
+          "index": 85.486,
+          "base_index": 85.758,
+          "direction_adjustment": -0.271
+        },
+        {
+          "city": "Perth",
+          "index": 85.464,
+          "base_index": 85.012,
+          "direction_adjustment": 0.451
+        },
+        {
+          "city": "Cape Town",
+          "index": 84.949,
+          "base_index": 85.189,
+          "direction_adjustment": -0.24
+        },
+        {
+          "city": "Sanya",
+          "index": 84.453,
+          "base_index": 84.424,
+          "direction_adjustment": 0.029
+        },
+        {
+          "city": "Singapore",
+          "index": 84.001,
+          "base_index": 83.848,
+          "direction_adjustment": 0.153
+        },
+        {
+          "city": "Mexico City",
+          "index": 83.757,
+          "base_index": 83.781,
+          "direction_adjustment": -0.023
+        },
+        {
+          "city": "Rio de Janeiro",
+          "index": 83.356,
+          "base_index": 84.031,
+          "direction_adjustment": -0.675
+        }
+      ],
+      "top5_tier_size": 0,
+      "top10_tier_size": 0
+    },
+    {
+      "profile_id": "sim-0003",
+      "primary_element": "earth",
+      "secondary_element": "wood",
+      "avoid_elements": [
+        "metal",
+        "water"
+      ],
+      "intensity": "soft",
+      "climate_need": "balanced",
+      "confidence": "high",
+      "base_need_vector": [
+        28.358486,
+        21.75407,
+        34.942773,
+        10.529289,
+        4.415382
+      ],
+      "dayun_adjustment_vector": [
+        -1.272344,
+        0.993026,
+        0.152431,
+        0.075009,
+        0.051878
+      ],
+      "top10": [
+        {
+          "city": "Cusco",
+          "index": 92.363,
+          "base_index": 92.454,
+          "direction_adjustment": -0.091
+        },
+        {
+          "city": "Mexico City",
+          "index": 88.123,
+          "base_index": 88.142,
+          "direction_adjustment": -0.019
+        },
+        {
+          "city": "Kunming",
+          "index": 84.239,
+          "base_index": 84.88,
+          "direction_adjustment": -0.641
+        },
+        {
+          "city": "Nairobi",
+          "index": 83.976,
+          "base_index": 84.449,
+          "direction_adjustment": -0.473
+        },
+        {
+          "city": "Quito",
+          "index": 81.386,
+          "base_index": 81.522,
+          "direction_adjustment": -0.136
+        },
+        {
+          "city": "Guiyang",
+          "index": 80.078,
+          "base_index": 80.779,
+          "direction_adjustment": -0.701
+        },
+        {
+          "city": "Lhasa",
+          "index": 78.875,
+          "base_index": 79.55,
+          "direction_adjustment": -0.675
+        },
+        {
+          "city": "Chongqing",
+          "index": 78.101,
+          "base_index": 78.805,
+          "direction_adjustment": -0.704
+        },
+        {
+          "city": "Kuala Lumpur",
+          "index": 77.546,
+          "base_index": 77.448,
+          "direction_adjustment": 0.098
+        },
+        {
+          "city": "Guilin",
+          "index": 76.697,
+          "base_index": 77.405,
+          "direction_adjustment": -0.708
+        }
+      ],
+      "top5_tier_size": 0,
+      "top10_tier_size": 0
+    },
+    {
+      "profile_id": "sim-0004",
+      "primary_element": "metal",
+      "secondary_element": "wood",
+      "avoid_elements": [
+        "fire",
+        "water"
+      ],
+      "intensity": "soft",
+      "climate_need": "balanced",
+      "confidence": "high",
+      "base_need_vector": [
+        29.618113,
+        10.842125,
+        20.972586,
+        33.80688,
+        4.760296
+      ],
+      "dayun_adjustment_vector": [
+        0.755927,
+        0.055159,
+        0.414424,
+        -0.981026,
+        -0.244485
+      ],
+      "top10": [
+        {
+          "city": "Chengdu",
+          "index": 91.924,
+          "base_index": 92.136,
+          "direction_adjustment": -0.212
+        },
+        {
+          "city": "Vienna",
+          "index": 89.821,
+          "base_index": 89.944,
+          "direction_adjustment": -0.123
+        },
+        {
+          "city": "Toronto",
+          "index": 89.556,
+          "base_index": 89.479,
+          "direction_adjustment": 0.077
+        },
+        {
+          "city": "Harbin",
+          "index": 89.473,
+          "base_index": 89.689,
+          "direction_adjustment": -0.217
+        },
+        {
+          "city": "Seoul",
+          "index": 89.172,
+          "base_index": 89.391,
+          "direction_adjustment": -0.219
+        },
+        {
+          "city": "Milan",
+          "index": 89.164,
+          "base_index": 89.18,
+          "direction_adjustment": -0.016
+        },
+        {
+          "city": "Xi'an",
+          "index": 88.693,
+          "base_index": 88.909,
+          "direction_adjustment": -0.217
+        },
+        {
+          "city": "Florence",
+          "index": 88.566,
+          "base_index": 88.582,
+          "direction_adjustment": -0.016
+        },
+        {
+          "city": "Moscow",
+          "index": 88.496,
+          "base_index": 88.703,
+          "direction_adjustment": -0.207
+        },
+        {
+          "city": "Chicago",
+          "index": 88.215,
+          "base_index": 88.15,
+          "direction_adjustment": 0.065
+        }
+      ],
+      "top5_tier_size": 0,
+      "top10_tier_size": 0
+    },
+    {
+      "profile_id": "sim-0005",
+      "primary_element": "water",
+      "secondary_element": "wood",
+      "avoid_elements": [
+        "fire",
+        "earth"
+      ],
+      "intensity": "soft",
+      "climate_need": "balanced",
+      "confidence": "high",
+      "base_need_vector": [
+        29.065892,
+        9.797233,
+        4.681192,
+        21.206309,
+        35.249373
+      ],
+      "dayun_adjustment_vector": [
+        -1.152584,
+        0.26759,
+        0.294119,
+        -0.792692,
+        1.383567
+      ],
+      "top10": [
+        {
+          "city": "Stockholm",
+          "index": 94.399,
+          "base_index": 93.656,
+          "direction_adjustment": 0.743
+        },
+        {
+          "city": "Reykjavik",
+          "index": 94.302,
+          "base_index": 93.548,
+          "direction_adjustment": 0.754
+        },
+        {
+          "city": "Amsterdam",
+          "index": 94.294,
+          "base_index": 93.61,
+          "direction_adjustment": 0.684
+        },
+        {
+          "city": "Dublin",
+          "index": 94.261,
+          "base_index": 93.586,
+          "direction_adjustment": 0.675
+        },
+        {
+          "city": "Edinburgh",
+          "index": 94.258,
+          "base_index": 93.557,
+          "direction_adjustment": 0.701
+        },
+        {
+          "city": "Belfast",
+          "index": 94.17,
+          "base_index": 93.483,
+          "direction_adjustment": 0.687
+        },
+        {
+          "city": "London",
+          "index": 94.149,
+          "base_index": 93.48,
+          "direction_adjustment": 0.669
+        },
+        {
+          "city": "Oslo",
+          "index": 94.068,
+          "base_index": 93.33,
+          "direction_adjustment": 0.738
+        },
+        {
+          "city": "Murmansk",
+          "index": 94.066,
+          "base_index": 93.292,
+          "direction_adjustment": 0.774
+        },
+        {
+          "city": "Hangzhou",
+          "index": 94.06,
+          "base_index": 93.414,
+          "direction_adjustment": 0.646
+        }
+      ],
+      "top5_tier_size": 0,
+      "top10_tier_size": 0
+    },
+    {
+      "profile_id": "sim-0006",
+      "primary_element": "wood",
+      "secondary_element": "earth",
+      "avoid_elements": [
+        "metal",
+        "water"
+      ],
+      "intensity": "soft",
+      "climate_need": "balanced",
+      "confidence": "high",
+      "base_need_vector": [
+        34.685188,
+        21.870083,
+        28.810628,
+        10.124258,
+        4.509842
+      ],
+      "dayun_adjustment_vector": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "top10": [
+        {
+          "city": "Cusco",
+          "index": 92.775,
+          "base_index": 92.055,
+          "direction_adjustment": 0.72
+        },
+        {
+          "city": "Quito",
+          "index": 88.729,
+          "base_index": 88.003,
+          "direction_adjustment": 0.726
+        },
+        {
+          "city": "Kuala Lumpur",
+          "index": 86.76,
+          "base_index": 87.484,
+          "direction_adjustment": -0.724
+        },
+        {
+          "city": "Hanoi",
+          "index": 86.12,
+          "base_index": 86.824,
+          "direction_adjustment": -0.704
+        },
+        {
+          "city": "Guilin",
+          "index": 84.262,
+          "base_index": 84.968,
+          "direction_adjustment": -0.706
+        },
+        {
+          "city": "Kunming",
+          "index": 83.65,
+          "base_index": 84.336,
+          "direction_adjustment": -0.686
+        },
+        {
+          "city": "Sanya",
+          "index": 83.647,
+          "base_index": 84.363,
+          "direction_adjustment": -0.716
+        },
+        {
+          "city": "Guiyang",
+          "index": 83.555,
+          "base_index": 84.249,
+          "direction_adjustment": -0.694
+        },
+        {
+          "city": "Shenzhen",
+          "index": 83.237,
+          "base_index": 83.954,
+          "direction_adjustment": -0.717
+        },
+        {
+          "city": "Taipei",
+          "index": 83.201,
+          "base_index": 83.924,
+          "direction_adjustment": -0.722
+        }
+      ],
+      "top5_tier_size": 0,
+      "top10_tier_size": 0
+    },
+    {
+      "profile_id": "sim-0007",
+      "primary_element": "fire",
+      "secondary_element": "earth",
+      "avoid_elements": [
+        "water",
+        "wood"
+      ],
+      "intensity": "soft",
+      "climate_need": "balanced",
+      "confidence": "high",
+      "base_need_vector": [
+        4.568296,
+        35.133075,
+        28.358019,
+        21.59831,
+        10.3423
+      ],
+      "dayun_adjustment_vector": [
+        0.117898,
+        -1.883488,
+        0.033818,
+        1.46346,
+        0.268312
+      ],
+      "top10": [
+        {
+          "city": "Santiago",
+          "index": 94.675,
+          "base_index": 94.008,
+          "direction_adjustment": 0.667
+        },
+        {
+          "city": "Johannesburg",
+          "index": 93.926,
+          "base_index": 93.304,
+          "direction_adjustment": 0.623
+        },
+        {
+          "city": "Nairobi",
+          "index": 93.913,
+          "base_index": 93.509,
+          "direction_adjustment": 0.404
+        },
+        {
+          "city": "Lima",
+          "index": 93.72,
+          "base_index": 93.135,
+          "direction_adjustment": 0.585
+        },
+        {
+          "city": "Riyadh",
+          "index": 93.71,
+          "base_index": 93.661,
+          "direction_adjustment": 0.048
+        },
+        {
+          "city": "Marrakech",
+          "index": 93.58,
+          "base_index": 93.607,
+          "direction_adjustment": -0.027
+        },
+        {
+          "city": "Phoenix",
+          "index": 92.929,
+          "base_index": 93.647,
+          "direction_adjustment": -0.717
+        },
+        {
+          "city": "Los Angeles",
+          "index": 92.473,
+          "base_index": 93.183,
+          "direction_adjustment": -0.71
+        },
+        {
+          "city": "Cairo",
+          "index": 92.816,
+          "base_index": 92.805,
+          "direction_adjustment": 0.011
+        },
+        {
+          "city": "New Delhi",
+          "index": 92.598,
+          "base_index": 92.819,
+          "direction_adjustment": -0.221
+        }
+      ],
+      "top5_tier_size": 0,
+      "top10_tier_size": 0
+    },
+    {
+      "profile_id": "sim-0008",
+      "primary_element": "earth",
+      "secondary_element": "fire",
+      "avoid_elements": [
+        "metal",
+        "wood"
+      ],
+      "intensity": "soft",
+      "climate_need": "balanced",
+      "confidence": "high",
+      "base_need_vector": [
+        4.494845,
+        28.725117,
+        34.45549,
+        10.690418,
+        21.63413
+      ],
+      "dayun_adjustment_vector": [
+        -0.120747,
+        0.699364,
+        -1.532581,
+        0.90285,
+        0.051114
+      ],
+      "top10": [
+        {
+          "city": "Mexico City",
+          "index": 91.76,
+          "base_index": 92.119,
+          "direction_adjustment": -0.359
+        },
+        {
+          "city": "Nairobi",
+          "index": 90.339,
+          "base_index": 90.136,
+          "direction_adjustment": 0.202
+        },
+        {
+          "city": "Santiago",
+          "index": 88.116,
+          "base_index": 88.333,
+          "direction_adjustment": -0.217
+        },
+        {
+          "city": "Lhasa",
+          "index": 87.752,
+          "base_index": 87.546,
+          "direction_adjustment": 0.206
+        },
+        {
+          "city": "Cusco",
+          "index": 86.159,
+          "base_index": 86.509,
+          "direction_adjustment": -0.35
+        },
+        {
+          "city": "Johannesburg",
+          "index": 85.126,
+          "base_index": 84.837,
+          "direction_adjustment": 0.289
+        },
+        {
+          "city": "Kunming",
+          "index": 81.542,
+          "base_index": 81.266,
+          "direction_adjustment": 0.276
+        },
+        {
+          "city": "Urumqi",
+          "index": 80.462,
+          "base_index": 80.389,
+          "direction_adjustment": 0.073
+        },
+        {
+          "city": "Lima",
+          "index": 80.018,
+          "base_index": 80.358,
+          "direction_adjustment": -0.34
+        },
+        {
+          "city": "Lanzhou",
+          "index": 80.168,
+          "base_index": 79.994,
+          "direction_adjustment": 0.175
+        }
+      ],
+      "top5_tier_size": 0,
+      "top10_tier_size": 0
+    },
+    {
+      "profile_id": "sim-0009",
+      "primary_element": "metal",
+      "secondary_element": "fire",
+      "avoid_elements": [
+        "wood",
+        "water"
+      ],
+      "intensity": "soft",
+      "climate_need": "balanced",
+      "confidence": "high",
+      "base_need_vector": [
+        10.555506,
+        28.487411,
+        21.800798,
+        34.651676,
+        4.504609
+      ],
+      "dayun_adjustment_vector": [
+        -0.837281,
+        -0.361172,
+        -0.113057,
+        1.220378,
+        0.091133
+      ],
+      "top10": [
+        {
+          "city": "Marrakech",
+          "index": 94.53,
+          "base_index": 94.017,
+          "direction_adjustment": 0.513
+        },
+        {
+          "city": "Johannesburg",
+          "index": 94.379,
+          "base_index": 93.674,
+          "direction_adjustment": 0.705
+        },
+        {
+          "city": "Riyadh",
+          "index": 94.107,
+          "base_index": 93.743,
+          "direction_adjustment": 0.364
+        },
+        {
+          "city": "New Delhi",
+          "index": 93.984,
+          "base_index": 93.828,
+          "direction_adjustment": 0.156
+        },
+        {
+          "city": "Cairo",
+          "index": 93.766,
+          "base_index": 93.393,
+          "direction_adjustment": 0.373
+        },
+        {
+          "city": "Kashgar",
+          "index": 93.411,
+          "base_index": 93.355,
+          "direction_adjustment": 0.055
+        },
+        {
+          "city": "Santiago",
+          "index": 93.33,
+          "base_index": 93.204,
+          "direction_adjustment": 0.126
+        },
+        {
+          "city": "Phoenix",
+          "index": 93.213,
+          "base_index": 93.881,
+          "direction_adjustment": -0.668
+        },
+        {
+          "city": "Urumqi",
+          "index": 93.115,
+          "base_index": 93.169,
+          "direction_adjustment": -0.054
+        },
+        {
+          "city": "Los Angeles",
+          "index": 92.527,
+          "base_index": 93.207,
+          "direction_adjustment": -0.68
+        }
+      ],
+      "top5_tier_size": 0,
+      "top10_tier_size": 0
+    },
+    {
+      "profile_id": "sim-0010",
+      "primary_element": "water",
+      "secondary_element": "fire",
+      "avoid_elements": [
+        "metal",
+        "earth"
+      ],
+      "intensity": "soft",
+      "climate_need": "balanced",
+      "confidence": "high",
+      "base_need_vector": [
+        21.045448,
+        29.649571,
+        4.701408,
+        10.702134,
+        33.90144
+      ],
+      "dayun_adjustment_vector": [
+        -0.019371,
+        -2.844895,
+        0.117328,
+        0.347111,
+        2.399826
+      ],
+      "top10": [
+        {
+          "city": "Manila",
+          "index": 93.032,
+          "base_index": 92.793,
+          "direction_adjustment": 0.239
+        },
+        {
+          "city": "Singapore",
+          "index": 92.953,
+          "base_index": 92.815,
+          "direction_adjustment": 0.138
+        },
+        {
+          "city": "Bangkok",
+          "index": 92.899,
+          "base_index": 92.7,
+          "direction_adjustment": 0.199
+        },
+        {
+          "city": "Miami",
+          "index": 92.63,
+          "base_index": 92.622,
+          "direction_adjustment": 0.009
+        },
+        {
+          "city": "Sanya",
+          "index": 92.6,
+          "base_index": 92.362,
+          "direction_adjustment": 0.238
+        },
+        {
+          "city": "Hong Kong",
+          "index": 92.556,
+          "base_index": 92.295,
+          "direction_adjustment": 0.261
+        },
+        {
+          "city": "Shenzhen",
+          "index": 92.383,
+          "base_index": 92.121,
+          "direction_adjustment": 0.262
+        },
+        {
+          "city": "Rio de Janeiro",
+          "index": 92.34,
+          "base_index": 92.623,
+          "direction_adjustment": -0.283
+        },
+        {
+          "city": "Guangzhou",
+          "index": 91.649,
+          "base_index": 91.387,
+          "direction_adjustment": 0.263
+        },
+        {
+          "city": "Sydney",
+          "index": 91.394,
+          "base_index": 91.309,
+          "direction_adjustment": 0.085
+        }
+      ],
+      "top5_tier_size": 0,
+      "top10_tier_size": 0
+    },
+    {
+      "profile_id": "sim-0011",
+      "primary_element": "wood",
+      "secondary_element": "metal",
+      "avoid_elements": [
+        "fire",
+        "earth"
+      ],
+      "intensity": "soft",
+      "climate_need": "balanced",
+      "confidence": "high",
+      "base_need_vector": [
+        35.220081,
+        10.808938,
+        4.59407,
+        28.013901,
+        21.36301
+      ],
+      "dayun_adjustment_vector": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "top10": [
+        {
+          "city": "Hangzhou",
+          "index": 92.647,
+          "base_index": 92.339,
+          "direction_adjustment": 0.308
+        },
+        {
+          "city": "Stockholm",
+          "index": 92.547,
+          "base_index": 92.367,
+          "direction_adjustment": 0.179
+        },
+        {
+          "city": "Murmansk",
+          "index": 92.546,
+          "base_index": 92.327,
+          "direction_adjustment": 0.219
+        },
+        {
+          "city": "St Petersburg",
+          "index": 92.538,
+          "base_index": 92.328,
+          "direction_adjustment": 0.21
+        },
+        {
+          "city": "Oslo",
+          "index": 92.434,
+          "base_index": 92.271,
+          "direction_adjustment": 0.163
+        },
+        {
+          "city": "Nanjing",
+          "index": 92.424,
+          "base_index": 92.113,
+          "direction_adjustment": 0.311
+        },
+        {
+          "city": "Helsinki",
+          "index": 92.404,
+          "base_index": 92.207,
+          "direction_adjustment": 0.197
+        },
+        {
+          "city": "Sapporo",
+          "index": 92.39,
+          "base_index": 92.072,
+          "direction_adjustment": 0.318
+        },
+        {
+          "city": "Busan",
+          "index": 92.362,
+          "base_index": 92.048,
+          "direction_adjustment": 0.313
+        },
+        {
+          "city": "Shanghai",
+          "index": 92.346,
+          "base_index": 92.037,
+          "direction_adjustment": 0.309
+        }
+      ],
+      "top5_tier_size": 0,
+      "top10_tier_size": 0
+    },
+    {
+      "profile_id": "sim-0012",
+      "primary_element": "fire",
+      "secondary_element": "metal",
+      "avoid_elements": [
+        "water",
+        "earth"
+      ],
+      "intensity": "soft",
+      "climate_need": "balanced",
+      "confidence": "high",
+      "base_need_vector": [
+        21.6268,
+        33.842213,
+        4.515601,
+        29.323162,
+        10.692224
+      ],
+      "dayun_adjustment_vector": [
+        -1.232277,
+        -0.174162,
+        0.483878,
+        1.212315,
+        -0.289754
+      ],
+      "top10": [
+        {
+          "city": "Honolulu",
+          "index": 92.972,
+          "base_index": 92.865,
+          "direction_adjustment": 0.107
+        },
+        {
+          "city": "Lima",
+          "index": 92.886,
+          "base_index": 92.827,
+          "direction_adjustment": 0.059
+        },
+        {
+          "city": "Perth",
+          "index": 92.744,
+          "base_index": 92.136,
+          "direction_adjustment": 0.609
+        },
+        {
+          "city": "Los Angeles",
+          "index": 92.715,
+          "base_index": 92.947,
+          "direction_adjustment": -0.232
+        },
+        {
+          "city": "Cape Town",
+          "index": 92.404,
+          "base_index": 92.33,
+          "direction_adjustment": 0.075
+        },
+        {
+          "city": "New Delhi",
+          "index": 92.242,
+          "base_index": 92.733,
+          "direction_adjustment": -0.491
+        },
+        {
+          "city": "Dubai",
+          "index": 91.863,
+          "base_index": 92.364,
+          "direction_adjustment": -0.501
+        },
+        {
+          "city": "Cairo",
+          "index": 91.606,
+          "base_index": 92.224,
+          "direction_adjustment": -0.619
+        },
+        {
+          "city": "Johannesburg",
+          "index": 91.896,
+          "base_index": 91.91,
+          "direction_adjustment": -0.014
+        },
+        {
+          "city": "Marrakech",
+          "index": 90.131,
+          "base_index": 90.882,
+          "direction_adjustment": -0.75
+        }
+      ],
+      "top5_tier_size": 0,
+      "top10_tier_size": 0
+    },
+    {
+      "profile_id": "sim-0013",
+      "primary_element": "earth",
+      "secondary_element": "metal",
+      "avoid_elements": [
+        "wood",
+        "water"
+      ],
+      "intensity": "soft",
+      "climate_need": "balanced",
+      "confidence": "high",
+      "base_need_vector": [
+        10.81076,
+        20.547838,
+        33.832923,
+        30.103721,
+        4.704758
+      ],
+      "dayun_adjustment_vector": [
+        0.192363,
+        -0.176318,
+        -0.794592,
+        0.542173,
+        0.236374
+      ],
+      "top10": [
+        {
+          "city": "Lhasa",
+          "index": 94.245,
+          "base_index": 93.596,
+          "direction_adjustment": 0.65
+        },
+        {
+          "city": "Johannesburg",
+          "index": 93.337,
+          "base_index": 92.673,
+          "direction_adjustment": 0.664
+        },
+        {
+          "city": "Lanzhou",
+          "index": 93.254,
+          "base_index": 92.611,
+          "direction_adjustment": 0.643
+        },
+        {
+          "city": "Santiago",
+          "index": 92.289,
+          "base_index": 92.995,
+          "direction_adjustment": -0.706
+        },
+        {
+          "city": "Denver",
+          "index": 91.967,
+          "base_index": 92.643,
+          "direction_adjustment": -0.676
+        },
+        {
+          "city": "Xining",
+          "index": 92.854,
+          "base_index": 92.245,
+          "direction_adjustment": 0.609
+        },
+        {
+          "city": "Nairobi",
+          "index": 92.813,
+          "base_index": 92.228,
+          "direction_adjustment": 0.585
+        },
+        {
+          "city": "Hohhot",
+          "index": 92.672,
+          "base_index": 92.373,
+          "direction_adjustment": 0.299
+        },
+        {
+          "city": "Urumqi",
+          "index": 92.559,
+          "base_index": 92.225,
+          "direction_adjustment": 0.335
+        },
+        {
+          "city": "Madrid",
+          "index": 91.789,
+          "base_index": 91.794,
+          "direction_adjustment": -0.005
+        }
+      ],
+      "top5_tier_size": 0,
+      "top10_tier_size": 0
+    },
+    {
+      "profile_id": "sim-0014",
+      "primary_element": "metal",
+      "secondary_element": "earth",
+      "avoid_elements": [
+        "fire",
+        "water"
+      ],
+      "intensity": "soft",
+      "climate_need": "balanced",
+      "confidence": "high",
+      "base_need_vector": [
+        21.769368,
+        10.223839,
+        29.390501,
+        33.837697,
+        4.778595
+      ],
+      "dayun_adjustment_vector": [
+        -1.349107,
+        -1.125758,
+        1.234673,
+        1.190372,
+        0.04982
+      ],
+      "top10": [
+        {
+          "city": "Xining",
+          "index": 92.643,
+          "base_index": 92.33,
+          "direction_adjustment": 0.313
+        },
+        {
+          "city": "Hohhot",
+          "index": 92.354,
+          "base_index": 92.252,
+          "direction_adjustment": 0.102
+        },
+        {
+          "city": "Xi'an",
+          "index": 92.342,
+          "base_index": 92.004,
+          "direction_adjustment": 0.338
+        },
+        {
+          "city": "Lanzhou",
+          "index": 92.301,
+          "base_index": 91.984,
+          "direction_adjustment": 0.317
+        },
+        {
+          "city": "Madrid",
+          "index": 90.489,
+          "base_index": 90.374,
+          "direction_adjustment": 0.115
+        },
+        {
+          "city": "Denver",
+          "index": 90.188,
+          "base_index": 90.586,
+          "direction_adjustment": -0.397
+        },
+        {
+          "city": "Astana",
+          "index": 88.419,
+          "base_index": 88.243,
+          "direction_adjustment": 0.176
+        },
+        {
+          "city": "Chengdu",
+          "index": 88.031,
+          "base_index": 87.614,
+          "direction_adjustment": 0.417
+        },
+        {
+          "city": "Harbin",
+          "index": 87.174,
+          "base_index": 87.462,
+          "direction_adjustment": -0.289
+        },
+        {
+          "city": "Urumqi",
+          "index": 87.504,
+          "base_index": 87.265,
+          "direction_adjustment": 0.239
+        }
+      ],
+      "top5_tier_size": 0,
+      "top10_tier_size": 0
+    },
+    {
+      "profile_id": "sim-0015",
+      "primary_element": "water",
+      "secondary_element": "earth",
+      "avoid_elements": [
+        "metal",
+        "fire"
+      ],
+      "intensity": "soft",
+      "climate_need": "balanced",
+      "confidence": "high",
+      "base_need_vector": [
+        21.18315,
+        4.709275,
+        28.863835,
+        10.159616,
+        35.084124
+      ],
+      "dayun_adjustment_vector": [
+        -0.220136,
+        -0.156543,
+        1.7463,
+        0.586883,
+        -1.956504
+      ],
+      "top10": [
+        {
+          "city": "Changsha",
+          "index": 93.057,
+          "base_index": 92.295,
+          "direction_adjustment": 0.762
+        },
+        {
+          "city": "Kyoto",
+          "index": 92.965,
+          "base_index": 92.31,
+          "direction_adjustment": 0.655
+        },
+        {
+          "city": "Guilin",
+          "index": 92.878,
+          "base_index": 92.497,
+          "direction_adjustment": 0.381
+        },
+        {
+          "city": "Zurich",
+          "index": 92.86,
+          "base_index": 92.376,
+          "direction_adjustment": 0.484
+        },
+        {
+          "city": "Quito",
+          "index": 92.846,
+          "base_index": 92.054,
+          "direction_adjustment": 0.792
+        },
+        {
+          "city": "Manchester",
+          "index": 92.598,
+          "base_index": 92.016,
+          "direction_adjustment": 0.581
+        },
+        {
+          "city": "Glasgow",
+          "index": 92.025,
+          "base_index": 91.417,
+          "direction_adjustment": 0.608
+        },
+        {
+          "city": "Oslo",
+          "index": 91.7,
+          "base_index": 91.095,
+          "direction_adjustment": 0.604
+        },
+        {
+          "city": "Reykjavik",
+          "index": 91.698,
+          "base_index": 90.986,
+          "direction_adjustment": 0.712
+        },
+        {
+          "city": "Taipei",
+          "index": 91.306,
+          "base_index": 90.807,
+          "direction_adjustment": 0.498
+        }
+      ],
+      "top5_tier_size": 0,
+      "top10_tier_size": 0
+    },
+    {
+      "profile_id": "sim-0016",
+      "primary_element": "wood",
+      "secondary_element": "water",
+      "avoid_elements": [
+        "fire",
+        "earth"
+      ],
+      "intensity": "soft",
+      "climate_need": "balanced",
+      "confidence": "high",
+      "base_need_vector": [
+        35.10228,
+        10.354751,
+        4.709312,
+        21.062268,
+        28.77139
+      ],
+      "dayun_adjustment_vector": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "top10": [
+        {
+          "city": "Hangzhou",
+          "index": 94.057,
+          "base_index": 93.351,
+          "direction_adjustment": 0.706
+        },
+        {
+          "city": "Stockholm",
+          "index": 93.965,
+          "base_index": 93.258,
+          "direction_adjustment": 0.707
+        },
+        {
+          "city": "Oslo",
+          "index": 93.864,
+          "base_index": 93.175,
+          "direction_adjustment": 0.688
+        },
+        {
+          "city": "Murmansk",
+          "index": 93.779,
+          "base_index": 93.097,
+          "direction_adjustment": 0.682
+        },
+        {
+          "city": "Busan",
+          "index": 93.693,
+          "base_index": 92.989,
+          "direction_adjustment": 0.704
+        },
+        {
+          "city": "Wuhan",
+          "index": 93.631,
+          "base_index": 92.93,
+          "direction_adjustment": 0.701
+        },
+        {
+          "city": "Kyoto",
+          "index": 93.605,
+          "base_index": 92.909,
+          "direction_adjustment": 0.696
+        },
+        {
+          "city": "Amsterdam",
+          "index": 93.578,
+          "base_index": 93.174,
+          "direction_adjustment": 0.404
+        },
+        {
+          "city": "Nanjing",
+          "index": 93.572,
+          "base_index": 92.866,
+          "direction_adjustment": 0.706
+        },
+        {
+          "city": "Tokyo",
+          "index": 93.55,
+          "base_index": 92.862,
+          "direction_adjustment": 0.688
+        }
+      ],
+      "top5_tier_size": 0,
+      "top10_tier_size": 0
+    },
+    {
+      "profile_id": "sim-0017",
+      "primary_element": "fire",
+      "secondary_element": "water",
+      "avoid_elements": [
+        "earth",
+        "metal"
+      ],
+      "intensity": "soft",
+      "climate_need": "balanced",
+      "confidence": "high",
+      "base_need_vector": [
+        21.398553,
+        35.837505,
+        9.950411,
+        4.592362,
+        28.221168
+      ],
+      "dayun_adjustment_vector": [
+        -1.261705,
+        -0.268657,
+        -0.390651,
+        0.063571,
+        1.857443
+      ],
+      "top10": [
+        {
+          "city": "Miami",
+          "index": 92.994,
+          "base_index": 92.953,
+          "direction_adjustment": 0.041
+        },
+        {
+          "city": "Bangkok",
+          "index": 92.297,
+          "base_index": 92.437,
+          "direction_adjustment": -0.141
+        },
+        {
+          "city": "Singapore",
+          "index": 92.094,
+          "base_index": 92.257,
+          "direction_adjustment": -0.163
+        },
+        {
+          "city": "Rio de Janeiro",
+          "index": 91.86,
+          "base_index": 91.517,
+          "direction_adjustment": 0.344
+        },
+        {
+          "city": "Manila",
+          "index": 91.209,
+          "base_index": 91.494,
+          "direction_adjustment": -0.285
+        },
+        {
+          "city": "Cape Town",
+          "index": 91.095,
+          "base_index": 90.684,
+          "direction_adjustment": 0.411
+        },
+        {
+          "city": "Perth",
+          "index": 90.203,
+          "base_index": 90.593,
+          "direction_adjustment": -0.39
+        },
+        {
+          "city": "Sanya",
+          "index": 89.01,
+          "base_index": 89.218,
+          "direction_adjustment": -0.208
+        },
+        {
+          "city": "Buenos Aires",
+          "index": 88.368,
+          "base_index": 88.106,
+          "direction_adjustment": 0.263
+        },
+        {
+          "city": "Honolulu",
+          "index": 88.238,
+          "base_index": 88.637,
+          "direction_adjustment": -0.399
+        }
+      ],
+      "top5_tier_size": 0,
+      "top10_tier_size": 0
+    },
+    {
+      "profile_id": "sim-0018",
+      "primary_element": "earth",
+      "secondary_element": "water",
+      "avoid_elements": [
+        "metal",
+        "fire"
+      ],
+      "intensity": "soft",
+      "climate_need": "balanced",
+      "confidence": "high",
+      "base_need_vector": [
+        21.59764,
+        4.926996,
+        34.225551,
+        10.348303,
+        28.90151
+      ],
+      "dayun_adjustment_vector": [
+        0.087629,
+        -0.221209,
+        -1.76897,
+        -0.332267,
+        2.234817
+      ],
+      "top10": [
+        {
+          "city": "Guilin",
+          "index": 92.788,
+          "base_index": 92.41,
+          "direction_adjustment": 0.378
+        },
+        {
+          "city": "Cusco",
+          "index": 91.837,
+          "base_index": 92.134,
+          "direction_adjustment": -0.297
+        },
+        {
+          "city": "Guiyang",
+          "index": 91.647,
+          "base_index": 91.228,
+          "direction_adjustment": 0.42
+        },
+        {
+          "city": "Changsha",
+          "index": 90.895,
+          "base_index": 90.516,
+          "direction_adjustment": 0.379
+        },
+        {
+          "city": "Zurich",
+          "index": 90.473,
+          "base_index": 89.703,
+          "direction_adjustment": 0.769
+        },
+        {
+          "city": "Kyoto",
+          "index": 89.645,
+          "base_index": 89.369,
+          "direction_adjustment": 0.275
+        },
+        {
+          "city": "Chongqing",
+          "index": 89.464,
+          "base_index": 89.021,
+          "direction_adjustment": 0.443
+        },
+        {
+          "city": "Kunming",
+          "index": 89.458,
+          "base_index": 89.014,
+          "direction_adjustment": 0.444
+        },
+        {
+          "city": "Quito",
+          "index": 88.737,
+          "base_index": 88.97,
+          "direction_adjustment": -0.233
+        },
+        {
+          "city": "Florence",
+          "index": 87.504,
+          "base_index": 86.738,
+          "direction_adjustment": 0.766
+        }
+      ],
+      "top5_tier_size": 0,
+      "top10_tier_size": 0
+    },
+    {
+      "profile_id": "sim-0019",
+      "primary_element": "metal",
+      "secondary_element": "water",
+      "avoid_elements": [
+        "earth",
+        "wood"
+      ],
+      "intensity": "soft",
+      "climate_need": "balanced",
+      "confidence": "high",
+      "base_need_vector": [
+        4.709146,
+        20.337548,
+        10.730646,
+        36.104191,
+        28.11847
+      ],
+      "dayun_adjustment_vector": [
+        0.269364,
+        1.168839,
+        0.137104,
+        0.60433,
+        -2.179637
+      ],
+      "top10": [
+        {
+          "city": "Kashgar",
+          "index": 93.151,
+          "base_index": 92.567,
+          "direction_adjustment": 0.584
+        },
+        {
+          "city": "Urumqi",
+          "index": 93.056,
+          "base_index": 92.62,
+          "direction_adjustment": 0.437
+        },
+        {
+          "city": "Beijing",
+          "index": 93.053,
+          "base_index": 93.037,
+          "direction_adjustment": 0.016
+        },
+        {
+          "city": "Dalian",
+          "index": 92.744,
+          "base_index": 92.816,
+          "direction_adjustment": -0.072
+        },
+        {
+          "city": "Astana",
+          "index": 92.61,
+          "base_index": 92.093,
+          "direction_adjustment": 0.517
+        },
+        {
+          "city": "Xi'an",
+          "index": 92.203,
+          "base_index": 92.085,
+          "direction_adjustment": 0.118
+        },
+        {
+          "city": "Qingdao",
+          "index": 91.971,
+          "base_index": 92.054,
+          "direction_adjustment": -0.082
+        },
+        {
+          "city": "Madrid",
+          "index": 91.987,
+          "base_index": 91.261,
+          "direction_adjustment": 0.727
+        },
+        {
+          "city": "Barcelona",
+          "index": 91.656,
+          "base_index": 90.93,
+          "direction_adjustment": 0.726
+        },
+        {
+          "city": "Istanbul",
+          "index": 91.552,
+          "base_index": 90.825,
+          "direction_adjustment": 0.728
+        }
+      ],
+      "top5_tier_size": 0,
+      "top10_tier_size": 0
+    },
+    {
+      "profile_id": "sim-0020",
+      "primary_element": "water",
+      "secondary_element": "metal",
+      "avoid_elements": [
+        "wood",
+        "fire"
+      ],
+      "intensity": "soft",
+      "climate_need": "balanced",
+      "confidence": "high",
+      "base_need_vector": [
+        10.190144,
+        4.483049,
+        20.476387,
+        29.403716,
+        35.446704
+      ],
+      "dayun_adjustment_vector": [
+        0.46517,
+        -0.164375,
+        0.108584,
+        0.163803,
+        -0.573182
+      ],
+      "top10": [
+        {
+          "city": "St Petersburg",
+          "index": 93.921,
+          "base_index": 93.182,
+          "direction_adjustment": 0.739
+        },
+        {
+          "city": "Moscow",
+          "index": 93.912,
+          "base_index": 93.181,
+          "direction_adjustment": 0.731
+        },
+        {
+          "city": "Yakutsk",
+          "index": 93.834,
+          "base_index": 93.128,
+          "direction_adjustment": 0.706
+        },
+        {
+          "city": "Helsinki",
+          "index": 93.489,
+          "base_index": 92.748,
+          "direction_adjustment": 0.74
+        },
+        {
+          "city": "Murmansk",
+          "index": 93.397,
+          "base_index": 92.659,
+          "direction_adjustment": 0.738
+        },
+        {
+          "city": "Sapporo",
+          "index": 93.305,
+          "base_index": 92.716,
+          "direction_adjustment": 0.589
+        },
+        {
+          "city": "Oslo",
+          "index": 93.282,
+          "base_index": 92.543,
+          "direction_adjustment": 0.739
+        },
+        {
+          "city": "Harbin",
+          "index": 93.164,
+          "base_index": 92.441,
+          "direction_adjustment": 0.723
+        },
+        {
+          "city": "Stockholm",
+          "index": 93.007,
+          "base_index": 92.267,
+          "direction_adjustment": 0.74
+        },
+        {
+          "city": "Reykjavik",
+          "index": 92.912,
+          "base_index": 92.215,
+          "direction_adjustment": 0.697
+        }
+      ],
+      "top5_tier_size": 0,
+      "top10_tier_size": 0
+    },
+    {
+      "profile_id": "sim-0021",
+      "primary_element": "wood",
+      "secondary_element": "fire",
+      "avoid_elements": [
+        "water",
+        "earth"
+      ],
+      "intensity": "standard",
+      "climate_need": "balanced",
+      "confidence": "high",
+      "base_need_vector": [
+        42.465207,
+        28.575855,
+        2.909165,
+        18.647778,
+        7.401995
+      ],
+      "dayun_adjustment_vector": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "top10": [
+        {
+          "city": "Miami",
+          "index": 84.953,
+          "base_index": 84.488,
+          "direction_adjustment": 0.465
+        },
+        {
+          "city": "Bangkok",
+          "index": 82.864,
+          "base_index": 83.562,
+          "direction_adjustment": -0.698
+        },
+        {
+          "city": "Rio de Janeiro",
+          "index": 83.302,
+          "base_index": 82.686,
+          "direction_adjustment": 0.616
+        },
+        {
+          "city": "Singapore",
+          "index": 82.111,
+          "base_index": 82.788,
+          "direction_adjustment": -0.677
+        },
+        {
+          "city": "Hong Kong",
+          "index": 81.15,
+          "base_index": 81.851,
+          "direction_adjustment": -0.701
+        },
+        {
+          "city": "Sanya",
+          "index": 81.07,
+          "base_index": 81.777,
+          "direction_adjustment": -0.707
+        },
+        {
+          "city": "Manila",
+          "index": 80.393,
+          "base_index": 81.091,
+          "direction_adjustment": -0.698
+        },
+        {
+          "city": "Shenzhen",
+          "index": 80.026,
+          "base_index": 80.727,
+          "direction_adjustment": -0.701
+        },
+        {
+          "city": "Sydney",
+          "index": 79.997,
+          "base_index": 79.997,
+          "direction_adjustment": 0.0
+        },
+        {
+          "city": "Lisbon",
+          "index": 79.395,
+          "base_index": 80.049,
+          "direction_adjustment": -0.654
+        }
+      ],
+      "top5_tier_size": 0,
+      "top10_tier_size": 0
+    },
+    {
+      "profile_id": "sim-0022",
+      "primary_element": "fire",
+      "secondary_element": "wood",
+      "avoid_elements": [
+        "earth",
+        "water"
+      ],
+      "intensity": "standard",
+      "climate_need": "balanced",
+      "confidence": "high",
+      "base_need_vector": [
+        28.192243,
+        42.963666,
+        7.558017,
+        18.425811,
+        2.860263
+      ],
+      "dayun_adjustment_vector": [
+        -0.575438,
+        2.387285,
+        0.165307,
+        -1.763816,
+        -0.213338
+      ],
+      "top10": [
+        {
+          "city": "Honolulu",
+          "index": 87.129,
+          "base_index": 87.606,
+          "direction_adjustment": -0.477
+        },
+        {
+          "city": "Miami",
+          "index": 85.165,
+          "base_index": 85.882,
+          "direction_adjustment": -0.717
+        },
+        {
+          "city": "Cape Town",
+          "index": 85.885,
+          "base_index": 85.349,
+          "direction_adjustment": 0.536
+        },
+        {
+          "city": "Perth",
+          "index": 84.455,
+          "base_index": 83.772,
+          "direction_adjustment": 0.683
+        },
+        {
+          "city": "Bangkok",
+          "index": 82.515,
+          "base_index": 82.207,
+          "direction_adjustment": 0.308
+        },
+        {
+          "city": "Lima",
+          "index": 78.309,
+          "base_index": 78.629,
+          "direction_adjustment": -0.32
+        },
+        {
+          "city": "Dubai",
+          "index": 78.348,
+          "base_index": 78.348,
+          "direction_adjustment": 0.0
+        },
+        {
+          "city": "Singapore",
+          "index": 78.125,
+          "base_index": 77.658,
+          "direction_adjustment": 0.467
+        },
+        {
+          "city": "Nairobi",
+          "index": 78.057,
+          "base_index": 77.57,
+          "direction_adjustment": 0.487
+        },
+        {
+          "city": "Rio de Janeiro",
+          "index": 77.53,
+          "base_index": 77.505,
+          "direction_adjustment": 0.025
+        }
+      ],
+      "top5_tier_size": 0,
+      "top10_tier_size": 0
+    },
+    {
+      "profile_id": "sim-0023",
+      "primary_element": "earth",
+      "secondary_element": "wood",
+      "avoid_elements": [
+        "metal",
+        "fire"
+      ],
+      "intensity": "standard",
+      "climate_need": "balanced",
+      "confidence": "high",
+      "base_need_vector": [
+        29.810773,
+        2.856475,
+        42.35809,
+        7.327223,
+        17.64744
+      ],
+      "dayun_adjustment_vector": [
+        0.748975,
+        0.140322,
+        -0.524187,
+        -0.423396,
+        0.058286
+      ],
+      "top10": [
+        {
+          "city": "Cusco",
+          "index": 88.641,
+          "base_index": 89.27,
+          "direction_adjustment": -0.629
+        },
+        {
+          "city": "Guiyang",
+          "index": 86.395,
+          "base_index": 85.707,
+          "direction_adjustment": 0.688
+        },
+        {
+          "city": "Guilin",
+          "index": 86.076,
+          "base_index": 85.394,
+          "direction_adjustment": 0.682
+        },
+        {
+          "city": "Chongqing",
+          "index": 84.489,
+          "base_index": 83.793,
+          "direction_adjustment": 0.696
+        },
+        {
+          "city": "Kunming",
+          "index": 83.791,
+          "base_index": 83.105,
+          "direction_adjustment": 0.686
+        },
+        {
+          "city": "Changsha",
+          "index": 82.399,
+          "base_index": 81.709,
+          "direction_adjustment": 0.69
+        },
+        {
+          "city": "Zurich",
+          "index": 81.265,
+          "base_index": 81.036,
+          "direction_adjustment": 0.228
+        },
+        {
+          "city": "Quito",
+          "index": 80.591,
+          "base_index": 81.124,
+          "direction_adjustment": -0.533
+        },
+        {
+          "city": "Kyoto",
+          "index": 79.542,
+          "base_index": 78.839,
+          "direction_adjustment": 0.703
+        },
+        {
+          "city": "Chengdu",
+          "index": 79.201,
+          "base_index": 78.501,
+          "direction_adjustment": 0.7
+        }
+      ],
+      "top5_tier_size": 0,
+      "top10_tier_size": 0
+    },
+    {
+      "profile_id": "sim-0024",
+      "primary_element": "metal",
+      "secondary_element": "wood",
+      "avoid_elements": [
+        "earth",
+        "water"
+      ],
+      "intensity": "standard",
+      "climate_need": "balanced",
+      "confidence": "high",
+      "base_need_vector": [
+        28.197069,
+        18.606639,
+        7.059338,
+        43.38219,
+        2.754765
+      ],
+      "dayun_adjustment_vector": [
+        0.349351,
+        1.060938,
+        -0.074131,
+        -1.493802,
+        0.157644
+      ],
+      "top10": [
+        {
+          "city": "Dalian",
+          "index": 80.879,
+          "base_index": 81.289,
+          "direction_adjustment": -0.41
+        },
+        {
+          "city": "Madrid",
+          "index": 80.133,
+          "base_index": 80.541,
+          "direction_adjustment": -0.409
+        },
+        {
+          "city": "Xi'an",
+          "index": 79.734,
+          "base_index": 80.085,
+          "direction_adjustment": -0.351
+        },
+        {
+          "city": "Qingdao",
+          "index": 79.214,
+          "base_index": 79.615,
+          "direction_adjustment": -0.401
+        },
+        {
+          "city": "Istanbul",
+          "index": 78.838,
+          "base_index": 79.223,
+          "direction_adjustment": -0.384
+        },
+        {
+          "city": "Barcelona",
+          "index": 78.642,
+          "base_index": 79.048,
+          "direction_adjustment": -0.406
+        },
+        {
+          "city": "Beijing",
+          "index": 78.423,
+          "base_index": 78.827,
+          "direction_adjustment": -0.404
+        },
+        {
+          "city": "Athens",
+          "index": 77.496,
+          "base_index": 77.879,
+          "direction_adjustment": -0.382
+        },
+        {
+          "city": "Rome",
+          "index": 76.94,
+          "base_index": 77.34,
+          "direction_adjustment": -0.4
+        },
+        {
+          "city": "Buenos Aires",
+          "index": 77.127,
+          "base_index": 76.728,
+          "direction_adjustment": 0.399
+        }
+      ],
+      "top5_tier_size": 0,
+      "top10_tier_size": 0
+    },
+    {
+      "profile_id": "sim-0025",
+      "primary_element": "water",
+      "secondary_element": "wood",
+      "avoid_elements": [
+        "fire",
+        "metal"
+      ],
+      "intensity": "standard",
+      "climate_need": "balanced",
+      "confidence": "high",
+      "base_need_vector": [
+        28.697578,
+        7.005366,
+        17.60872,
+        2.900718,
+        43.787619
+      ],
+      "dayun_adjustment_vector": [
+        0.279615,
+        -0.344753,
+        0.250304,
+        0.189835,
+        -0.375001
+      ],
+      "top10": [
+        {
+          "city": "Seattle",
+          "index": 92.981,
+          "base_index": 92.282,
+          "direction_adjustment": 0.699
+        },
+        {
+          "city": "Vancouver",
+          "index": 92.78,
+          "base_index": 92.083,
+          "direction_adjustment": 0.697
+        },
+        {
+          "city": "Belfast",
+          "index": 92.738,
+          "base_index": 92.564,
+          "direction_adjustment": 0.175
+        },
+        {
+          "city": "Glasgow",
+          "index": 92.682,
+          "base_index": 92.506,
+          "direction_adjustment": 0.177
+        },
+        {
+          "city": "Reykjavik",
+          "index": 92.663,
+          "base_index": 92.34,
+          "direction_adjustment": 0.322
+        },
+        {
+          "city": "Dublin",
+          "index": 92.648,
+          "base_index": 92.483,
+          "direction_adjustment": 0.166
+        },
+        {
+          "city": "Edinburgh",
+          "index": 92.629,
+          "base_index": 92.457,
+          "direction_adjustment": 0.172
+        },
+        {
+          "city": "Kyoto",
+          "index": 92.601,
+          "base_index": 92.212,
+          "direction_adjustment": 0.39
+        },
+        {
+          "city": "Manchester",
+          "index": 92.599,
+          "base_index": 92.454,
+          "direction_adjustment": 0.145
+        },
+        {
+          "city": "Amsterdam",
+          "index": 92.52,
+          "base_index": 92.422,
+          "direction_adjustment": 0.097
+        }
+      ],
+      "top5_tier_size": 0,
+      "top10_tier_size": 0
+    },
+    {
+      "profile_id": "sim-0026",
+      "primary_element": "wood",
+      "secondary_element": "earth",
+      "avoid_elements": [
+        "metal",
+        "water"
+      ],
+      "intensity": "standard",
+      "climate_need": "balanced",
+      "confidence": "high",
+      "base_need_vector": [
+        42.447552,
+        17.805301,
+        29.554081,
+        7.323333,
+        2.869732
+      ],
+      "dayun_adjustment_vector": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "top10": [
+        {
+          "city": "Cusco",
+          "index": 85.356,
+          "base_index": 85.279,
+          "direction_adjustment": 0.077
+        },
+        {
+          "city": "Kuala Lumpur",
+          "index": 82.491,
+          "base_index": 82.563,
+          "direction_adjustment": -0.072
+        },
+        {
+          "city": "Quito",
+          "index": 82.287,
+          "base_index": 82.244,
+          "direction_adjustment": 0.043
+        },
+        {
+          "city": "Hanoi",
+          "index": 81.387,
+          "base_index": 81.704,
+          "direction_adjustment": -0.316
+        },
+        {
+          "city": "Guilin",
+          "index": 80.741,
+          "base_index": 81.102,
+          "direction_adjustment": -0.361
+        },
+        {
+          "city": "Guiyang",
+          "index": 79.783,
+          "base_index": 80.269,
+          "direction_adjustment": -0.487
+        },
+        {
+          "city": "Kunming",
+          "index": 78.527,
+          "base_index": 79.015,
+          "direction_adjustment": -0.489
+        },
+        {
+          "city": "Chongqing",
+          "index": 78.282,
+          "base_index": 78.874,
+          "direction_adjustment": -0.592
+        },
+        {
+          "city": "Taipei",
+          "index": 78.502,
+          "base_index": 78.115,
+          "direction_adjustment": 0.388
+        },
+        {
+          "city": "Shenzhen",
+          "index": 77.036,
+          "base_index": 77.127,
+          "direction_adjustment": -0.091
+        }
+      ],
+      "top5_tier_size": 0,
+      "top10_tier_size": 0
+    },
+    {
+      "profile_id": "sim-0027",
+      "primary_element": "fire",
+      "secondary_element": "earth",
+      "avoid_elements": [
+        "metal",
+        "water"
+      ],
+      "intensity": "standard",
+      "climate_need": "balanced",
+      "confidence": "high",
+      "base_need_vector": [
+        18.375412,
+        41.29462,
+        30.171969,
+        7.219478,
+        2.93852
+      ],
+      "dayun_adjustment_vector": [
+        -0.364783,
+        1.604037,
+        -0.775956,
+        -0.730892,
+        0.267594
+      ],
+      "top10": [
+        {
+          "city": "Nairobi",
+          "index": 88.398,
+          "base_index": 88.502,
+          "direction_adjustment": -0.105
+        },
+        {
+          "city": "Mexico City",
+          "index": 84.602,
+          "base_index": 85.093,
+          "direction_adjustment": -0.491
+        },
+        {
+          "city": "Santiago",
+          "index": 83.856,
+          "base_index": 83.031,
+          "direction_adjustment": 0.826
+        },
+        {
+          "city": "Lima",
+          "index": 82.679,
+          "base_index": 83.078,
+          "direction_adjustment": -0.399
+        },
+        {
+          "city": "Honolulu",
+          "index": 81.896,
+          "base_index": 81.981,
+          "direction_adjustment": -0.085
+        },
+        {
+          "city": "Johannesburg",
+          "index": 81.756,
+          "base_index": 81.578,
+          "direction_adjustment": 0.179
+        },
+        {
+          "city": "Los Angeles",
+          "index": 80.765,
+          "base_index": 81.228,
+          "direction_adjustment": -0.464
+        },
+        {
+          "city": "New Delhi",
+          "index": 77.11,
+          "base_index": 77.549,
+          "direction_adjustment": -0.439
+        },
+        {
+          "city": "Cape Town",
+          "index": 77.514,
+          "base_index": 77.27,
+          "direction_adjustment": 0.244
+        },
+        {
+          "city": "Perth",
+          "index": 76.675,
+          "base_index": 75.861,
+          "direction_adjustment": 0.814
+        }
+      ],
+      "top5_tier_size": 0,
+      "top10_tier_size": 0
+    },
+    {
+      "profile_id": "sim-0028",
+      "primary_element": "earth",
+      "secondary_element": "fire",
+      "avoid_elements": [
+        "wood",
+        "water"
+      ],
+      "intensity": "standard",
+      "climate_need": "balanced",
+      "confidence": "high",
+      "base_need_vector": [
+        7.44381,
+        29.623908,
+        41.92492,
+        18.040978,
+        2.966385
+      ],
+      "dayun_adjustment_vector": [
+        0.257497,
+        0.419764,
+        -0.863574,
+        0.314552,
+        -0.128239
+      ],
+      "top10": [
+        {
+          "city": "Santiago",
+          "index": 92.879,
+          "base_index": 92.243,
+          "direction_adjustment": 0.636
+        },
+        {
+          "city": "Lhasa",
+          "index": 92.007,
+          "base_index": 92.494,
+          "direction_adjustment": -0.488
+        },
+        {
+          "city": "Nairobi",
+          "index": 91.274,
+          "base_index": 90.88,
+          "direction_adjustment": 0.394
+        },
+        {
+          "city": "Mexico City",
+          "index": 88.533,
+          "base_index": 88.559,
+          "direction_adjustment": -0.026
+        },
+        {
+          "city": "Johannesburg",
+          "index": 87.823,
+          "base_index": 87.235,
+          "direction_adjustment": 0.588
+        },
+        {
+          "city": "Marrakech",
+          "index": 86.777,
+          "base_index": 85.979,
+          "direction_adjustment": 0.799
+        },
+        {
+          "city": "Phoenix",
+          "index": 81.564,
+          "base_index": 81.837,
+          "direction_adjustment": -0.273
+        },
+        {
+          "city": "New Delhi",
+          "index": 81.474,
+          "base_index": 81.838,
+          "direction_adjustment": -0.363
+        },
+        {
+          "city": "Urumqi",
+          "index": 80.739,
+          "base_index": 81.321,
+          "direction_adjustment": -0.582
+        },
+        {
+          "city": "Los Angeles",
+          "index": 80.511,
+          "base_index": 80.843,
+          "direction_adjustment": -0.333
+        }
+      ],
+      "top5_tier_size": 0,
+      "top10_tier_size": 0
+    },
+    {
+      "profile_id": "sim-0029",
+      "primary_element": "metal",
+      "secondary_element": "fire",
+      "avoid_elements": [
+        "wood",
+        "earth"
+      ],
+      "intensity": "standard",
+      "climate_need": "balanced",
+      "confidence": "high",
+      "base_need_vector": [
+        6.825957,
+        29.503835,
+        2.641672,
+        42.97144,
+        18.057096
+      ],
+      "dayun_adjustment_vector": [
+        -0.976035,
+        0.686858,
+        -0.340656,
+        1.000554,
+        -0.370721
+      ],
+      "top10": [
+        {
+          "city": "Phoenix",
+          "index": 93.055,
+          "base_index": 92.324,
+          "direction_adjustment": 0.731
+        },
+        {
+          "city": "Cairo",
+          "index": 91.53,
+          "base_index": 92.29,
+          "direction_adjustment": -0.76
+        },
+        {
+          "city": "Marrakech",
+          "index": 91.285,
+          "base_index": 92.052,
+          "direction_adjustment": -0.767
+        },
+        {
+          "city": "Kashgar",
+          "index": 90.638,
+          "base_index": 91.172,
+          "direction_adjustment": -0.535
+        },
+        {
+          "city": "New Delhi",
+          "index": 89.602,
+          "base_index": 90.167,
+          "direction_adjustment": -0.565
+        },
+        {
+          "city": "Beijing",
+          "index": 89.517,
+          "base_index": 89.688,
+          "direction_adjustment": -0.171
+        },
+        {
+          "city": "Dubai",
+          "index": 88.209,
+          "base_index": 88.917,
+          "direction_adjustment": -0.708
+        },
+        {
+          "city": "Riyadh",
+          "index": 87.987,
+          "base_index": 88.726,
+          "direction_adjustment": -0.739
+        },
+        {
+          "city": "Los Angeles",
+          "index": 88.174,
+          "base_index": 87.469,
+          "direction_adjustment": 0.706
+        },
+        {
+          "city": "Urumqi",
+          "index": 87.804,
+          "base_index": 88.237,
+          "direction_adjustment": -0.433
+        }
+      ],
+      "top5_tier_size": 0,
+      "top10_tier_size": 0
+    },
+    {
+      "profile_id": "sim-0030",
+      "primary_element": "water",
+      "secondary_element": "fire",
+      "avoid_elements": [
+        "wood",
+        "earth"
+      ],
+      "intensity": "standard",
+      "climate_need": "balanced",
+      "confidence": "high",
+      "base_need_vector": [
+        6.997244,
+        28.792647,
+        2.889803,
+        18.789495,
+        42.53081
+      ],
+      "dayun_adjustment_vector": [
+        -0.134614,
+        1.208782,
+        -0.03265,
+        -0.135736,
+        -0.905781
+      ],
+      "top10": [
+        {
+          "city": "Miami",
+          "index": 83.344,
+          "base_index": 83.583,
+          "direction_adjustment": -0.239
+        },
+        {
+          "city": "Buenos Aires",
+          "index": 82.597,
+          "base_index": 82.915,
+          "direction_adjustment": -0.318
+        },
+        {
+          "city": "Bangkok",
+          "index": 82.273,
+          "base_index": 81.955,
+          "direction_adjustment": 0.318
+        },
+        {
+          "city": "Sydney",
+          "index": 82.222,
+          "base_index": 82.133,
+          "direction_adjustment": 0.089
+        },
+        {
+          "city": "San Francisco",
+          "index": 81.315,
+          "base_index": 80.997,
+          "direction_adjustment": 0.317
+        },
+        {
+          "city": "Lisbon",
+          "index": 81.247,
+          "base_index": 81.264,
+          "direction_adjustment": -0.017
+        },
+        {
+          "city": "Singapore",
+          "index": 80.738,
+          "base_index": 80.426,
+          "direction_adjustment": 0.311
+        },
+        {
+          "city": "Rio de Janeiro",
+          "index": 80.052,
+          "base_index": 80.355,
+          "direction_adjustment": -0.303
+        },
+        {
+          "city": "Perth",
+          "index": 79.877,
+          "base_index": 79.709,
+          "direction_adjustment": 0.168
+        },
+        {
+          "city": "Manila",
+          "index": 79.532,
+          "base_index": 79.224,
+          "direction_adjustment": 0.308
+        }
+      ],
+      "top5_tier_size": 0,
+      "top10_tier_size": 0
+    },
+    {
+      "profile_id": "sim-0031",
+      "primary_element": "wood",
+      "secondary_element": "metal",
+      "avoid_elements": [
+        "water",
+        "fire"
+      ],
+      "intensity": "standard",
+      "climate_need": "balanced",
+      "confidence": "high",
+      "base_need_vector": [
+        42.24853,
+        2.845479,
+        17.990239,
+        29.248685,
+        7.667067
+      ],
+      "dayun_adjustment_vector": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "top10": [
+        {
+          "city": "St Petersburg",
+          "index": 86.81,
+          "base_index": 86.75,
+          "direction_adjustment": 0.06
+        },
+        {
+          "city": "Murmansk",
+          "index": 86.656,
+          "base_index": 86.563,
+          "direction_adjustment": 0.093
+        },
+        {
+          "city": "Sapporo",
+          "index": 86.474,
+          "base_index": 86.258,
+          "direction_adjustment": 0.215
+        },
+        {
+          "city": "Oslo",
+          "index": 86.313,
+          "base_index": 86.256,
+          "direction_adjustment": 0.057
+        },
+        {
+          "city": "Yakutsk",
+          "index": 85.263,
+          "base_index": 85.076,
+          "direction_adjustment": 0.187
+        },
+        {
+          "city": "Moscow",
+          "index": 85.083,
+          "base_index": 85.034,
+          "direction_adjustment": 0.049
+        },
+        {
+          "city": "Vienna",
+          "index": 84.869,
+          "base_index": 84.857,
+          "direction_adjustment": 0.012
+        },
+        {
+          "city": "Changsha",
+          "index": 84.42,
+          "base_index": 84.225,
+          "direction_adjustment": 0.194
+        },
+        {
+          "city": "Seoul",
+          "index": 84.209,
+          "base_index": 83.999,
+          "direction_adjustment": 0.21
+        },
+        {
+          "city": "Berlin",
+          "index": 84.092,
+          "base_index": 84.063,
+          "direction_adjustment": 0.029
+        }
+      ],
+      "top5_tier_size": 0,
+      "top10_tier_size": 0
+    },
+    {
+      "profile_id": "sim-0032",
+      "primary_element": "fire",
+      "secondary_element": "metal",
+      "avoid_elements": [
+        "wood",
+        "water"
+      ],
+      "intensity": "standard",
+      "climate_need": "balanced",
+      "confidence": "high",
+      "base_need_vector": [
+        7.585319,
+        42.155176,
+        18.07796,
+        29.150171,
+        3.031375
+      ],
+      "dayun_adjustment_vector": [
+        -0.384074,
+        2.838202,
+        -0.62358,
+        -1.533424,
+        -0.297123
+      ],
+      "top10": [
+        {
+          "city": "Dubai",
+          "index": 93.663,
+          "base_index": 93.538,
+          "direction_adjustment": 0.126
+        },
+        {
+          "city": "Riyadh",
+          "index": 93.376,
+          "base_index": 93.301,
+          "direction_adjustment": 0.074
+        },
+        {
+          "city": "Cairo",
+          "index": 92.973,
+          "base_index": 93.061,
+          "direction_adjustment": -0.088
+        },
+        {
+          "city": "Los Angeles",
+          "index": 92.317,
+          "base_index": 92.972,
+          "direction_adjustment": -0.655
+        },
+        {
+          "city": "Marrakech",
+          "index": 92.143,
+          "base_index": 92.557,
+          "direction_adjustment": -0.413
+        },
+        {
+          "city": "Phoenix",
+          "index": 92.046,
+          "base_index": 92.716,
+          "direction_adjustment": -0.671
+        },
+        {
+          "city": "New Delhi",
+          "index": 92.521,
+          "base_index": 92.309,
+          "direction_adjustment": 0.212
+        },
+        {
+          "city": "Santiago",
+          "index": 92.025,
+          "base_index": 92.326,
+          "direction_adjustment": -0.301
+        },
+        {
+          "city": "Lima",
+          "index": 91.737,
+          "base_index": 92.336,
+          "direction_adjustment": -0.599
+        },
+        {
+          "city": "Johannesburg",
+          "index": 91.826,
+          "base_index": 91.36,
+          "direction_adjustment": 0.466
+        }
+      ],
+      "top5_tier_size": 0,
+      "top10_tier_size": 0
+    },
+    {
+      "profile_id": "sim-0033",
+      "primary_element": "earth",
+      "secondary_element": "metal",
+      "avoid_elements": [
+        "wood",
+        "water"
+      ],
+      "intensity": "standard",
+      "climate_need": "balanced",
+      "confidence": "high",
+      "base_need_vector": [
+        7.186363,
+        17.809688,
+        42.369615,
+        29.8731,
+        2.761234
+      ],
+      "dayun_adjustment_vector": [
+        -0.634049,
+        0.124795,
+        3.0,
+        -2.635689,
+        0.144944
+      ],
+      "top10": [
+        {
+          "city": "Lhasa",
+          "index": 93.375,
+          "base_index": 93.287,
+          "direction_adjustment": 0.088
+        },
+        {
+          "city": "Santiago",
+          "index": 89.523,
+          "base_index": 89.433,
+          "direction_adjustment": 0.09
+        },
+        {
+          "city": "Johannesburg",
+          "index": 85.245,
+          "base_index": 84.537,
+          "direction_adjustment": 0.708
+        },
+        {
+          "city": "Lanzhou",
+          "index": 84.766,
+          "base_index": 84.83,
+          "direction_adjustment": -0.063
+        },
+        {
+          "city": "Denver",
+          "index": 83.699,
+          "base_index": 84.392,
+          "direction_adjustment": -0.692
+        },
+        {
+          "city": "Urumqi",
+          "index": 84.139,
+          "base_index": 84.156,
+          "direction_adjustment": -0.017
+        },
+        {
+          "city": "Nairobi",
+          "index": 83.461,
+          "base_index": 82.829,
+          "direction_adjustment": 0.633
+        },
+        {
+          "city": "Hohhot",
+          "index": 82.762,
+          "base_index": 82.921,
+          "direction_adjustment": -0.159
+        },
+        {
+          "city": "Kashgar",
+          "index": 81.86,
+          "base_index": 81.768,
+          "direction_adjustment": 0.093
+        },
+        {
+          "city": "Xining",
+          "index": 81.589,
+          "base_index": 81.64,
+          "direction_adjustment": -0.052
+        }
+      ],
+      "top5_tier_size": 0,
+      "top10_tier_size": 0
+    },
+    {
+      "profile_id": "sim-0034",
+      "primary_element": "metal",
+      "secondary_element": "earth",
+      "avoid_elements": [
+        "fire",
+        "water"
+      ],
+      "intensity": "standard",
+      "climate_need": "balanced",
+      "confidence": "high",
+      "base_need_vector": [
+        18.655955,
+        7.157619,
+        28.864495,
+        42.381542,
+        2.94039
+      ],
+      "dayun_adjustment_vector": [
+        0.565492,
+        0.106303,
+        -0.377968,
+        -0.361435,
+        0.067608
+      ],
+      "top10": [
+        {
+          "city": "Xining",
+          "index": 89.209,
+          "base_index": 89.675,
+          "direction_adjustment": -0.466
+        },
+        {
+          "city": "Hohhot",
+          "index": 88.906,
+          "base_index": 89.367,
+          "direction_adjustment": -0.461
+        },
+        {
+          "city": "Madrid",
+          "index": 88.071,
+          "base_index": 87.817,
+          "direction_adjustment": 0.254
+        },
+        {
+          "city": "Astana",
+          "index": 87.917,
+          "base_index": 88.25,
+          "direction_adjustment": -0.333
+        },
+        {
+          "city": "Denver",
+          "index": 87.894,
+          "base_index": 87.959,
+          "direction_adjustment": -0.064
+        },
+        {
+          "city": "Lanzhou",
+          "index": 87.754,
+          "base_index": 88.22,
+          "direction_adjustment": -0.466
+        },
+        {
+          "city": "Xi'an",
+          "index": 87.729,
+          "base_index": 88.196,
+          "direction_adjustment": -0.467
+        },
+        {
+          "city": "Harbin",
+          "index": 85.615,
+          "base_index": 86.064,
+          "direction_adjustment": -0.449
+        },
+        {
+          "city": "Urumqi",
+          "index": 85.411,
+          "base_index": 85.851,
+          "direction_adjustment": -0.44
+        },
+        {
+          "city": "Kashgar",
+          "index": 84.781,
+          "base_index": 85.219,
+          "direction_adjustment": -0.438
+        }
+      ],
+      "top5_tier_size": 0,
+      "top10_tier_size": 0
+    },
+    {
+      "profile_id": "sim-0035",
+      "primary_element": "water",
+      "secondary_element": "earth",
+      "avoid_elements": [
+        "metal",
+        "fire"
+      ],
+      "intensity": "standard",
+      "climate_need": "balanced",
+      "confidence": "high",
+      "base_need_vector": [
+        18.081145,
+        2.808278,
+        29.935848,
+        7.106256,
+        42.068472
+      ],
+      "dayun_adjustment_vector": [
+        -0.402746,
+        -0.037412,
+        -1.171449,
+        0.250049,
+        1.361559
+      ],
+      "top10": [
+        {
+          "city": "Kyoto",
+          "index": 85.198,
+          "base_index": 84.576,
+          "direction_adjustment": 0.623
+        },
+        {
+          "city": "Zurich",
+          "index": 84.45,
+          "base_index": 83.782,
+          "direction_adjustment": 0.668
+        },
+        {
+          "city": "Manchester",
+          "index": 83.966,
+          "base_index": 83.312,
+          "direction_adjustment": 0.654
+        },
+        {
+          "city": "Oslo",
+          "index": 83.828,
+          "base_index": 83.09,
+          "direction_adjustment": 0.737
+        },
+        {
+          "city": "Reykjavik",
+          "index": 83.825,
+          "base_index": 83.15,
+          "direction_adjustment": 0.675
+        },
+        {
+          "city": "Changsha",
+          "index": 83.805,
+          "base_index": 83.244,
+          "direction_adjustment": 0.561
+        },
+        {
+          "city": "Wuhan",
+          "index": 83.536,
+          "base_index": 82.952,
+          "direction_adjustment": 0.585
+        },
+        {
+          "city": "Guilin",
+          "index": 83.532,
+          "base_index": 83.0,
+          "direction_adjustment": 0.532
+        },
+        {
+          "city": "Ushuaia",
+          "index": 82.53,
+          "base_index": 83.306,
+          "direction_adjustment": -0.777
+        },
+        {
+          "city": "Murmansk",
+          "index": 83.28,
+          "base_index": 82.477,
+          "direction_adjustment": 0.804
+        }
+      ],
+      "top5_tier_size": 0,
+      "top10_tier_size": 0
+    },
+    {
+      "profile_id": "sim-0036",
+      "primary_element": "wood",
+      "secondary_element": "water",
+      "avoid_elements": [
+        "metal",
+        "earth"
+      ],
+      "intensity": "standard",
+      "climate_need": "balanced",
+      "confidence": "high",
+      "base_need_vector": [
+        42.344524,
+        18.28412,
+        2.811882,
+        7.120017,
+        29.439457
+      ],
+      "dayun_adjustment_vector": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "top10": [
+        {
+          "city": "Hanoi",
+          "index": 93.288,
+          "base_index": 92.564,
+          "direction_adjustment": 0.724
+        },
+        {
+          "city": "Kuala Lumpur",
+          "index": 93.047,
+          "base_index": 92.545,
+          "direction_adjustment": 0.502
+        },
+        {
+          "city": "Sanya",
+          "index": 92.86,
+          "base_index": 92.186,
+          "direction_adjustment": 0.674
+        },
+        {
+          "city": "Shenzhen",
+          "index": 92.859,
+          "base_index": 92.131,
+          "direction_adjustment": 0.728
+        },
+        {
+          "city": "Manila",
+          "index": 92.783,
+          "base_index": 92.349,
+          "direction_adjustment": 0.434
+        },
+        {
+          "city": "Singapore",
+          "index": 92.698,
+          "base_index": 92.246,
+          "direction_adjustment": 0.452
+        },
+        {
+          "city": "Guangzhou",
+          "index": 92.402,
+          "base_index": 91.665,
+          "direction_adjustment": 0.737
+        },
+        {
+          "city": "Rio de Janeiro",
+          "index": 91.762,
+          "base_index": 91.265,
+          "direction_adjustment": 0.496
+        },
+        {
+          "city": "Hong Kong",
+          "index": 91.705,
+          "base_index": 90.981,
+          "direction_adjustment": 0.723
+        },
+        {
+          "city": "Taipei",
+          "index": 91.669,
+          "base_index": 90.906,
+          "direction_adjustment": 0.763
+        }
+      ],
+      "top5_tier_size": 0,
+      "top10_tier_size": 0
+    },
+    {
+      "profile_id": "sim-0037",
+      "primary_element": "fire",
+      "secondary_element": "water",
+      "avoid_elements": [
+        "metal",
+        "earth"
+      ],
+      "intensity": "standard",
+      "climate_need": "balanced",
+      "confidence": "high",
+      "base_need_vector": [
+        17.787855,
+        41.483878,
+        2.942203,
+        7.535116,
+        30.250947
+      ],
+      "dayun_adjustment_vector": [
+        -0.191504,
+        -0.280517,
+        0.171282,
+        -0.227568,
+        0.528306
+      ],
+      "top10": [
+        {
+          "city": "Miami",
+          "index": 88.825,
+          "base_index": 88.979,
+          "direction_adjustment": -0.153
+        },
+        {
+          "city": "Bangkok",
+          "index": 87.383,
+          "base_index": 87.315,
+          "direction_adjustment": 0.069
+        },
+        {
+          "city": "Singapore",
+          "index": 87.125,
+          "base_index": 86.988,
+          "direction_adjustment": 0.136
+        },
+        {
+          "city": "Cape Town",
+          "index": 85.787,
+          "base_index": 85.905,
+          "direction_adjustment": -0.118
+        },
+        {
+          "city": "Manila",
+          "index": 85.786,
+          "base_index": 85.525,
+          "direction_adjustment": 0.262
+        },
+        {
+          "city": "Perth",
+          "index": 85.463,
+          "base_index": 85.24,
+          "direction_adjustment": 0.223
+        },
+        {
+          "city": "Honolulu",
+          "index": 84.771,
+          "base_index": 84.608,
+          "direction_adjustment": 0.163
+        },
+        {
+          "city": "Rio de Janeiro",
+          "index": 84.621,
+          "base_index": 84.937,
+          "direction_adjustment": -0.316
+        },
+        {
+          "city": "Sanya",
+          "index": 83.352,
+          "base_index": 83.205,
+          "direction_adjustment": 0.148
+        },
+        {
+          "city": "Hong Kong",
+          "index": 81.653,
+          "base_index": 81.456,
+          "direction_adjustment": 0.197
+        }
+      ],
+      "top5_tier_size": 0,
+      "top10_tier_size": 0
+    },
+    {
+      "profile_id": "sim-0038",
+      "primary_element": "earth",
+      "secondary_element": "water",
+      "avoid_elements": [
+        "wood",
+        "fire"
+      ],
+      "intensity": "standard",
+      "climate_need": "balanced",
+      "confidence": "high",
+      "base_need_vector": [
+        7.590586,
+        2.969073,
+        42.263977,
+        18.560055,
+        28.61631
+      ],
+      "dayun_adjustment_vector": [
+        0.225872,
+        -0.173283,
+        -0.57447,
+        -1.050783,
+        1.572664
+      ],
+      "top10": [
+        {
+          "city": "Hohhot",
+          "index": 83.338,
+          "base_index": 82.585,
+          "direction_adjustment": 0.753
+        },
+        {
+          "city": "Lhasa",
+          "index": 81.916,
+          "base_index": 81.621,
+          "direction_adjustment": 0.295
+        },
+        {
+          "city": "Xining",
+          "index": 81.492,
+          "base_index": 80.969,
+          "direction_adjustment": 0.523
+        },
+        {
+          "city": "Cusco",
+          "index": 81.296,
+          "base_index": 80.839,
+          "direction_adjustment": 0.457
+        },
+        {
+          "city": "Kunming",
+          "index": 80.914,
+          "base_index": 80.896,
+          "direction_adjustment": 0.019
+        },
+        {
+          "city": "Guiyang",
+          "index": 80.341,
+          "base_index": 80.325,
+          "direction_adjustment": 0.016
+        },
+        {
+          "city": "Lanzhou",
+          "index": 80.308,
+          "base_index": 79.792,
+          "direction_adjustment": 0.516
+        },
+        {
+          "city": "Chongqing",
+          "index": 80.293,
+          "base_index": 80.104,
+          "direction_adjustment": 0.189
+        },
+        {
+          "city": "Zurich",
+          "index": 78.991,
+          "base_index": 78.25,
+          "direction_adjustment": 0.741
+        },
+        {
+          "city": "Florence",
+          "index": 78.205,
+          "base_index": 77.486,
+          "direction_adjustment": 0.718
+        }
+      ],
+      "top5_tier_size": 0,
+      "top10_tier_size": 0
+    },
+    {
+      "profile_id": "sim-0039",
+      "primary_element": "metal",
+      "secondary_element": "water",
+      "avoid_elements": [
+        "fire",
+        "wood"
+      ],
+      "intensity": "standard",
+      "climate_need": "balanced",
+      "confidence": "high",
+      "base_need_vector": [
+        2.946008,
+        7.005452,
+        18.292492,
+        42.704273,
+        29.051775
+      ],
+      "dayun_adjustment_vector": [
+        -0.022343,
+        0.216233,
+        -0.988965,
+        -0.403017,
+        1.198093
+      ],
+      "top10": [
+        {
+          "city": "Astana",
+          "index": 93.819,
+          "base_index": 93.145,
+          "direction_adjustment": 0.675
+        },
+        {
+          "city": "Harbin",
+          "index": 92.768,
+          "base_index": 92.674,
+          "direction_adjustment": 0.094
+        },
+        {
+          "city": "Beijing",
+          "index": 92.527,
+          "base_index": 92.248,
+          "direction_adjustment": 0.279
+        },
+        {
+          "city": "Moscow",
+          "index": 90.841,
+          "base_index": 90.169,
+          "direction_adjustment": 0.672
+        },
+        {
+          "city": "Dalian",
+          "index": 90.534,
+          "base_index": 90.425,
+          "direction_adjustment": 0.109
+        },
+        {
+          "city": "Hohhot",
+          "index": 90.213,
+          "base_index": 89.802,
+          "direction_adjustment": 0.411
+        },
+        {
+          "city": "Chicago",
+          "index": 90.085,
+          "base_index": 89.953,
+          "direction_adjustment": 0.132
+        },
+        {
+          "city": "Xining",
+          "index": 89.858,
+          "base_index": 89.205,
+          "direction_adjustment": 0.653
+        },
+        {
+          "city": "Yakutsk",
+          "index": 89.551,
+          "base_index": 89.338,
+          "direction_adjustment": 0.213
+        },
+        {
+          "city": "Xi'an",
+          "index": 88.352,
+          "base_index": 87.805,
+          "direction_adjustment": 0.548
+        }
+      ],
+      "top5_tier_size": 0,
+      "top10_tier_size": 0
+    },
+    {
+      "profile_id": "sim-0040",
+      "primary_element": "water",
+      "secondary_element": "metal",
+      "avoid_elements": [
+        "wood",
+        "fire"
+      ],
+      "intensity": "standard",
+      "climate_need": "balanced",
+      "confidence": "high",
+      "base_need_vector": [
+        7.519437,
+        2.779585,
+        17.719183,
+        28.658446,
+        43.323348
+      ],
+      "dayun_adjustment_vector": [
+        0.249711,
+        0.011774,
+        0.5131,
+        -0.318983,
+        -0.455602
+      ],
+      "top10": [
+        {
+          "city": "St Petersburg",
+          "index": 92.173,
+          "base_index": 92.037,
+          "direction_adjustment": 0.136
+        },
+        {
+          "city": "Yakutsk",
+          "index": 91.686,
+          "base_index": 91.234,
+          "direction_adjustment": 0.452
+        },
+        {
+          "city": "Moscow",
+          "index": 90.449,
+          "base_index": 90.474,
+          "direction_adjustment": -0.026
+        },
+        {
+          "city": "Helsinki",
+          "index": 90.401,
+          "base_index": 90.224,
+          "direction_adjustment": 0.177
+        },
+        {
+          "city": "Chicago",
+          "index": 90.087,
+          "base_index": 89.477,
+          "direction_adjustment": 0.61
+        },
+        {
+          "city": "Murmansk",
+          "index": 89.693,
+          "base_index": 89.294,
+          "direction_adjustment": 0.399
+        },
+        {
+          "city": "Sapporo",
+          "index": 89.621,
+          "base_index": 89.2,
+          "direction_adjustment": 0.421
+        },
+        {
+          "city": "Oslo",
+          "index": 89.048,
+          "base_index": 88.671,
+          "direction_adjustment": 0.376
+        },
+        {
+          "city": "Toronto",
+          "index": 88.969,
+          "base_index": 88.383,
+          "direction_adjustment": 0.586
+        },
+        {
+          "city": "Reykjavik",
+          "index": 88.263,
+          "base_index": 87.526,
+          "direction_adjustment": 0.736
+        }
+      ],
+      "top5_tier_size": 0,
+      "top10_tier_size": 0
+    }
+  ]
+}
