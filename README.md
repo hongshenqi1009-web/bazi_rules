@@ -39,6 +39,25 @@
 - `analysis/t005_manual_chart_regression.py`：人工案例匹配回归程序；`analysis/t005_verify_manual_case_pillars.js` 用锁定候选库复算四柱。
 - `design/design_system.md`：“山河有应”视觉 token、组件、动效、图片、文案与无障碍规范。
 - `design/references/`：六类已确认视觉方向的参考图目录与元数据要求；原图待补。
+- `app/`：T-008 可运行的移动端纵向 MVP 切片；包含零依赖开发服务器、服务适配层、受控样板响应、测试和验收记录。
+
+## 本地预览 T-008
+
+需要 Node.js 20 或更高版本：
+
+```text
+cd app
+node dev-server.mjs
+```
+
+浏览器打开 `http://127.0.0.1:4173`。运行测试：
+
+```text
+cd app
+node --test
+```
+
+当前页面顶部会持续显示“结构演示”：它只用于验证已确认的移动端流程与视觉层级，尚未连接正式 BaZi / Matching 服务，也不包含已授权的 Logo 或城市图片。详细边界见 `app/README.md` 与 `app/QA.md`。
 
 ## 状态标签
 
@@ -57,4 +76,4 @@
 
 ## 当前边界
 
-当前已完成 T-007，“山河有应”免费娱乐传播版 MVP 已形成可实施的产品、内容、视觉和前端接口规格；R2 已获批作为当前 preferred exposure 方案。T-008 前端与服务编排实现已就绪但尚未开始。专业付费版、复杂参数研究和商业化继续延后；参考原图、Logo 源文件、城市图片许可、部署与数据保留期限须在对应验收节点前补齐。具体状态以 `PROJECT_STATUS.md` 与 `TASKS.md` 为准。
+当前已完成 T-008，“山河有应”免费娱乐传播版拥有可运行、可测试的移动端纵向切片；R2 继续作为当前 preferred exposure 方案。下一步为 T-009 真实服务接入与首批内容发布准备。专业付费版、复杂参数研究和商业化继续延后；参考原图、Logo 源文件、城市图片许可、部署与数据保留期限须在发布验收前补齐。具体状态以 `PROJECT_STATUS.md` 与 `TASKS.md` 为准。
