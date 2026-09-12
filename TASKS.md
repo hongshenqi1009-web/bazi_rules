@@ -4,22 +4,34 @@
 
 ## Backlog
 
-暂无。
+### T-008 免费版 MVP 前端与服务编排实现
+
+- 类型：开发/测试/设计
+- 负责人：Work
+- 状态：Backlog
+- 准备度：规格已就绪，可启动
+- 前置：T-007 已完成；开发前确认运行环境、部署目标与城市图片方案，参考原图可在视觉精修前补入
+- 工作文件：后续应用代码、接口 schema、组件测试、端到端测试与部署文档
+- 验收：按 T-007 规格打通首页、两步输入、真实状态推演、结果一、Top 3、城市详情和分享预览的移动端纵向切片；前端不复制底层算法；City Profile/AI 可先用带明确标识的受控样板数据接入，不能伪造为完整 100 城事实。
 
 ## In Progress
+
+暂无。
+
+## Done
 
 ### T-007 免费娱乐传播版 MVP 产品定义与接口整理
 
 - 类型：产品/设计/接口
 - 负责人：Chat/Work
-- 状态：In Progress
+- 状态：Done
 - 开始日期：2026-09-11
-- 前置：T-003 至 T-006 已完成；Chat 已批准 R2 `preferred-exposure-r2-balanced-candidate` 作为免费娱乐版 MVP 当前采用的 preferred exposure 方案
-- 工作文件：`product/PRD.md`、`product/user_flow.md`、`design/design_system.md`、后续免费结果与接口文档；本次阶段切换先更新 `PROJECT_STATUS.md`、`TASKS.md`、`DECISIONS.md`
-- 验收：定义免费版结果结构、Top 3–5 城市展示、轻量个人五行画像、城市适配解释、基础 City Profile 标签、当前阶段提示、分享卡结构、免费用户流程、免责声明及前端所需接口；保留专业解释接口，但不开发付费版、不继续复杂参数研究、不在本任务直接开发前端。
-- 本轮进展：已启动项目阶段切换；详细产品定义与接口整理留在 T-007 后续提交完成。
-
-## Done
+- 完成日期：2026-09-12
+- 前置：T-003 至 T-006 已完成；R2 已获批用于免费 MVP
+- 工作文件：`product/PRD.md`、`product/user_flow.md`、`product/free_result_and_share_spec.md`、`product/city_profile_mvp.md`、`product/frontend_interface_contract.md`、`design/design_system.md`、`design/references/`
+- 验收：品牌、首页、两步输入、真实状态推演、结果一、Top 3、城市详情、分享卡、免责声明、City Profile 字段、AI 边界和前端接口均形成可实施规格；参考图六类目录与使用/禁用原则已建立；未开发前端、付费版或新算法。
+- 结果：正式品牌为“山河有应”；新增 D-020 至 D-023。免费版不显示个人五行百分比或独立当前阶段模块；Top 3 按真实分数排序并显示`契合指数 N`；City Profile 不改核心分数；分享卡默认不含出生资料。
+- 未阻塞后续的待补：参考原图及许可、Logo 源文件、城市图片授权、部署与数据保留期限。以上不阻塞 T-008 结构和组件开发，但必须在视觉/上线验收前完成。
 
 ### T-006 Personal Need 语义解耦与 preferred ranges 专项校准
 

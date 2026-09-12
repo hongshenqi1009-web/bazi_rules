@@ -24,16 +24,21 @@
 - `knowledge/city_element_methodology.md`：城市五行方法论、证据和版本规范。
 - `knowledge/matching_engine_methodology.md`：个人需要向量、城市匹配、指数标定、大运/方位修正及覆盖审计。
 - `knowledge/matching_manual_regression.md`：T-005 的 15 例人工命盘回归、分层问题归因与参数锁定结论。
-- `product/PRD.md`：产品范围、目标和验收框架。
-- `product/user_flow.md`：用户流程框架。
-- `product/monetisation.md`：商业化假设与验证框架。
+- `knowledge/preferred_ranges_calibration.md`：T-006 R1/R2/R3 暴露区间校准与 R2 采用证据。
+- `product/PRD.md`：“山河有应”免费娱乐传播版 MVP 范围、页面、边界与验收。
+- `product/user_flow.md`：首页、两步输入、推演、两页结果、城市详情和分享的完整状态流程。
+- `product/free_result_and_share_spec.md`：结果内容、城市文案与 3:4 分享卡规格。
+- `product/city_profile_mvp.md`：City Profile 事实、标签、媒体、AI 白名单和发布闸门。
+- `product/frontend_interface_contract.md`：前端输入、异步任务、结果、错误与版本链合同。
+- `product/monetisation.md`：已延后的商业化假设与原则。
 - `data/cities.csv`：城市数据结构。
 - `data/test_cases.json`：可重复验证的测试案例。
 - `data/matching_simulation_results.json`：T-005 三种匹配方法、3,000 组模拟和全部 100 城推荐次数。
 - `data/matching_manual_regression_cases.json`：15 个构造命盘案例的完整解释、需要向量、区间、大运前后、Top 10、Top 3 解释、冲突及辅助方案。
 - `analysis/t005_matching_simulation.py`：T-005 可重复模拟与集中度审计程序，不是前端应用代码。
 - `analysis/t005_manual_chart_regression.py`：人工案例匹配回归程序；`analysis/t005_verify_manual_case_pillars.js` 用锁定候选库复算四柱。
-- `design/design_system.md`：视觉与文案规范。
+- `design/design_system.md`：“山河有应”视觉 token、组件、动效、图片、文案与无障碍规范。
+- `design/references/`：六类已确认视觉方向的参考图目录与元数据要求；原图待补。
 
 ## 状态标签
 
@@ -52,4 +57,4 @@
 
 ## 当前边界
 
-当前已完成 T-004 城市自然模型及 T-005 设计、模拟与人工案例回归。T-005 的五档结构、大运和方位闸门可保留，但数值锚点、preferred ranges、强忌过量曲线和指数标定尚未通过锁定。仓库暂不开发前端、不扩展商业化，也不把候选匹配参数写成正式命理规则；具体状态以 `PROJECT_STATUS.md` 与 `TASKS.md` 为准。
+当前已完成 T-007，“山河有应”免费娱乐传播版 MVP 已形成可实施的产品、内容、视觉和前端接口规格；R2 已获批作为当前 preferred exposure 方案。T-008 前端与服务编排实现已就绪但尚未开始。专业付费版、复杂参数研究和商业化继续延后；参考原图、Logo 源文件、城市图片许可、部署与数据保留期限须在对应验收节点前补齐。具体状态以 `PROJECT_STATUS.md` 与 `TASKS.md` 为准。
