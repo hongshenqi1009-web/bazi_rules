@@ -4,13 +4,15 @@ import { fileURLToPath } from "node:url";
 const SERVICE_ROOT = fileURLToPath(new URL("..", import.meta.url));
 export const REPO_ROOT = resolve(SERVICE_ROOT, "..");
 export const APP_ROOT = resolve(REPO_ROOT, "app");
+export const PRODUCTION_APP_URL = "https://mydestinycity.com/";
+export const STAGING_APP_URL = "https://staging.mydestinycity.com/";
 
 function positiveInteger(value, fallback) {
   const parsed = Number(value);
   return Number.isInteger(parsed) && parsed > 0 ? parsed : fallback;
 }
 
-function normalizedPublicUrl(value, production) {
+function normalizedPublicUrl(value, production, deploymentChannel) {
   if (production && !value) throw new Error("PUBLIC_APP_URL is required in production");
   const candidate = value || "http://127.0.0.1:4173/";
   const url = new URL(candidate);
@@ -19,15 +21,27 @@ function normalizedPublicUrl(value, production) {
   url.hash = "";
   url.search = "";
   if (!url.pathname.endsWith("/")) url.pathname += "/";
-  return url.toString();
+  const normalized = url.toString();
+  if (production && deploymentChannel === "production" && normalized !== PRODUCTION_APP_URL) {
+    throw new Error(`production PUBLIC_APP_URL must be ${PRODUCTION_APP_URL}`);
+  }
+  if (production && deploymentChannel === "staging" && normalized !== STAGING_APP_URL) {
+    throw new Error(`staging PUBLIC_APP_URL must be ${STAGING_APP_URL}`);
+  }
+  return normalized;
 }
 
 export function loadConfig(env = process.env) {
   const production = env.NODE_ENV === "production";
+  const deploymentChannel = env.DEPLOYMENT_CHANNEL || (production ? "production" : "development");
+  if (!['development', 'staging', 'production'].includes(deploymentChannel)) throw new Error("DEPLOYMENT_CHANNEL is invalid");
   return Object.freeze({
+    production,
+    deploymentChannel,
     host: env.HOST || "127.0.0.1",
     port: positiveInteger(env.PORT, 4173),
-    publicAppUrl: normalizedPublicUrl(env.PUBLIC_APP_URL, production),
+    publicAppUrl: normalizedPublicUrl(env.PUBLIC_APP_URL, production, deploymentChannel),
+    canonicalAppUrl: PRODUCTION_APP_URL,
     readingTtlMs: positiveInteger(env.READING_TTL_MINUTES, 15) * 60_000,
     contentTimeoutMs: positiveInteger(env.CONTENT_TIMEOUT_MS, 18_000),
     openAiApiKey: env.OPENAI_API_KEY || "",

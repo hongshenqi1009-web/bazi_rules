@@ -50,8 +50,20 @@ const securityHeaders = {
   "Referrer-Policy": "no-referrer",
   "X-Content-Type-Options": "nosniff",
   "X-Frame-Options": "DENY",
-  "Permissions-Policy": "camera=(), microphone=(), geolocation=()"
+  "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
+  ...(config.production ? { "Strict-Transport-Security": "max-age=31536000; includeSubDomains" } : {})
 };
+
+function canonicalRedirect(request, response) {
+  if (!config.production || config.deploymentChannel !== "production") return false;
+  const host = String(request.headers["x-forwarded-host"] || request.headers.host || "").split(",")[0].trim().toLowerCase().split(":")[0];
+  const forwardedProto = String(request.headers["x-forwarded-proto"] || "").split(",")[0].trim().toLowerCase();
+  if (host !== "www.mydestinycity.com" && !(host === "mydestinycity.com" && forwardedProto && forwardedProto !== "https")) return false;
+  const location = new URL(request.url || "/", config.canonicalAppUrl).toString();
+  response.writeHead(308, { ...securityHeaders, "Cache-Control": "public, max-age=3600", Location: location });
+  response.end();
+  return true;
+}
 
 function sendJson(response, status, body) {
   response.writeHead(status, { ...securityHeaders, "Cache-Control": "no-store", "Content-Type": "application/json; charset=utf-8" });
@@ -84,11 +96,13 @@ async function serveStatic(pathname, response) {
   } catch {
     filePath = resolve(APP_ROOT, "index.html");
   }
-  response.writeHead(200, { ...securityHeaders, "Cache-Control": extname(filePath) === ".html" ? "no-store" : "public, max-age=300", "Content-Type": mimeTypes[extname(filePath)] || "application/octet-stream" });
+  const isHtml = extname(filePath) === ".html";
+  response.writeHead(200, { ...securityHeaders, ...(isHtml ? { Link: `<${config.canonicalAppUrl}>; rel="canonical"` } : {}), "Cache-Control": isHtml ? "no-store" : "public, max-age=300", "Content-Type": mimeTypes[extname(filePath)] || "application/octet-stream" });
   createReadStream(filePath).pipe(response);
 }
 
 async function handler(request, response) {
+  if (canonicalRedirect(request, response)) return;
   const url = new URL(request.url, `http://${request.headers.host || "localhost"}`);
   try {
     if (request.method === "GET" && url.pathname === "/healthz") {

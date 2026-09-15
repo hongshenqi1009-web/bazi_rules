@@ -255,6 +255,15 @@
 - 许可与归档：旧效果图原文件未进入工作区时，只登记归档位与“参考/不参考”说明，不得虚构已归档。任何未确认许可或来源的外部图片不得进入正式公开构建。生成素材仍须在公开发布前完成产品方、地标形态、裁切压缩及适用条款检查。
 - 关联任务/文件：T-009、`design/references/`、`design/assets/`、`app/assets/`、`data/city_profiles_mvp.json`
 
+### D-028 正式生产域名与 canonical 策略
+
+- 日期：2026-09-15
+- 状态：已确认
+- 决策：山河有应免费版 MVP 的正式主域名为`mydestinycity.com`，生产公开 URL、canonical URL 与正式分享二维码统一使用`https://mydestinycity.com/`。中文名“山河有应”继续作为页面主品牌，不强制使用“My Destiny City”。
+- 主机策略：根域名是唯一 canonical；`www.mydestinycity.com`以 308 永久跳转到根域名并保留路径/查询。正式上线前如需测试，只允许使用受访问控制的`https://staging.mydestinycity.com/`，不得把云厂商临时地址、IP、本机地址或 staging 地址写死在生产前端与最终分享卡中。
+- 配置与 HTTPS：二维码继续只读取服务端`PUBLIC_APP_URL`。生产通道会校验该值必须等于正式主域名；HTTPS 在香港入口终止并由应用提供 HSTS/二次 canonical 防线。DNS、证书与香港绑定按`deploy/README.md`执行。
+- 关联任务/文件：T-009、`service/src/config.mjs`、`service/server.mjs`、`app/index.html`、`deploy/`
+
 ## 待决定
 
 - Git 分支与合并策略。

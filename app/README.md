@@ -39,7 +39,7 @@ pnpm test
 
 ## 生产配置
 
-复制`service/.env.example`中的字段到部署平台的密钥/环境变量设置。生产必须配置 HTTPS 的`PUBLIC_APP_URL`；AI 内容还需服务端`OPENAI_API_KEY`和`OPENAI_CONTENT_MODEL`。不要把`.env`提交到仓库。
+复制`service/.env.example`中的字段到部署平台的密钥/环境变量设置。正式生产固定使用`DEPLOYMENT_CHANNEL=production`与`PUBLIC_APP_URL=https://mydestinycity.com/`；受控预发布使用`staging`通道与`https://staging.mydestinycity.com/`。AI 内容还需服务端`OPENAI_API_KEY`和`OPENAI_CONTENT_MODEL`。不要把`.env`提交到仓库。
 
 完整数据流、失败隔离、隐私政策、容器入口和香港部署方案见`product/t009_release_and_privacy.md`。
 

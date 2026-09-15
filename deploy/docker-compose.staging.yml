@@ -1,0 +1,36 @@
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      DEPLOYMENT_CHANNEL: staging
+      PUBLIC_APP_URL: https://staging.mydestinycity.com/
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      OPENAI_CONTENT_MODEL: ${OPENAI_CONTENT_MODEL}
+      READING_TTL_MINUTES: 15
+    expose:
+      - "4173"
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    depends_on:
+      - app
+    environment:
+      STAGING_USER: ${STAGING_USER}
+      STAGING_PASSWORD_HASH: ${STAGING_PASSWORD_HASH}
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile.staging:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  caddy_data:
+  caddy_config:

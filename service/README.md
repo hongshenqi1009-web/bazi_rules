@@ -17,7 +17,7 @@ pnpm install --frozen-lockfile
 pnpm start
 ```
 
-默认同时提供`http://127.0.0.1:4173/`页面和同源 API。环境变量见`.env.example`；本服务不会自动读取本地`.env`，应由开发环境或部署平台注入。
+默认同时提供`http://127.0.0.1:4173/`页面和同源 API。环境变量见`.env.example`；本服务不会自动读取本地`.env`，应由开发环境或部署平台注入。正式生产只接受`https://mydestinycity.com/`，受控 staging 只接受`https://staging.mydestinycity.com/`；HTTPS、DNS 和`www`跳转见`deploy/README.md`。
 
 ## API
 

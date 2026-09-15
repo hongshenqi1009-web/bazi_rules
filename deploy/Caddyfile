@@ -1,0 +1,14 @@
+www.mydestinycity.com {
+  redir https://mydestinycity.com{uri} 308
+}
+
+mydestinycity.com {
+  encode zstd gzip
+  reverse_proxy app:4173
+
+  header {
+    X-Content-Type-Options nosniff
+    Referrer-Policy no-referrer
+    Strict-Transport-Security "max-age=31536000; includeSubDomains"
+  }
+}

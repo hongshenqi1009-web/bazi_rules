@@ -1,0 +1,7 @@
+staging.mydestinycity.com {
+  encode zstd gzip
+  basic_auth {
+    {$STAGING_USER} {$STAGING_PASSWORD_HASH}
+  }
+  reverse_proxy app:4173
+}

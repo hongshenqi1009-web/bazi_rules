@@ -83,4 +83,4 @@ pnpm test
 
 ## 当前边界
 
-当前 T-009 已完成本地真实计算链、34,135 条标准地点、8 城 City Profile、AI 失败隔离、15 分钟临时结果、可注入二维码入口及首批视觉候选；R2 继续作为当前 preferred exposure 方案。公开发布仍受正式域名/香港环境、AI 生产凭据、视觉候选最终验收以及大陆三网真机验收约束。专业付费版、复杂参数研究和商业化继续延后；具体状态以 `PROJECT_STATUS.md` 与 `TASKS.md` 为准。
+当前 T-009 已完成本地真实计算链、34,135 条标准地点、8 城 City Profile、AI 失败隔离、15 分钟临时结果、首批视觉候选及`mydestinycity.com`生产域名配置；R2 继续作为当前 preferred exposure 方案。公开发布仍受香港 DNS/HTTPS 实际绑定、AI 生产凭据、视觉候选最终验收以及大陆三网真机验收约束。专业付费版、复杂参数研究和商业化继续延后；具体状态以 `PROJECT_STATUS.md` 与 `TASKS.md` 为准。

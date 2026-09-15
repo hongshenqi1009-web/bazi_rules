@@ -83,9 +83,9 @@ AI 必须按 JSON Schema 返回三个段落：
 
 ## 6. 境内外可访问部署方案
 
-### 当前推荐：香港单区单体发布
+### 当前确认：`mydestinycity.com` 香港单区单体发布
 
-- 注册并绑定独立 `.com` 域名；DNS 不依赖只在单一区域稳定的前端脚本服务。
+- 正式主域名固定为`https://mydestinycity.com/`；中文品牌仍为“山河有应”。`www.mydestinycity.com`以 308 永久跳转到根域名。
 - 在香港区域运行一个容器化 Node 服务，同时提供静态前端、地点检索和计算 API，避免跨域与多服务网络依赖。
 - 使用香港负载均衡或反向代理终止 HTTPS；源站只开放服务端口给代理。
 - Logo、字体、二维码代码和正式城市图片全部自托管；首屏不依赖 Google Fonts、公共 JS CDN 或境外图片热链。
@@ -101,19 +101,21 @@ AI 必须按 JSON Schema 返回三个段落：
 仓库根目录 `Dockerfile` 是单容器发布入口。生产环境至少注入：
 
 ```text
-PUBLIC_APP_URL=https://你的.com/
+DEPLOYMENT_CHANNEL=production
+PUBLIC_APP_URL=https://mydestinycity.com/
 OPENAI_API_KEY=服务端密钥
 OPENAI_CONTENT_MODEL=经验证的模型 ID
 READING_TTL_MINUTES=15
 ```
 
-生产模式强制 `PUBLIC_APP_URL` 为 HTTPS；密钥不得进入镜像、仓库或浏览器。`/healthz` 暴露地点、城市、Profile 数量及 AI 是否配置，但不返回密钥。
+生产模式不仅强制 HTTPS，还强制`PUBLIC_APP_URL=https://mydestinycity.com/`；受控 staging 只允许`https://staging.mydestinycity.com/`。密钥不得进入镜像、仓库或浏览器。`/healthz`暴露地点、城市、Profile 数量及 AI 是否配置，但不返回密钥。DNS、HTTPS、`www`跳转和发布验收详见`deploy/README.md`。
 
 ## 7. 发布闸门
 
 代码和本地真实链已经就绪，但公开发布必须同时满足：
 
-- [ ] 确认 `.com` 正式域名并注入 `PUBLIC_APP_URL`；
+- [x] 正式域名确认为`mydestinycity.com`，生产配置与二维码入口已固定为`https://mydestinycity.com/`；
+- [ ] 在域名 DNS 控制台把根域名、`www`及可选`staging`记录指向香港入口，并完成证书签发；
 - [ ] 选择香港云账号/区域并完成 HTTPS、备份、告警和限流；
 - [ ] 注入可用 AI 模型与服务端密钥，跑一次真实上游内容验收；
 - [x] 整理完整 Logo、简化 icon 与首批 8 城统一尺寸的上线候选图，记录生成方式、哈希和使用边界；
@@ -135,7 +137,8 @@ pnpm test
 
 docker build -t shanhe-youying:t009 .
 docker run --rm -p 4173:4173 \
-  -e PUBLIC_APP_URL=https://example.com/ \
+  -e DEPLOYMENT_CHANNEL=production \
+  -e PUBLIC_APP_URL=https://mydestinycity.com/ \
   shanhe-youying:t009
 ```
 

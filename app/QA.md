@@ -58,8 +58,8 @@
 
 ### 自动化
 
-- `service`: 11/11 通过，覆盖生产 HTTPS 配置、非整点时区、DST gap/fold、四柱、23:00 换日、子时双候选、AI 脱敏/结构/失败隔离、地点与 City Profile、完整真实链。
-- `app`: 13/13 通过，覆盖真实地点/API 适配、服务失败不回退 demo、输入合同、状态顺序、Top 3 顺序、分享卡出生信息隔离和 Top 1 媒体嵌入。
+- `service`: 12/12 通过，覆盖正式生产域名与受控 staging 约束、非整点时区、DST gap/fold、四柱、23:00 换日、子时双候选、AI 脱敏/结构/失败隔离、地点与 City Profile、完整真实链。
+- `app`: 14/14 通过，覆盖 canonical/Open Graph 正式域名、真实地点/API 适配、服务失败不回退 demo、输入合同、状态顺序、Top 3 顺序、分享卡出生信息隔离和 Top 1 媒体嵌入。
 - 浏览器控制台：0 error。
 
 ### T-009 视觉素材补充验证
@@ -69,7 +69,16 @@
 - API 城市对象同时返回`thumbnail`与`hero_media`，图片可用性不进入 Matching Engine，也不改变 Top 3 顺序；
 - 城市榜单、详情页和分享预览使用同一媒体焦点；无媒体城市继续显示明确的品牌占位，不借用其他城市图片；
 - 下载分享卡会将可用的 Top 1 主图嵌入 SVG；取图失败时只保留品牌化抽象图，不伪造城市素材；
-- `service` 11/11、`app` 13/13 再次通过；8/8 媒体文件与哈希独立校验通过。
+- `service` 12/12、`app` 14/14 再次通过；8/8 媒体文件与哈希独立校验通过。
+
+### T-009 正式域名配置验证
+
+- 生产模式使用`DEPLOYMENT_CHANNEL=production`与`PUBLIC_APP_URL=https://mydestinycity.com/`可正常启动；其他 HTTPS 域名会被配置校验拒绝；
+- 受控 staging 仅接受`https://staging.mydestinycity.com/`；
+- 模拟反向代理请求中，`www.mydestinycity.com/path?q=1`和根域名 HTTP 均以 308 跳转到`https://mydestinycity.com/path?q=1`；
+- 根域名 HTTPS 返回 200、HSTS 和`Link: <https://mydestinycity.com/>; rel="canonical"`；
+- 二维码接口只接受正式 URL：正式域名返回 200，临时测试域名返回 422；
+- 本机没有 Docker，未执行 Caddy/Compose 容器启动；该项必须在香港 staging 环境完成。
 
 ### 尚待上线环境验收
 
