@@ -4,6 +4,7 @@ export class CityProfileRepository {
   constructor(snapshot) {
     this.metadata = {
       schema_version: snapshot.schema_version,
+      asset_manifest_version: snapshot.asset_manifest_version,
       reviewed_on: snapshot.reviewed_on,
       score_boundary: snapshot.score_boundary,
       media_policy: snapshot.media_policy

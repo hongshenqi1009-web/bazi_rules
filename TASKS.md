@@ -21,10 +21,11 @@
 - 当前阶段：优先打通并回归“真实出生输入 → 地点解析 → 四柱/解释 → R2 个人需要 → 100 城匹配 → Top 3 → 可降级城市文案 → 分享入口”。
 - 阶段成果（2026-09-15）：已实现`service/`真实编排；基于 GeoNames `cities15000`快照建立 34,135 条中英文地点索引；以锁定`lunar-javascript 1.7.7`封装四柱/晚子时/大运，用三轨解释候选、R2 和锁定 100 城完成 Top 3；没有前端算法复制或真实模式 demo 回退。
 - 内容与隐私：完成 London、Vancouver、Tokyo、Singapore、New York、Barcelona、Shanghai、Kyoto 8 城 City Profile 事实/来源/许可边界；AI 只接收展示级五行与核验事实，失败独立降级；原始出生输入不落盘，派生结果仅内存 15 分钟，分享与二维码不含出生资料。
-- 验证：`service` 11/11、`app` 12/12 自动测试通过；390 × 844 浏览器真实链复验通过，含中文地点搜索、真实 Top 3、AI 不可用时核心结果保留、提交前隐私提示和可扫描入口二维码。
+- 验证：`service` 11/11、`app` 13/13 自动测试通过；390 × 844 浏览器真实链复验通过，含中文地点搜索、真实 Top 3、AI 不可用时核心结果保留、提交前隐私提示、可扫描入口二维码和分享卡 Top 1 媒体嵌入。
 - 发布实现：新增单容器入口、生产 HTTPS/公开 URL 校验及香港`.com`部署方案；关键静态资产保持自托管边界。
-- 尚未满足的完成闸门：缺正式`.com`与香港运行环境、生产 AI 密钥/模型的真实上游验收、获授权 Logo/城市图片，以及大陆三网与海外真机网络验收。因此 T-009 保持 In Progress，不把“集成测试通过”误写为“已经可公开发布”。
-- 结果链接：`service/`、`data/city_profiles_mvp.json`、`data/CITY_PROFILE_SOURCES.md`、`product/frontend_interface_contract.md`、`product/t009_release_and_privacy.md`、`app/QA.md`
+- 视觉素材（2026-09-15）：按 D-027 整理完整 Logo 与简化 icon；生成 London、Vancouver、Tokyo、Singapore、New York、Barcelona、Shanghai、Kyoto 8 张统一 1536 × 1024 城市意象候选图，记录提示、地标、替代文本、焦点与 SHA-256，并接通服务端媒体字段、城市详情、榜单和分享卡预览。未引入来源不明的外部图片。
+- 尚未满足的完成闸门：缺正式`.com`与香港运行环境、生产 AI 密钥/模型的真实上游验收、8 城候选图最终品牌方/适用条款与移动裁切压缩验收，以及大陆三网与海外真机网络验收。因此 T-009 保持 In Progress，不把“集成测试通过”误写为“已经可公开发布”。
+- 结果链接：`service/`、`data/city_profiles_mvp.json`、`data/CITY_PROFILE_SOURCES.md`、`design/assets/`、`app/assets/`、`product/frontend_interface_contract.md`、`product/t009_release_and_privacy.md`、`app/QA.md`
 
 ## Done
 

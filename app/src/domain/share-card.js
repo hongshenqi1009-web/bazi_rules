@@ -14,7 +14,7 @@ function splitLine(text, limit = 18) {
   return lines.slice(0, 3);
 }
 
-export function buildShareCardSvg(result) {
+export function buildShareCardSvg(result, { heroDataUrl = null } = {}) {
   const [first, second, third] = result.rankedCities;
   const lines = splitLine(first.shareLine);
   const lineMarkup = lines.map((line, index) => (
@@ -31,6 +31,11 @@ export function buildShareCardSvg(result) {
     ? `<image href="${escapeXml(result.share.qr_data_url)}" x="446" y="1122" width="188" height="188" />`
     : `<g fill="#d8c18b">${fallbackQrModules}</g>`;
   const qrLabel = result.share?.qr_data_url ? "扫码开启你的城市探索" : "开发占位 · 公开构建前接入真实入口";
+  const heroMarkup = heroDataUrl
+    ? `<image href="${escapeXml(heroDataUrl)}" x="258" y="218" width="564" height="424" preserveAspectRatio="xMidYMid slice" clip-path="url(#cityCrop)" />
+       <ellipse cx="540" cy="430" rx="282" ry="212" fill="url(#cityVeil)" clip-path="url(#cityCrop)" />`
+    : `<path d="M300 485 Q430 320 540 410 T780 360" fill="none" stroke="#d8c18b" stroke-opacity="0.52" stroke-width="3" />
+       <path d="M320 540 Q470 390 620 520 T780 430" fill="none" stroke="#628f95" stroke-opacity="0.56" stroke-width="6" />`;
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1440" viewBox="0 0 1080 1440">
@@ -40,6 +45,12 @@ export function buildShareCardSvg(result) {
       <stop offset="0.55" stop-color="#0d241d" stop-opacity="0.72" />
       <stop offset="1" stop-color="#050a08" />
     </radialGradient>
+    <linearGradient id="cityVeil" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#050a08" stop-opacity="0.08" />
+      <stop offset="0.72" stop-color="#050a08" stop-opacity="0.3" />
+      <stop offset="1" stop-color="#050a08" stop-opacity="0.82" />
+    </linearGradient>
+    <clipPath id="cityCrop"><ellipse cx="540" cy="430" rx="282" ry="212" /></clipPath>
     <style>
       .serif { font-family: "Noto Serif SC", "Songti SC", serif; fill: #e9e5d8; }
       .sans { font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif; fill: #b8b7ad; }
@@ -49,8 +60,7 @@ export function buildShareCardSvg(result) {
   <rect width="1080" height="1440" fill="url(#glow)" />
   <circle cx="540" cy="440" r="292" fill="none" stroke="#b9985a" stroke-opacity="0.36" stroke-width="2" />
   <circle cx="540" cy="440" r="238" fill="none" stroke="#d8c18b" stroke-opacity="0.18" />
-  <path d="M300 485 Q430 320 540 410 T780 360" fill="none" stroke="#d8c18b" stroke-opacity="0.52" stroke-width="3" />
-  <path d="M320 540 Q470 390 620 520 T780 430" fill="none" stroke="#628f95" stroke-opacity="0.56" stroke-width="6" />
+  ${heroMarkup}
   <text x="540" y="104" text-anchor="middle" class="serif" font-size="28" letter-spacing="6">山河有应</text>
   <text x="540" y="172" text-anchor="middle" class="serif" font-size="40">你的城市能量，回应在这座城里</text>
   <text x="540" y="402" text-anchor="middle" class="serif" font-size="82" letter-spacing="8">${escapeXml(first.zh)}</text>
@@ -68,8 +78,23 @@ export function buildShareCardSvg(result) {
 </svg>`;
 }
 
-export function downloadShareCard(result) {
-  const svg = buildShareCardSvg(result);
+async function mediaDataUrl(url) {
+  if (!url) return null;
+  const response = await fetch(url);
+  if (!response.ok) return null;
+  const blob = await response.blob();
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.addEventListener("load", () => resolve(reader.result), { once: true });
+    reader.addEventListener("error", reject, { once: true });
+    reader.readAsDataURL(blob);
+  });
+}
+
+export async function downloadShareCard(result) {
+  let heroDataUrl = null;
+  try { heroDataUrl = await mediaDataUrl(result.rankedCities[0]?.heroMedia?.url); } catch { /* keep the branded fallback */ }
+  const svg = buildShareCardSvg(result, { heroDataUrl });
   const blob = new Blob([svg], { type: "image/svg+xml;charset=utf-8" });
   const url = URL.createObjectURL(blob);
   const anchor = document.createElement("a");

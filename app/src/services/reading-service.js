@@ -143,6 +143,8 @@ export class ApiReadingService {
       veryClose: city.very_close_match,
       tags: city.core_mood_tags,
       scene: city.scene,
+      thumbnail: city.thumbnail || null,
+      heroMedia: city.hero_media || city.thumbnail || null,
       city_profile_status: city.city_profile_status,
       dataConfidence: city.data_confidence,
       contentStatus: city.content?.status || "unavailable",

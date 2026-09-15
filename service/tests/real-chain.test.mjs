@@ -33,12 +33,17 @@ test("GeoNames search supports Chinese, English and disambiguation fields", asyn
   for (const field of ["standard_id", "country", "admin_area", "iana_timezone", "lat", "lon"]) assert.ok(field in english[0]);
 });
 
-test("eight reviewed City Profiles have sources and cannot change scores", async () => {
+test("eight reviewed City Profiles have auditable media and cannot change scores", async () => {
   const { cities, profiles } = await fixtures();
   assert.equal(profiles.profiles.size, 8);
   for (const profile of profiles.profiles.values()) {
-    assert.equal(profile.review_status, "facts_reviewed_media_missing");
+    assert.equal(profile.review_status, "facts_reviewed_media_candidate");
     assert.ok(profile.sources.length >= 2);
+    assert.equal(profile.media.type, "ai_generated_cityscape");
+    assert.match(profile.media.url, /^\/assets\/cities\/.+-hero\.png$/);
+    assert.match(profile.media.sha256, /^[a-f0-9]{64}$/);
+    assert.equal(profile.media.width, 1536);
+    assert.equal(profile.media.height, 1024);
     assert.ok(cities.get(profile.city_id));
     assert.ok(profile.sources.every((source) => source.url && source.license && source.usage_boundary));
     assert.equal("score" in profile, false);
@@ -83,6 +88,12 @@ test("a real birth input completes BaZi, interpretation, R2 and 100-city matchin
   assert.equal(store.records.get(created.result_id).request, undefined);
   assert.match(response.share.qr_data_url, /^data:image\/png;base64,/);
   assert.ok(response.ranked_cities.every((city) => city.content.status === "unavailable"));
+  for (const city of response.ranked_cities) {
+    if (city.city_profile_status === "reviewed") {
+      assert.equal(city.hero_media.type, "ai_generated_cityscape");
+      assert.equal(city.thumbnail.asset_id, city.hero_media.asset_id);
+    }
+  }
   assert.equal("technical" in response, false);
   assert.doesNotMatch(JSON.stringify(response), /2000-10-09|14:20/);
 });

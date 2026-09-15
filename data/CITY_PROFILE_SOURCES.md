@@ -1,7 +1,7 @@
 # City Profile MVP 来源与媒体边界
 
 - 数据文件：`data/city_profiles_mvp.json`
-- Profile 版本：`city-profile-mvp-v0.1`
+- Profile 版本：`city-profile-mvp-v0.2`
 - 首批范围：London、Vancouver、Tokyo、Singapore、New York、Barcelona、Shanghai、Kyoto
 - 事实审核日：2026-09-15
 
@@ -16,6 +16,8 @@
 
 ## 媒体状态
 
-8 城当前统一为 `facts_reviewed_media_missing`。开发环境可以继续显示明确标记的品牌占位图；公开构建前必须用有明确商业使用权、署名要求和裁剪许可的正式城市图片替换，并在资产清单记录来源。
+8 城当前统一为 `facts_reviewed_media_candidate`。仓库已加入 8 张从零生成的 1536 × 1024 城市意象母版；没有使用来源网页的照片或地图。每张图均记录生成方式、地标、替代文本、裁切焦点和 SHA-256，详见 `design/assets/README.md`。
+
+这些图属于上线候选插图，不是纪实摄影，也不作为 City Profile 事实证据。公开发布前仍须逐张完成产品方城市识别与品牌确认、移动端/分享卡裁切 QA，以及适用平台 AI 素材披露和商用条款复核。任何未确认来源的外部图片仍不得进入公开构建。
 
 完整逐城来源、事实、许可边界与置信度以 `data/city_profiles_mvp.json` 为准。

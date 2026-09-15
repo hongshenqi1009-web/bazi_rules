@@ -69,7 +69,7 @@
 - 来源 URL、发布者、访问日期、许可或使用边界、置信度；
 - 媒体状态。
 
-Profile 不含匹配权重，也不修改城市向量、分数或排名。当前事实文本允许摘要和事实性转述；原网页图片没有随数据进入仓库。`facts_reviewed_media_missing` 表示文字事实已审，正式城市图片仍待单独授权。
+Profile 不含匹配权重，也不修改城市向量、分数或排名。当前事实文本允许摘要和事实性转述；原网页图片没有随数据进入仓库。`facts_reviewed_media_candidate` 表示文字事实已审，并已绑定从零生成的城市意象候选图；生成图不是纪实摄影或事实证据，仍须在公开发布前完成品牌方与适用条款验收。
 
 ## 5. AI 内容约束
 
@@ -116,7 +116,8 @@ READING_TTL_MINUTES=15
 - [ ] 确认 `.com` 正式域名并注入 `PUBLIC_APP_URL`；
 - [ ] 选择香港云账号/区域并完成 HTTPS、备份、告警和限流；
 - [ ] 注入可用 AI 模型与服务端密钥，跑一次真实上游内容验收；
-- [ ] 替换并审核 Logo 与至少首发城市的许可图片；
+- [x] 整理完整 Logo、简化 icon 与首批 8 城统一尺寸的上线候选图，记录生成方式、哈希和使用边界；
+- [ ] 产品方逐张确认 8 城图，并完成压缩衍生、移动裁切、AI 素材披露/商用条款与最终公开构建审核；
 - [ ] 在大陆三网与至少一个海外网络完成真机流程和二维码扫描；
 - [ ] 完成适用法域的隐私、免责声明和第三方处理者审核；
 - [ ] 确认 GeoNames 署名展示位置，并保留 8 城来源台账。
@@ -150,4 +151,3 @@ docker run --rm -p 4173:4173 \
 - 阿里云 CDN 加速区域：<https://www.alibabacloud.com/help/en/cdn/user-guide/change-the-accelerated-region>
 - 中国《个人信息保护法》：<https://www.npc.gov.cn/npc/c2/c30834/202108/t20210820_313088.html>
 - 香港个人资料私隐专员公署《私隐条例概览》：<https://www.pcpd.org.hk/english/data_privacy_law/ordinance_at_a_Glance/ordinance.html>
-

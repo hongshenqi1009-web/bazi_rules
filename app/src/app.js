@@ -44,14 +44,7 @@ function escapeHtml(value = "") {
 function brandMark({ compact = false } = {}) {
   return `
     <span class="brand-lockup ${compact ? "is-compact" : ""}">
-      <svg class="brand-symbol" viewBox="0 0 72 72" aria-hidden="true">
-        <circle cx="36" cy="36" r="31" fill="none" stroke="currentColor" stroke-width="1" opacity=".72" />
-        <path d="M12 44c9-2 13-18 22-18 8 0 10 12 17 12 4 0 6-3 9-6" fill="none" stroke="currentColor" stroke-width="1.4" />
-        <path d="M14 49c10-5 18 1 26-3 7-3 11-9 19-7" fill="none" stroke="currentColor" stroke-width="1" opacity=".8" />
-        <path d="M20 47 34 28l7 10 6-7 9 13" fill="none" stroke="currentColor" stroke-width="1" opacity=".72" />
-        <circle cx="52" cy="19" r="1.8" fill="currentColor" />
-        <path d="M47 19h10M52 14v10" stroke="currentColor" stroke-width=".7" opacity=".8" />
-      </svg>
+      <img class="brand-symbol" src="/assets/brand/logo-symbol.svg" alt="" aria-hidden="true" />
       <span class="brand-wordmark">山河有应</span>
     </span>`;
 }
@@ -349,11 +342,21 @@ function renderProfile() {
   `, { backAction: "restart", className: "result-page" });
 }
 
+function cityMedia(city, className, { hero = false, decorative = false } = {}) {
+  const media = hero ? city.heroMedia : (city.thumbnail || city.heroMedia);
+  if (!media?.url) {
+    return `<span class="${className} scene-art scene-${city.scene}" ${decorative ? "aria-hidden=\"true\"" : `role="img" aria-label="${escapeHtml(city.zh)}城市图片待发布"`}><i></i><i></i><i></i></span>`;
+  }
+  const focal = media.focal_point || { x: 0.5, y: 0.5 };
+  const position = `${Math.round(Number(focal.x || 0.5) * 100)}% ${Math.round(Number(focal.y || 0.5) * 100)}%`;
+  return `<span class="${className} city-media" ${decorative ? "aria-hidden=\"true\"" : `role="img" aria-label="${escapeHtml(media.alt_zh || `${city.zh}城市景观`)}"`}><img src="${escapeHtml(media.url)}" alt="" loading="lazy" decoding="async" style="object-position:${position}" /><span class="city-media-veil" aria-hidden="true"></span></span>`;
+}
+
 function renderCityCard(city) {
   return `
     <button class="city-card rank-${city.rank}" type="button" data-action="open-city" data-city="${city.id}">
       <span class="city-rank">0${city.rank}</span>
-      <span class="scene-art scene-${city.scene}" aria-hidden="true"><i></i><i></i><i></i></span>
+      ${cityMedia(city, "city-card-art", { decorative: true })}
       <span class="city-card-copy">
         <span class="city-title-row"><strong>${city.zh}</strong><small>${city.en}</small></span>
         <span class="index-pill">契合指数 ${city.index}</span>
@@ -387,9 +390,7 @@ function renderCityDetail() {
         <h1>${city.zh}</h1>
         <div class="detail-meta"><span class="index-pill">契合指数 ${city.index}</span><span class="tag-row">${city.tags.map((tag) => `<em>${tag}</em>`).join("")}</span></div>
       </header>
-      <div class="city-hero scene-art scene-${city.scene}" role="img" aria-label="${city.zh}城市图片的品牌占位图">
-        <i></i><i></i><i></i><span>城市授权图片待接入</span>
-      </div>
+      ${cityMedia(city, "city-hero", { hero: true })}
       ${readingService.isDemo ? `<div class="content-sample-label">内容样板 · 上线前需逐条事实复核</div>` : ""}
       ${contentReady ? `
         <section class="detail-section"><p class="section-number">01</p><h2>城市特色</h2><p>${escapeHtml(city.feature)}</p></section>
@@ -425,7 +426,7 @@ function renderShare() {
       <div class="share-card-preview" aria-label="山河有应分享卡预览">
         <div class="share-brand">${brandMark({ compact: true })}</div>
         <p class="share-kicker">你的城市能量，回应在这座城里</p>
-        <div class="share-city-art scene-art scene-${first.scene}" aria-hidden="true"><i></i><i></i><i></i></div>
+        ${cityMedia(first, "share-city-art", { hero: true, decorative: true })}
         <div class="share-city-title"><h2>${first.zh}</h2><p>${first.en}</p><span>契合指数 ${first.index}</span></div>
         <blockquote>${first.shareLine}</blockquote>
         <div class="share-secondary"><p>Top 2 · ${second.en} — 契合指数 ${second.index}</p><p>Top 3 · ${third.en} — 契合指数 ${third.index}</p></div>
@@ -434,7 +435,7 @@ function renderShare() {
       <p class="qr-warning">二维码指向公开产品入口，不包含出生信息或可还原本次结果的参数。</p>
       <div class="share-actions">
         <button class="secondary-button" type="button" data-action="back-cities">返回榜单</button>
-        <button class="primary-button" type="button" data-action="download-share">保存 SVG 预览</button>
+        <button class="primary-button" type="button" data-action="download-share">保存分享卡</button>
       </div>
     </section>
   `, { backAction: "back-cities", className: "share-page" });
@@ -653,7 +654,7 @@ root.addEventListener("click", (event) => {
       });
   }
   if (action === "show-share") setScreen("share");
-  if (action === "download-share") downloadShareCard(state.reading);
+  if (action === "download-share") void downloadShareCard(state.reading);
 });
 
 render();

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-labelledby="title desc">
+  <title id="title">山河有应品牌图标</title>
+  <desc id="desc">圆形暗金印记，融合山形、水纹与星轨。</desc>
+  <g fill="none" stroke="#D8C18B" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="48" cy="48" r="41" stroke-width="1.4" opacity=".86"/>
+    <ellipse cx="48" cy="48" rx="38" ry="18" stroke-width=".8" opacity=".32" transform="rotate(-18 48 48)"/>
+    <path d="M16 61 35 36l10 14 8-10 18 23" stroke-width="1.8" opacity=".9"/>
+    <path d="M17 66c13-7 23 2 34-3 9-4 15-12 28-9" stroke-width="1.5" opacity=".82"/>
+    <path d="M19 71c14-5 24 2 35-2 8-3 14-8 24-6" stroke-width=".9" opacity=".46"/>
+    <circle cx="69" cy="25" r="2.2" fill="#D8C18B" stroke="none"/>
+    <path d="M62 25h14M69 18v14" stroke-width=".8" opacity=".76"/>
+  </g>
+</svg>

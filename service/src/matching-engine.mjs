@@ -136,7 +136,8 @@ export class MatchingEngine {
         data_confidence: item.city.dataConfidence,
         match_reasons: item.reasons,
         direction_adjustment: item.direction,
-        city_profile_status: item.profile ? "reviewed" : "not_yet_published"
+        city_profile_status: item.profile ? "reviewed" : "not_yet_published",
+        media: item.profile?.media || null
       };
     });
   }

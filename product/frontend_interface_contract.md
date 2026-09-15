@@ -166,7 +166,7 @@ T-009 为减少服务端保留出生资料，不持久化`input_summary`：页�
   "city_name_en": "Vancouver",
   "compatibility_index": 91,
   "core_mood_tags": [],
-  "hero_media": {"url": "", "alt_zh": "", "asset_id": "", "attribution": ""},
+  "hero_media": {"url": "", "alt_zh": "", "asset_id": "", "attribution": "", "type": "photo | ai_generated_cityscape", "focal_point": {"x": 0.5, "y": 0.5}},
   "sections": {
     "city_feature": {"title": "城市特色", "body": "", "fact_ids": []},
     "why_match": {"title": "为什么契合", "body": "", "reason_codes": []},
@@ -198,8 +198,9 @@ T-009 为减少服务端保留出生资料，不持久化`input_summary`：页�
   "index_calibration": "matching-index-calibration-v0.1-candidate",
   "dayun_adjustment": "dayun-adjustment-v0.1-candidate",
   "direction_adjustment": "direction-adjustment-v0.1-candidate",
-  "city_profile": "city-profile-v0.1",
-  "content_template": "mvp-city-copy-v0.1"
+  "city_profile": "city-profile-mvp-v0.2",
+  "content_template": "mvp-city-copy-v0.1",
+  "asset_manifest": "visual-assets-t009-v0.1-candidate"
 }
 ```
 
@@ -235,7 +236,7 @@ T-009 为减少服务端保留出生资料，不持久化`input_summary`：页�
   "contains_birth_data": false,
   "qr_target": "",
   "copy_version": "mvp-share-copy-v0.1",
-  "asset_manifest_version": ""
+  "asset_manifest_version": "visual-assets-t009-v0.1-candidate"
 }
 ```
 

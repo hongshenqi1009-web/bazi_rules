@@ -44,6 +44,14 @@ function copyCity(city) {
 
 function contractCity(city) {
   const copied = copyCity(city);
+  const media = copied.media ? {
+    url: copied.media.url,
+    alt_zh: copied.media.alt_zh,
+    asset_id: copied.media.asset_id,
+    attribution: copied.media.attribution,
+    type: copied.media.type,
+    focal_point: copied.media.focal_point
+  } : null;
   return {
     rank: copied.rank,
     city_id: copied.id,
@@ -54,6 +62,8 @@ function contractCity(city) {
     very_close_match: copied.veryClose,
     core_mood_tags: copied.tags,
     scene: copied.scene,
+    thumbnail: media,
+    hero_media: media,
     city_profile_status: copied.city_profile_status,
     data_confidence: copied.data_confidence,
     match_reason_summary: copied.match_reasons?.short || "",
@@ -104,7 +114,8 @@ function contractResult(result) {
       dayun_adjustment: result.versions.dayunAdjustment,
       direction_adjustment: result.versions.directionAdjustment,
       city_profile: result.versions.cityProfile,
-      content_template: result.versions.contentTemplate
+      content_template: result.versions.contentTemplate,
+      asset_manifest: result.versions.assetManifest
     }
   };
 }
@@ -190,7 +201,7 @@ export class ReadingStore {
           confidence: interpretation.confidence,
           auxiliary_interpretation: interpretation.auxiliary_interpretation
         },
-        share: { landing_url: this.config.publicAppUrl, qr_data_url: qrDataUrl },
+        share: { landing_url: this.config.publicAppUrl, qr_data_url: qrDataUrl, asset_manifest_version: this.profiles.metadata.asset_manifest_version },
         privacy: {
           account_required: false,
           birth_input_persisted: false,
@@ -212,7 +223,8 @@ export class ReadingStore {
           dayunAdjustment: personal.dayun_adjustment_version,
           directionAdjustment: "direction-adjustment-v0.1-candidate",
           cityProfile: this.profiles.metadata.schema_version,
-          contentTemplate: "city-detail-ai-v0.1"
+          contentTemplate: "city-detail-ai-v0.1",
+          assetManifest: this.profiles.metadata.asset_manifest_version
         }
       };
       record.result = coreResult;

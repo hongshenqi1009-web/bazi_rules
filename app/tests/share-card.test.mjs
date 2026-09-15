@@ -16,3 +16,11 @@ test("share card uses the agreed 3:4 canvas", () => {
   const svg = buildShareCardSvg(DEMO_RESULT);
   assert.match(svg, /width="1080" height="1440"/);
 });
+
+test("share card can embed an audited Top 1 city image without changing result copy", () => {
+  const svg = buildShareCardSvg(DEMO_RESULT, { heroDataUrl: "data:image/png;base64,AA==" });
+  assert.match(svg, /data:image\/png;base64,AA==/);
+  assert.match(svg, /clip-path="url\(#cityCrop\)"/);
+  assert.match(svg, /契合指数 91/);
+  assert.doesNotMatch(svg, /2000-10-09|青岛|未时|female|四柱/);
+});

@@ -104,7 +104,7 @@ export class CityContentService {
         generated_by: "ai",
         model: this.model,
         prompt_version: "city-detail-ai-v0.1",
-        source_profile_version: "city-profile-mvp-v0.1"
+        source_profile_version: "city-profile-mvp-v0.2"
       };
     } catch (error) {
       return unavailable(error?.name === "AbortError" ? "CONTENT_TIMEOUT" : "CONTENT_GENERATION_FAILED");

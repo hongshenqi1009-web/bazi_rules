@@ -52,7 +52,7 @@ test("real reading adapter renders server ranking unchanged", async () => {
       },
       desired_city_energy: { paragraphs: ["一", "二", "三"], visual_levels: { wood: 4, fire: 1, earth: 2, metal: 3, water: 5 } },
       ranked_cities: [
-        { rank: 1, city_id: "1", city_name_zh: "甲", city_name_en: "A", compatibility_index: 91, compatibility_tier: "top", very_close_match: true, core_mood_tags: [], content: { status: "unavailable" }, share_line: "甲回应你。" },
+        { rank: 1, city_id: "1", city_name_zh: "甲", city_name_en: "A", compatibility_index: 91, compatibility_tier: "top", very_close_match: true, core_mood_tags: [], thumbnail: {url: "/assets/cities/a-hero.png", asset_id: "a-v1"}, hero_media: {url: "/assets/cities/a-hero.png", asset_id: "a-v1"}, content: { status: "unavailable" }, share_line: "甲回应你。" },
         { rank: 2, city_id: "2", city_name_zh: "乙", city_name_en: "B", compatibility_index: 91, compatibility_tier: "top", very_close_match: true, core_mood_tags: [], content: { status: "unavailable" }, share_line: "乙回应你。" },
         { rank: 3, city_id: "3", city_name_zh: "丙", city_name_en: "C", compatibility_index: 89, compatibility_tier: "top", very_close_match: false, core_mood_tags: [], content: { status: "unavailable" }, share_line: "丙回应你。" }
       ],
@@ -67,6 +67,7 @@ test("real reading adapter renders server ranking unchanged", async () => {
     const result = await new ApiReadingService({ pollInterval: 1 }).createReading({}, {});
     assert.deepEqual(result.rankedCities.map((city) => city.id), ["1", "2", "3"]);
     assert.equal(result.rankedCities[0].index, 91);
+    assert.equal(result.rankedCities[0].heroMedia.asset_id, "a-v1");
     assert.equal(result.privacy.birth_input_persisted, false);
   } finally {
     globalThis.fetch = originalFetch;

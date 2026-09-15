@@ -1202,6 +1202,32 @@ input::-webkit-calendar-picker-indicator {
     linear-gradient(130deg, #183c32, #0b1d19 55%, #315047);
 }
 
+.city-card-art,
+.city-media {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  min-width: 0;
+  background: #0b1d19;
+}
+
+.city-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(.84) contrast(1.04) brightness(.86);
+}
+
+.city-media-veil {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(5, 10, 8, .04) 35%, rgba(5, 10, 8, .76) 100%),
+    linear-gradient(110deg, rgba(13, 36, 29, .28), transparent 52%, rgba(185, 152, 90, .08));
+  pointer-events: none;
+}
+
 .scene-art::before,
 .scene-art::after,
 .scene-art i {
