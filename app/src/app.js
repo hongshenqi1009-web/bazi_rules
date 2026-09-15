@@ -1,4 +1,4 @@
-import { DEMO_META, LOCATIONS, SHICHEN } from "./data/demo-fixture.js";
+import { DEMO_META, SHICHEN } from "./data/demo-fixture.js";
 import { buildInputSummary, createReadingRequest, validateBirthStep, validatePlaceStep } from "./domain/validators.js";
 import { downloadShareCard } from "./domain/share-card.js";
 import { readingService } from "./services/reading-service.js";
@@ -17,13 +17,20 @@ const state = {
   },
   locationQuery: "",
   location: null,
+  locationResults: [],
+  locationLoading: false,
+  locationError: null,
   sex: null,
   errors: {},
   loadingStage: null,
   reading: null,
   selectedCity: null,
-  fatalError: null
+  fatalError: null,
+  contentRetrying: false
 };
+
+let locationSearchTimer = null;
+let locationSearchController = null;
 
 function escapeHtml(value = "") {
   return String(value)
@@ -50,7 +57,9 @@ function brandMark({ compact = false } = {}) {
 }
 
 function demoBanner() {
-  return `<div class="demo-banner" role="note"><span>${DEMO_META.label}</span>${DEMO_META.notice}</div>`;
+  return readingService.isDemo
+    ? `<div class="demo-banner" role="note"><span>${DEMO_META.label}</span>${DEMO_META.notice}</div>`
+    : "";
 }
 
 function pageShell(content, { backAction = null, className = "" } = {}) {
@@ -214,22 +223,16 @@ function renderZiSegment() {
     </fieldset>`;
 }
 
-function getLocationMatches(query) {
-  const normalized = query.trim().toLowerCase();
-  if (!normalized) return [];
-  return LOCATIONS.filter((location) => [location.zh, location.en, location.country, location.region]
-    .some((value) => value.toLowerCase().includes(normalized))).slice(0, 6);
-}
-
 function locationResultsMarkup() {
-  const matches = getLocationMatches(state.locationQuery);
-  if (!state.locationQuery.trim()) return `<p class="search-hint">可搜索：青岛、上海、伦敦、温哥华、新加坡等样板城市</p>`;
-  if (!matches.length) return `<p class="empty-state">样板地点库暂未找到这座城市。正式版将接入标准全球地点服务。</p>`;
+  if (!state.locationQuery.trim()) return `<p class="search-hint">支持中英文城市名与海外出生地点；同名地点会显示国家和地区。</p>`;
+  if (state.locationLoading) return `<p class="search-hint" role="status">正在查找标准地点…</p>`;
+  if (state.locationError) return `<p class="field-error" role="alert">${escapeHtml(state.locationError)}</p>`;
+  if (!state.locationResults.length) return `<p class="empty-state">没有找到匹配地点，请检查拼写或换用城市英文名。</p>`;
   return `<div class="location-results" role="listbox" aria-label="地点搜索结果">
-    ${matches.map((location) => `
+    ${state.locationResults.map((location) => `
       <button type="button" role="option" data-action="select-location" data-location="${location.id}" aria-selected="${state.location?.id === location.id}">
-        <span><strong>${location.zh}</strong><small>${location.en}</small></span>
-        <span>${location.region} · ${location.country}</span>
+        <span><strong>${escapeHtml(location.zh)}</strong><small>${escapeHtml(location.en)}</small></span>
+        <span>${escapeHtml([location.region, location.country].filter(Boolean).join(" · "))}</span>
       </button>`).join("")}
   </div>`;
 }
@@ -250,6 +253,7 @@ function renderPlaceStep() {
         <input id="location-search" data-input="location-search" type="search" autocomplete="off" placeholder="搜索城市名" value="${escapeHtml(state.locationQuery)}" aria-controls="location-results" />
       </div>
       <div id="location-results">${locationResultsMarkup()}</div>
+      <p class="source-note">地点资料：<a href="https://www.geonames.org/" target="_blank" rel="noreferrer">GeoNames</a> · CC BY 4.0</p>
       ${fieldError("location")}
     </section>
     <section class="form-section">
@@ -267,6 +271,10 @@ function renderPlaceStep() {
       <span>你的出生轨迹</span>
       <strong>${escapeHtml(summary)}</strong>
     </section>
+    <p class="privacy-note">
+      出生信息只用于本次推演，不注册、不长期保存；临时结果将在 15 分钟后删除。
+      <a href="/privacy.html" target="_blank" rel="noreferrer">查看隐私说明</a>
+    </p>
     <div class="sticky-action">
       <button class="primary-button" type="button" data-action="submit-reading">探索你的城市能量<span aria-hidden="true">↗</span></button>
     </div>
@@ -325,7 +333,7 @@ function renderProfile() {
         <h1>${profile.typeName}</h1>
         <p class="strength-line">${profile.strengthSummary}</p>
         <p class="reading-line">${profile.oneLineReading}</p>
-        <button class="confidence-chip" type="button" data-action="toggle-confidence" aria-expanded="false">样板结果说明 <span>＋</span></button>
+        <button class="confidence-chip" type="button" data-action="toggle-confidence" aria-expanded="false">结果依据与置信度 <span>＋</span></button>
         <p class="confidence-note" hidden>${profile.confidence.displayHint}</p>
       </div>
       <div class="energy-bridge reveal-block" data-reveal="1" aria-hidden="true">
@@ -361,7 +369,7 @@ function renderCities() {
       <p class="eyebrow">山河回应</p>
       <h1>与你更契合的城市</h1>
       <p class="section-lead">它们依照同一套组合匹配依次浮现，没有为了故事感改动顺序。</p>
-      <div class="demo-data-note"><strong>样板榜单</strong> 分数与个性化内容尚未接入正式 Matching Engine。</div>
+      ${readingService.isDemo ? `<div class="demo-data-note"><strong>样板榜单</strong> 分数与个性化内容尚未接入正式 Matching Engine。</div>` : ""}
       <div class="city-list">${state.reading.rankedCities.map(renderCityCard).join("")}</div>
       <button class="secondary-button share-entry" type="button" data-action="show-share">生成我的城市回应卡<span aria-hidden="true">↗</span></button>
       <p class="legal-note">${state.reading.disclaimer}</p>
@@ -371,6 +379,7 @@ function renderCities() {
 
 function renderCityDetail() {
   const city = state.selectedCity;
+  const contentReady = readingService.isDemo || city.contentStatus === "ready";
   return pageShell(`
     <article class="city-detail">
       <header class="city-detail-header">
@@ -381,10 +390,16 @@ function renderCityDetail() {
       <div class="city-hero scene-art scene-${city.scene}" role="img" aria-label="${city.zh}城市图片的品牌占位图">
         <i></i><i></i><i></i><span>城市授权图片待接入</span>
       </div>
-      <div class="content-sample-label">内容样板 · 上线前需逐条事实复核</div>
-      <section class="detail-section"><p class="section-number">01</p><h2>城市特色</h2><p>${city.feature}</p></section>
-      <section class="detail-section"><p class="section-number">02</p><h2>为什么契合</h2><p>${city.why}</p></section>
-      <section class="detail-section felt-section"><p class="section-number">03</p><h2>它会带来的感受</h2><p>${city.feeling}</p></section>
+      ${readingService.isDemo ? `<div class="content-sample-label">内容样板 · 上线前需逐条事实复核</div>` : ""}
+      ${contentReady ? `
+        <section class="detail-section"><p class="section-number">01</p><h2>城市特色</h2><p>${escapeHtml(city.feature)}</p></section>
+        <section class="detail-section"><p class="section-number">02</p><h2>为什么契合</h2><p>${escapeHtml(city.why)}</p></section>
+        <section class="detail-section felt-section"><p class="section-number">03</p><h2>它会带来的感受</h2><p>${escapeHtml(city.feeling)}</p></section>` : `
+        <section class="content-unavailable" role="status">
+          <h2>详细解读暂时不可用</h2>
+          <p>${city.city_profile_status === "not_yet_published" ? "这座城市的正式资料仍在审核中；核心匹配结果不受影响。" : "用户五行、Top 3 与契合指数已经完成真实计算，可以稍后重试城市解读。"}</p>
+          ${city.city_profile_status === "reviewed" ? `<button class="secondary-button" type="button" data-action="retry-content" ${state.contentRetrying ? "disabled" : ""}>${state.contentRetrying ? "正在重试…" : "重试详细解读"}</button>` : ""}
+        </section>`}
       <div class="detail-actions">
         <button class="secondary-button" type="button" data-action="back-cities">返回榜单</button>
         <button class="primary-button" type="button" data-action="show-share">生成回应卡</button>
@@ -393,13 +408,11 @@ function renderCityDetail() {
   `, { backAction: "back-cities", className: "detail-page" });
 }
 
-function qrGrid() {
-  return `<span class="qr-placeholder" role="img" aria-label="不可扫描的二维码结构占位图">${Array.from({ length: 81 }, (_, index) => {
-    const x = index % 9;
-    const y = Math.floor(index / 9);
-    const filled = ((x * 7 + y * 11 + index) % 5) < 2 || (x < 3 && y < 3) || (x > 5 && y < 3) || (x < 3 && y > 5);
-    return `<i class="${filled ? "filled" : ""}"></i>`;
-  }).join("")}</span>`;
+function qrImage() {
+  const source = state.reading.share?.qr_data_url;
+  return source
+    ? `<img class="qr-real" src="${escapeHtml(source)}" alt="扫码开启山河有应城市探索" />`
+    : `<span class="qr-placeholder" role="img" aria-label="分享入口暂时不可用"></span>`;
 }
 
 function renderShare() {
@@ -416,9 +429,9 @@ function renderShare() {
         <div class="share-city-title"><h2>${first.zh}</h2><p>${first.en}</p><span>契合指数 ${first.index}</span></div>
         <blockquote>${first.shareLine}</blockquote>
         <div class="share-secondary"><p>Top 2 · ${second.en} — 契合指数 ${second.index}</p><p>Top 3 · ${third.en} — 契合指数 ${third.index}</p></div>
-        <div class="share-qr">${qrGrid()}<small>扫码开启你的城市探索</small></div>
+        <div class="share-qr">${qrImage()}<small>扫码开启你的城市探索</small></div>
       </div>
-      <p class="qr-warning">二维码为结构占位，目前不可扫描；接入正式入口链接后生成真实二维码。</p>
+      <p class="qr-warning">二维码指向公开产品入口，不包含出生信息或可还原本次结果的参数。</p>
       <div class="share-actions">
         <button class="secondary-button" type="button" data-action="back-cities">返回榜单</button>
         <button class="primary-button" type="button" data-action="download-share">保存 SVG 预览</button>
@@ -464,6 +477,36 @@ function setScreen(screen) {
   requestAnimationFrame(() => document.querySelector("#app-main")?.focus({ preventScroll: true }));
 }
 
+async function runLocationSearch(query) {
+  locationSearchController?.abort();
+  if (!query.trim()) {
+    state.locationResults = [];
+    state.locationLoading = false;
+    state.locationError = null;
+    if (state.screen === "place") document.querySelector("#location-results").innerHTML = locationResultsMarkup();
+    return;
+  }
+  const controller = new AbortController();
+  locationSearchController = controller;
+  state.locationLoading = true;
+  state.locationError = null;
+  if (state.screen === "place") document.querySelector("#location-results").innerHTML = locationResultsMarkup();
+  try {
+    const results = await readingService.searchLocations(query, { signal: controller.signal });
+    if (controller !== locationSearchController) return;
+    state.locationResults = results;
+  } catch (error) {
+    if (error?.name === "AbortError" || controller !== locationSearchController) return;
+    state.locationResults = [];
+    state.locationError = error?.userMessage || "地点服务暂时不可用，请稍后重试。";
+  } finally {
+    if (controller === locationSearchController) {
+      state.locationLoading = false;
+      if (state.screen === "place") document.querySelector("#location-results").innerHTML = locationResultsMarkup();
+    }
+  }
+}
+
 async function startReading() {
   state.errors = validatePlaceStep(state);
   if (Object.keys(state.errors).length) {
@@ -484,7 +527,7 @@ async function startReading() {
     state.reading.inputSummary = buildInputSummary(state.birth, state.location);
     setScreen("profile");
   } catch (error) {
-    state.fatalError = error?.name === "AbortError" ? "推演已取消" : "暂时无法完成推演，请稍后重试。";
+    state.fatalError = error?.name === "AbortError" ? "推演已取消" : (error?.userMessage || "暂时无法完成推演，请稍后重试。");
     state.loadingStage = "error";
     render();
   }
@@ -496,12 +539,16 @@ function resetExperience() {
     birth: { date: "", timeMode: null, exactTime: "", shichenId: null, ziSegment: null },
     locationQuery: "",
     location: null,
+    locationResults: [],
+    locationLoading: false,
+    locationError: null,
     sex: null,
     errors: {},
     loadingStage: null,
     reading: null,
     selectedCity: null,
-    fatalError: null
+    fatalError: null,
+    contentRetrying: false
   });
   render();
 }
@@ -513,7 +560,9 @@ root.addEventListener("input", (event) => {
   if (input.dataset.input === "location-search") {
     state.locationQuery = input.value;
     state.location = null;
-    document.querySelector("#location-results").innerHTML = locationResultsMarkup();
+    state.locationError = null;
+    clearTimeout(locationSearchTimer);
+    locationSearchTimer = setTimeout(() => runLocationSearch(state.locationQuery), 220);
   }
 });
 
@@ -573,7 +622,7 @@ root.addEventListener("click", (event) => {
     else setScreen("place");
   }
   if (action === "select-location") {
-    state.location = LOCATIONS.find((location) => location.id === target.dataset.location) || null;
+    state.location = state.locationResults.find((location) => location.id === target.dataset.location) || null;
     state.locationQuery = state.location ? `${state.location.zh} ${state.location.en}` : state.locationQuery;
     render();
   }
@@ -586,6 +635,22 @@ root.addEventListener("click", (event) => {
   if (action === "open-city") {
     state.selectedCity = state.reading.rankedCities.find((city) => city.id === target.dataset.city);
     setScreen("detail");
+  }
+  if (action === "retry-content" && state.selectedCity && !state.contentRetrying) {
+    state.contentRetrying = true;
+    render();
+    readingService.retryCityContent(state.reading.resultId, state.selectedCity.id)
+      .then((updated) => {
+        if (!updated) return;
+        const index = state.reading.rankedCities.findIndex((city) => city.id === updated.id);
+        if (index >= 0) state.reading.rankedCities[index] = updated;
+        state.selectedCity = updated;
+      })
+      .catch(() => {})
+      .finally(() => {
+        state.contentRetrying = false;
+        if (state.screen === "detail") render();
+      });
   }
   if (action === "show-share") setScreen("share");
   if (action === "download-share") downloadShareCard(state.reading);

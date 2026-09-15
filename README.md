@@ -30,34 +30,41 @@
 - `product/free_result_and_share_spec.md`：结果内容、城市文案与 3:4 分享卡规格。
 - `product/city_profile_mvp.md`：City Profile 事实、标签、媒体、AI 白名单和发布闸门。
 - `product/frontend_interface_contract.md`：前端输入、异步任务、结果、错误与版本链合同。
+- `product/t009_release_and_privacy.md`：真实服务编排、出生数据流、AI 失败隔离、首批内容边界、香港部署方案与发布闸门。
 - `product/monetisation.md`：已延后的商业化假设与原则。
 - `data/cities.csv`：城市数据结构。
 - `data/test_cases.json`：可重复验证的测试案例。
+- `data/city_profiles_mvp.json`：首批 8 城结构化 City Profile、来源与许可边界；`data/CITY_PROFILE_SOURCES.md`为发布摘要。
 - `data/matching_simulation_results.json`：T-005 三种匹配方法、3,000 组模拟和全部 100 城推荐次数。
 - `data/matching_manual_regression_cases.json`：15 个构造命盘案例的完整解释、需要向量、区间、大运前后、Top 10、Top 3 解释、冲突及辅助方案。
 - `analysis/t005_matching_simulation.py`：T-005 可重复模拟与集中度审计程序，不是前端应用代码。
 - `analysis/t005_manual_chart_regression.py`：人工案例匹配回归程序；`analysis/t005_verify_manual_case_pillars.js` 用锁定候选库复算四柱。
 - `design/design_system.md`：“山河有应”视觉 token、组件、动效、图片、文案与无障碍规范。
 - `design/references/`：六类已确认视觉方向的参考图目录与元数据要求；原图待补。
-- `app/`：T-008 可运行的移动端纵向 MVP 切片；包含零依赖开发服务器、服务适配层、受控样板响应、测试和验收记录。
+- `app/`：移动端纵向 MVP；默认连接 T-009 真实服务，显式`?demo=1`仅保留结构回归。
+- `service/`：T-009 服务端编排、GeoNames 地点索引、BaZi/Interpretation/Personal Need/Matching 适配、AI 内容隔离与测试。
 
-## 本地预览 T-008
+## 本地预览真实链路
 
 需要 Node.js 20 或更高版本：
 
 ```text
-cd app
-node dev-server.mjs
+cd service
+pnpm install --frozen-lockfile
+pnpm start
 ```
 
 浏览器打开 `http://127.0.0.1:4173`。运行测试：
 
 ```text
-cd app
-node --test
+cd service
+pnpm test
+
+cd ../app
+pnpm test
 ```
 
-当前页面顶部会持续显示“结构演示”：它只用于验证已确认的移动端流程与视觉层级，尚未连接正式 BaZi / Matching 服务，也不包含已授权的 Logo 或城市图片。详细边界见 `app/README.md` 与 `app/QA.md`。
+默认入口使用真实计算和地点服务，不会在失败时伪装样板结果。只有`/?demo=1`是明确标记的结构演示。Logo 与城市图片仍待正式授权，公开发布前还需完成`product/t009_release_and_privacy.md`列出的域名、香港部署、AI 密钥与真机网络验收门槛。
 
 ## 状态标签
 
@@ -76,4 +83,4 @@ node --test
 
 ## 当前边界
 
-当前已完成 T-008，“山河有应”免费娱乐传播版拥有可运行、可测试的移动端纵向切片；R2 继续作为当前 preferred exposure 方案。下一步为 T-009 真实服务接入与首批内容发布准备。专业付费版、复杂参数研究和商业化继续延后；参考原图、Logo 源文件、城市图片许可、部署与数据保留期限须在发布验收前补齐。具体状态以 `PROJECT_STATUS.md` 与 `TASKS.md` 为准。
+当前 T-009 已完成本地真实计算链、34,135 条标准地点、8 城 City Profile、AI 失败隔离、15 分钟临时结果和可注入二维码入口；R2 继续作为当前 preferred exposure 方案。公开发布仍受正式域名/香港环境、AI 生产凭据、Logo 与城市图片授权以及大陆三网真机验收约束。专业付费版、复杂参数研究和商业化继续延后；具体状态以 `PROJECT_STATUS.md` 与 `TASKS.md` 为准。

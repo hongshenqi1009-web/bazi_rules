@@ -495,6 +495,49 @@ h2 {
   font-size: 11px;
 }
 
+.privacy-note {
+  color: var(--mist-500);
+  font-size: 11px;
+  line-height: 1.8;
+  margin: 18px 2px 0;
+  text-align: center;
+}
+
+.privacy-note a {
+  color: var(--gold-300);
+  text-decoration-color: rgba(203, 176, 111, 0.45);
+  text-underline-offset: 3px;
+}
+
+.source-note {
+  color: var(--mist-500);
+  font-size: 10px;
+  margin: 8px 2px 0;
+}
+
+.source-note a {
+  color: inherit;
+}
+
+.privacy-page {
+  margin: 0 auto;
+  max-width: 680px;
+  padding: max(32px, env(safe-area-inset-top)) 24px 56px;
+}
+
+.privacy-page h1,
+.privacy-page h2 {
+  color: var(--paper-100);
+  font-family: var(--serif);
+  font-weight: 500;
+}
+
+.privacy-page h1 { font-size: 32px; }
+.privacy-page h2 { font-size: 20px; margin-top: 32px; }
+.privacy-page p,
+.privacy-page li { color: var(--mist-300); line-height: 1.85; }
+.privacy-page a { color: var(--gold-300); }
+
 .date-input,
 .exact-time-card input,
 .search-field {
@@ -1329,6 +1372,27 @@ input::-webkit-calendar-picker-indicator {
   text-align: center;
 }
 
+.content-unavailable {
+  margin: 30px 0 46px;
+  padding: 28px 22px;
+  text-align: center;
+  background: rgba(185, 152, 90, 0.06);
+  border: 1px solid rgba(185, 152, 90, 0.18);
+  border-radius: 18px;
+}
+
+.content-unavailable h2 {
+  margin-bottom: 12px;
+  font-size: 21px;
+}
+
+.content-unavailable p {
+  margin: 0 auto 20px;
+  max-width: 28rem;
+  color: var(--mist-300);
+  line-height: 1.8;
+}
+
 .detail-section {
   position: relative;
   padding: 0 0 44px 34px;
@@ -1529,6 +1593,17 @@ input::-webkit-calendar-picker-indicator {
   background: rgba(5, 10, 8, 0.76);
   border: 1px solid var(--gold-300);
   border-radius: 50%;
+  box-shadow: 0 0 0 5px rgba(185, 152, 90, 0.07), 0 0 22px rgba(216, 193, 139, 0.12);
+}
+
+.qr-real {
+  display: block;
+  width: 62px;
+  height: 62px;
+  padding: 4px;
+  background: #d7c79d;
+  border: 1px solid var(--gold-300);
+  border-radius: 14px;
   box-shadow: 0 0 0 5px rgba(185, 152, 90, 0.07), 0 0 22px rgba(216, 193, 139, 0.12);
 }
 

@@ -21,12 +21,16 @@ export function buildShareCardSvg(result) {
     `<text x="540" y="${840 + index * 52}" text-anchor="middle" class="share-copy">${escapeXml(line)}</text>`
   )).join("");
 
-  const qrModules = Array.from({ length: 81 }, (_, index) => {
+  const fallbackQrModules = Array.from({ length: 81 }, (_, index) => {
     const x = index % 9;
     const y = Math.floor(index / 9);
     const filled = ((x * 7 + y * 11 + index) % 5) < 2 || (x < 3 && y < 3) || (x > 5 && y < 3) || (x < 3 && y > 5);
     return filled ? `<rect x="${486 + x * 12}" y="${1162 + y * 12}" width="9" height="9" rx="1" />` : "";
   }).join("");
+  const qrMarkup = result.share?.qr_data_url
+    ? `<image href="${escapeXml(result.share.qr_data_url)}" x="446" y="1122" width="188" height="188" />`
+    : `<g fill="#d8c18b">${fallbackQrModules}</g>`;
+  const qrLabel = result.share?.qr_data_url ? "扫码开启你的城市探索" : "开发占位 · 公开构建前接入真实入口";
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1440" viewBox="0 0 1080 1440">
@@ -59,9 +63,8 @@ export function buildShareCardSvg(result) {
   <text x="210" y="1138" class="sans" font-size="25">Top 3 · ${escapeXml(third.en)} — 契合指数 ${third.index}</text>
   <circle cx="540" cy="1216" r="92" fill="#050a08" fill-opacity="0.82" stroke="#b9985a" stroke-width="3" />
   <circle cx="540" cy="1216" r="104" fill="none" stroke="#d8c18b" stroke-opacity="0.18" />
-  <g fill="#d8c18b">${qrModules}</g>
-  <text x="540" y="1334" text-anchor="middle" class="sans" font-size="22">二维码结构占位 · 正式链接接入后替换</text>
-  <text x="540" y="1384" text-anchor="middle" class="serif" font-size="26" letter-spacing="5">扫码开启你的城市探索</text>
+  ${qrMarkup}
+  <text x="540" y="1360" text-anchor="middle" class="serif" font-size="26" letter-spacing="5">${qrLabel}</text>
 </svg>`;
 }
 

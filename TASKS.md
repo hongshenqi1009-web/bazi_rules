@@ -4,19 +4,27 @@
 
 ## Backlog
 
+暂无。
+
+## In Progress
+
 ### T-009 真实服务接入与首批内容发布准备
 
 - 类型：开发/数据/测试/部署
 - 负责人：Work
-- 状态：Backlog
+- 状态：In Progress
+- 开始日期：2026-09-15
 - 前置：T-008 已完成移动端纵向切片
 - 工作文件：服务端适配器、地点服务、首批 City Profile、媒体清单、隐私与部署文档
-- 验收：按 `product/frontend_interface_contract.md` 接入真实 BaZi / Interpretation / Matching 任务；地点搜索返回标准 ID、时区与经纬度；先完成 8 城 City Profile 事实/许可审核；真实服务失败可恢复且不得回退成未标识样板结果；明确出生数据保留、二维码入口与境内外部署方案。
-- 边界：不在浏览器复制命理或匹配算法；不因发布准备重启复杂参数研究；未授权 Logo/城市图片不得进入正式构建。
-
-## In Progress
-
-暂无。
+- 验收：按 `product/frontend_interface_contract.md` 接入真实 BaZi / Interpretation / Personal Need R2 / Matching 任务；地点搜索返回标准 ID、时区与经纬度；先完成 8 城 City Profile 事实/许可审核；真实服务失败可恢复且不得回退成未标识样板结果；AI 文案失败不影响核心结果；明确出生数据保留、二维码入口与境内外部署方案。
+- 边界：不在浏览器复制命理或匹配算法；不因发布准备重启复杂参数研究；默认不建立账户或长期保存出生资料；未授权 Logo/城市图片不得进入正式构建。
+- 当前阶段：优先打通并回归“真实出生输入 → 地点解析 → 四柱/解释 → R2 个人需要 → 100 城匹配 → Top 3 → 可降级城市文案 → 分享入口”。
+- 阶段成果（2026-09-15）：已实现`service/`真实编排；基于 GeoNames `cities15000`快照建立 34,135 条中英文地点索引；以锁定`lunar-javascript 1.7.7`封装四柱/晚子时/大运，用三轨解释候选、R2 和锁定 100 城完成 Top 3；没有前端算法复制或真实模式 demo 回退。
+- 内容与隐私：完成 London、Vancouver、Tokyo、Singapore、New York、Barcelona、Shanghai、Kyoto 8 城 City Profile 事实/来源/许可边界；AI 只接收展示级五行与核验事实，失败独立降级；原始出生输入不落盘，派生结果仅内存 15 分钟，分享与二维码不含出生资料。
+- 验证：`service` 11/11、`app` 12/12 自动测试通过；390 × 844 浏览器真实链复验通过，含中文地点搜索、真实 Top 3、AI 不可用时核心结果保留、提交前隐私提示和可扫描入口二维码。
+- 发布实现：新增单容器入口、生产 HTTPS/公开 URL 校验及香港`.com`部署方案；关键静态资产保持自托管边界。
+- 尚未满足的完成闸门：缺正式`.com`与香港运行环境、生产 AI 密钥/模型的真实上游验收、获授权 Logo/城市图片，以及大陆三网与海外真机网络验收。因此 T-009 保持 In Progress，不把“集成测试通过”误写为“已经可公开发布”。
+- 结果链接：`service/`、`data/city_profiles_mvp.json`、`data/CITY_PROFILE_SOURCES.md`、`product/frontend_interface_contract.md`、`product/t009_release_and_privacy.md`、`app/QA.md`
 
 ## Done
 

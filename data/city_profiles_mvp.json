@@ -1,0 +1,160 @@
+{
+  "schema_version": "city-profile-mvp-v0.1",
+  "reviewed_on": "2026-09-15",
+  "score_boundary": "These profiles are explanation-only and never enter City Engine or Matching Engine scores.",
+  "media_policy": "No city photo is bundled. Production media requires a separate asset-level licence record.",
+  "profiles": [
+    {
+      "city_id": "2643743",
+      "city_name_en": "London",
+      "city_name_zh": "伦敦",
+      "core_tags": ["河流穿城", "公园日常", "文化层叠"],
+      "facts": {
+        "geography": ["泰晤士河贯穿伦敦，并通过潮汐河段与北海相连。", "城市及其周边地势总体较低缓，绿地与河岸共同构成日常空间。"],
+        "climate": ["长期气候快照显示年均温约 10.25°C、年降水约 716 mm、相对湿度约 84.67%。", "温带海洋性影响使气温变化相对温和，全年都有降水。"],
+        "city_life": ["河岸步行、公园和高密度文化设施在城市生活中并存。", "历史街区与持续更新的现代城区形成多层次城市体验。"]
+      },
+      "profile_tags": ["Art", "Finance", "History", "Academic", "Nature", "Lifestyle"],
+      "sources": [
+        {"id": "city-facts-2026-09-11-v1", "url": "data/cities.csv", "supports": ["climate", "terrain", "vegetation"], "license": "NASA open data; ESA WorldCover CC BY 4.0; Copernicus DEM licence; derived metrics inherit source terms", "usage_boundary": "Derived facts and values may be displayed with attribution."},
+        {"id": "london-thames-mapping", "url": "https://www.london.gov.uk/media/1173/download", "supports": ["Thames", "river geography"], "license": "Official public information; copyright retained", "usage_boundary": "Paraphrase factual statements only; do not reuse graphics or substantial text."},
+        {"id": "met-office-location-averages", "url": "https://www.metoffice.gov.uk/research/climate/maps-and-data/location-specific-long-term-averages", "supports": ["UK climate context"], "license": "Met Office terms apply", "usage_boundary": "Reference and link only; numerical MVP climate values remain from the locked NASA snapshot."}
+      ],
+      "confidence": "medium_high",
+      "review_status": "facts_reviewed_media_missing"
+    },
+    {
+      "city_id": "6173331",
+      "city_name_en": "Vancouver",
+      "city_name_zh": "温哥华",
+      "core_tags": ["山海相拥", "森林舒展", "户外日常"],
+      "facts": {
+        "geography": ["温哥华位于太平洋沿岸，布勒内湾与菲沙河水系共同塑造滨水边界。", "城市北侧山地抬升明显，30 km 范围地形高差接近 938 m。"],
+        "climate": ["长期气候快照显示年均温约 10.55°C、年降水约 1,293 mm、相对湿度约 81.34%。", "海洋影响、丰沛降水与山地共同形成湿润温和的底色。"],
+        "city_life": ["海堤、滨水公园与通往山地的户外活动紧密连接城市日常。", "自然景观与多元社区生活相邻，城市节奏在开放与从容之间转换。"]
+      },
+      "profile_tags": ["Nature", "Outdoor", "Food", "Lifestyle", "Art"],
+      "sources": [
+        {"id": "city-facts-2026-09-11-v1", "url": "data/cities.csv", "supports": ["climate", "coast", "terrain"], "license": "NASA open data; ESA WorldCover CC BY 4.0; Copernicus DEM licence; Natural Earth public domain", "usage_boundary": "Derived facts and values may be displayed with attribution."},
+        {"id": "vancouver-waterfront-inventory-2011", "url": "https://vancouver.ca/files/cov/vancouver-waterfront-inventory-2011.pdf", "supports": ["waterfront", "Burrard Inlet", "Fraser River"], "license": "City of Vancouver copyright", "usage_boundary": "Paraphrase official factual content; do not reuse maps or photography without permission."},
+        {"id": "vancouver-waterfront-policy", "url": "https://guidelines.vancouver.ca/policy-fraser-river-burrard-inlet-waterfront.pdf", "supports": ["waterfront public realm"], "license": "City of Vancouver copyright", "usage_boundary": "Reference factual planning context only."}
+      ],
+      "confidence": "high",
+      "review_status": "facts_reviewed_media_missing"
+    },
+    {
+      "city_id": "1850147",
+      "city_name_en": "Tokyo",
+      "city_name_zh": "东京",
+      "core_tags": ["海湾流动", "秩序精密", "传统新生"],
+      "facts": {
+        "geography": ["东京都从东京湾沿岸的低地延伸到西部山地，并包括伊豆与小笠原岛屿。", "中心城区与河流、运河、海湾形成密集的水陆边界。"],
+        "climate": ["长期气候快照显示年均温约 15.55°C、年降水约 1,636 mm、相对湿度约 79.05%。", "四季变化明显，夏季温暖湿润，降水丰沛。"],
+        "city_life": ["高密度交通与街区秩序支撑快节奏生活，同时保留神社、庭园与传统商业街。", "大型文化设施、设计、美食与细密社区日常并置。"]
+      },
+      "profile_tags": ["Technology", "Innovation", "Food", "Art", "History", "Lifestyle"],
+      "sources": [
+        {"id": "city-facts-2026-09-11-v1", "url": "data/cities.csv", "supports": ["climate", "coast", "terrain"], "license": "NASA open data; ESA WorldCover CC BY 4.0; Copernicus DEM licence; Natural Earth public domain", "usage_boundary": "Derived facts and values may be displayed with attribution."},
+        {"id": "tokyo-metropolitan-government-geography", "url": "https://www.english.metro.tokyo.lg.jp/w/000-101-007591", "supports": ["metropolitan geography", "islands", "western mountains"], "license": "Tokyo Metropolitan Government copyright", "usage_boundary": "Paraphrase factual statements only."},
+        {"id": "tokyo-natural-parks", "url": "https://www.kankyo1.metro.tokyo.lg.jp/naturepark/english/dynamic/index.html", "supports": ["natural parks", "mountain and island nature"], "license": "Tokyo Metropolitan Government copyright", "usage_boundary": "Reference and paraphrase; no image reuse."}
+      ],
+      "confidence": "medium_high",
+      "review_status": "facts_reviewed_media_missing"
+    },
+    {
+      "city_id": "1880252",
+      "city_name_en": "Singapore",
+      "city_name_zh": "新加坡",
+      "core_tags": ["湿热丰沛", "海岛流动", "花园秩序"],
+      "facts": {
+        "geography": ["新加坡是位于赤道附近的低海拔海岛城市，海岸与海峡构成鲜明边界。", "30 km 空间样本中海洋占比超过六成，地形总体低缓。"],
+        "climate": ["新加坡气象署将其概括为高温、高湿、全年雨量充足的热带气候。", "锁定快照显示年均温约 26.96°C、年降水约 2,275 mm、相对湿度约 84.74%。"],
+        "city_life": ["公园、自然保护区与公园连道网络把热带植被嵌入高密度城市。", "多语社群、港口联系和街区美食形成强烈的开放与流动感。"]
+      },
+      "profile_tags": ["Nature", "Food", "Finance", "Technology", "Innovation", "Lifestyle"],
+      "sources": [
+        {"id": "city-facts-2026-09-11-v1", "url": "data/cities.csv", "supports": ["climate", "ocean", "terrain"], "license": "NASA open data; ESA WorldCover CC BY 4.0; Copernicus DEM licence; Natural Earth public domain", "usage_boundary": "Derived facts and values may be displayed with attribution."},
+        {"id": "meteorological-service-singapore-climate", "url": "https://www.weather.gov.sg/climate-climate-of-singapore/", "supports": ["equatorial climate", "temperature", "humidity", "rainfall"], "license": "Government of Singapore terms apply", "usage_boundary": "Paraphrase factual climate description; numerical model values remain from locked snapshot."},
+        {"id": "singapore-nparks-parks-network", "url": "https://www.nparks.gov.sg/visit/when-visiting-parks/about-parks-nature-reserves-pcns", "supports": ["parks", "nature reserves", "park connectors"], "license": "Government of Singapore terms apply", "usage_boundary": "Paraphrase factual statements; no image reuse."}
+      ],
+      "confidence": "high",
+      "review_status": "facts_reviewed_media_missing"
+    },
+    {
+      "city_id": "5128581",
+      "city_name_en": "New York",
+      "city_name_zh": "纽约",
+      "core_tags": ["港湾汇流", "密度鲜明", "多元生长"],
+      "facts": {
+        "geography": ["纽约由岛屿、半岛与大陆部分共同组成，哈德逊河、东河与纽约港形成复杂水岸。", "城市坐落在大西洋沿岸，30 km 样本中海洋占比约 27.7%。"],
+        "climate": ["长期气候快照显示年均温约 12.06°C、年降水约 1,256 mm、相对湿度约 80.16%。", "四季分明，滨海位置与大陆性天气共同作用。"],
+        "city_life": ["密集街区、公共交通、滨水公园与大型文化机构让城市保持高流动性。", "金融、艺术、学术、美食与不同社群在相邻街区形成强烈对照。"]
+      },
+      "profile_tags": ["Finance", "Art", "Academic", "Food", "Fashion", "Innovation", "Lifestyle"],
+      "sources": [
+        {"id": "city-facts-2026-09-11-v1", "url": "data/cities.csv", "supports": ["climate", "coast", "terrain"], "license": "NASA open data; ESA WorldCover CC BY 4.0; Copernicus DEM licence; Natural Earth public domain", "usage_boundary": "Derived facts and values may be displayed with attribution."},
+        {"id": "nyc-dep-east-river-open-water", "url": "https://www.nyc.gov/site/dep/water/citywide-east-river-open-water.page", "supports": ["East River", "New York Harbor waterways"], "license": "City of New York copyright", "usage_boundary": "Paraphrase factual waterway information only."},
+        {"id": "nyc-escr-openings-2025", "url": "https://www.nyc.gov/site/ddc/about/press-releases/2025/pr-052925-ESCRopenings.page", "supports": ["East River waterfront parks", "public space"], "license": "City of New York copyright", "usage_boundary": "Use as current public-realm evidence; no media reuse."}
+      ],
+      "confidence": "medium_high",
+      "review_status": "facts_reviewed_media_missing"
+    },
+    {
+      "city_id": "3128760",
+      "city_name_en": "Barcelona",
+      "city_name_zh": "巴塞罗那",
+      "core_tags": ["地中海光线", "山海相望", "街区鲜活"],
+      "facts": {
+        "geography": ["巴塞罗那面向地中海，城市背靠科尔塞罗拉山地，并处在贝索斯河与略夫雷加特河之间。", "海岸、丘陵与紧凑城市网格在较短距离内交汇。"],
+        "climate": ["长期气候快照显示年均温约 15.43°C、年降水约 519 mm、相对湿度约 69.8%。", "地中海型气候表现为温暖明亮、相对偏干且降水季节性明显。"],
+        "city_life": ["步行街区、市场、海滩与公共空间连接紧密。", "建筑、艺术、美食与户外生活共同形成外向而有节奏的城市体验。"]
+      },
+      "profile_tags": ["Architecture", "Art", "Food", "History", "Nature", "Lifestyle"],
+      "sources": [
+        {"id": "city-facts-2026-09-11-v1", "url": "data/cities.csv", "supports": ["climate", "coast", "terrain"], "license": "NASA open data; ESA WorldCover CC BY 4.0; Copernicus DEM licence; Natural Earth public domain", "usage_boundary": "Derived facts and values may be displayed with attribution."},
+        {"id": "barcelona-breakwater", "url": "https://www.barcelona.cat/en/discoverbcn/pics/el-passeig-de-lescullera-trencaones-99400064469", "supports": ["Mediterranean waterfront", "breakwater"], "license": "Barcelona City Council copyright", "usage_boundary": "Paraphrase factual description; do not reuse photography."},
+        {"id": "barcelona-geographic-nodes", "url": "https://ajuntament.barcelona.cat/ecologiaurbana/es/noticia/els-nodes-geografics-de-manifesta-15-collserola-el-delta-del-llobregat-i-el-riu-besos_1306087", "supports": ["Collserola", "Besos", "Llobregat"], "license": "Barcelona City Council copyright", "usage_boundary": "Reference and paraphrase only."}
+      ],
+      "confidence": "medium_high",
+      "review_status": "facts_reviewed_media_missing"
+    },
+    {
+      "city_id": "1796236",
+      "city_name_en": "Shanghai",
+      "city_name_zh": "上海",
+      "core_tags": ["江海交汇", "城市流光", "开放更新"],
+      "facts": {
+        "geography": ["上海位于长江入海口南缘，黄浦江与苏州河穿过城市核心。", "地势低平，锁定 30 km 样本的中位海拔约 4.15 m。"],
+        "climate": ["长期气候快照显示年均温约 16.86°C、年降水约 1,194 mm、相对湿度约 77.72%。", "季风影响带来湿润环境与清晰季节变化。"],
+        "city_life": ["滨江空间、梧桐街区、密集商业与持续更新的新城区并置。", "金融、艺术、设计、美食与国际交流让城市生活保持流动与速度。"]
+      },
+      "profile_tags": ["Finance", "Art", "Food", "Fashion", "Innovation", "History", "Lifestyle"],
+      "sources": [
+        {"id": "city-facts-2026-09-11-v1", "url": "data/cities.csv", "supports": ["climate", "elevation", "terrain"], "license": "NASA open data; ESA WorldCover CC BY 4.0; Copernicus DEM licence; Natural Earth public domain", "usage_boundary": "Derived facts and values may be displayed with attribution."},
+        {"id": "shanghai-huangpu-suzhou", "url": "https://english.shanghai.gov.cn/en-CityTour/20250325/a0b2498d73b74b658da4f279ee3d3684.html", "supports": ["Huangpu River", "Suzhou Creek", "waterfront context"], "license": "Shanghai municipal portal copyright", "usage_boundary": "Paraphrase factual statements; no image reuse."},
+        {"id": "shanghai-expo-culture-park", "url": "https://english.shanghai.gov.cn/en-Parks/20231229/78434aa35b184c8c91bc0419313ebdd6.html", "supports": ["public parks", "Huangpu waterfront"], "license": "Shanghai municipal portal copyright", "usage_boundary": "Paraphrase public park facts only."}
+      ],
+      "confidence": "medium_high",
+      "review_status": "facts_reviewed_media_missing"
+    },
+    {
+      "city_id": "1857910",
+      "city_name_en": "Kyoto",
+      "city_name_zh": "京都",
+      "core_tags": ["山城层叠", "四季细腻", "历史沉静"],
+      "facts": {
+        "geography": ["京都市区位于山地环绕的盆地，鸭川与桂川等水系穿行其间。", "锁定样本显示 30 km 地形高差约 538 m、植被占比约 74%。"],
+        "climate": ["长期气候快照显示年均温约 13.6°C、年降水约 1,625 mm、相对湿度约 83.33%。", "盆地地形使季节感鲜明，夏季湿热、冬季偏冷。"],
+        "city_life": ["寺社、庭园、传统街区与大学文化共同塑造缓慢而细密的日常。", "山色、河流与季节变化持续进入步行和社区生活。"]
+      },
+      "profile_tags": ["History", "Architecture", "Academic", "Art", "Food", "Nature", "Lifestyle"],
+      "sources": [
+        {"id": "city-facts-2026-09-11-v1", "url": "data/cities.csv", "supports": ["climate", "terrain", "vegetation"], "license": "NASA open data; ESA WorldCover CC BY 4.0; Copernicus DEM licence; Natural Earth public domain", "usage_boundary": "Derived facts and values may be displayed with attribution."},
+        {"id": "kyoto-landscape-policy", "url": "https://www.city.kyoto.lg.jp/tokei/cmsfiles/contents/0000281/281300/1shou.pdf", "supports": ["basin and surrounding mountains", "landscape structure"], "license": "City of Kyoto copyright", "usage_boundary": "Paraphrase factual landscape context; do not reproduce maps or graphics."},
+        {"id": "kyoto-museum-guide", "url": "https://kyoto-museums.city.kyoto.lg.jp/en/museum/618/", "supports": ["municipal cultural institution context"], "license": "Kyoto City copyright", "usage_boundary": "Reference public facts only; no image reuse."}
+      ],
+      "confidence": "medium_high",
+      "review_status": "facts_reviewed_media_missing"
+    }
+  ]
+}
