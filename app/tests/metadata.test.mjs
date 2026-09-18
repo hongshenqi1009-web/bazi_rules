@@ -12,5 +12,6 @@ test("production metadata uses the formal canonical domain and Chinese brand", a
   assert.match(html, /property="og:url" content="https:\/\/mydestinycity\.com\/"/);
   assert.match(html, /property="og:site_name" content="山河有应"/);
   assert.match(html, /name="twitter:card" content="summary_large_image"/);
+  assert.match(html, /property="og:image" content="https:\/\/mydestinycity\.com\/assets\/brand\/og-city\.jpg"/);
   assert.doesNotMatch(html, /example\.com|127\.0\.0\.1|localhost/);
 });

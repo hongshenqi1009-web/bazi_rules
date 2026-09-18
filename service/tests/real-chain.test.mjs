@@ -1,12 +1,13 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { stat } from "node:fs/promises";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { unavailableContent } from "../src/content-service.mjs";
 import { interpretBazi } from "../src/interpretation-engine.mjs";
 import { MatchingEngine } from "../src/matching-engine.mjs";
 import { PersonalNeedEngine } from "../src/personal-need-engine.mjs";
-import { ReadingStore } from "../src/reading-store.mjs";
+import { ReadingStore, contractCity } from "../src/reading-store.mjs";
 import { CityProfileRepository } from "../src/repositories/city-profile-repository.mjs";
 import { CityRepository } from "../src/repositories/city-repository.mjs";
 import { LocationRepository } from "../src/repositories/location-repository.mjs";
@@ -44,11 +45,32 @@ test("eight reviewed City Profiles have auditable media and cannot change scores
     assert.match(profile.media.sha256, /^[a-f0-9]{64}$/);
     assert.equal(profile.media.width, 1536);
     assert.equal(profile.media.height, 1024);
+    for (const variant of ["thumbnail", "detail", "share"]) {
+      assert.match(profile.media.derivatives[variant], /^\/assets\/cities\/derived\/.+\.webp$/);
+      const file = resolve(repoRoot, "app", profile.media.derivatives[variant].slice(1));
+      assert.ok((await stat(file)).size > 30_000);
+    }
     assert.ok(cities.get(profile.city_id));
     assert.ok(profile.sources.every((source) => source.url && source.license && source.usage_boundary));
     assert.equal("score" in profile, false);
     assert.equal("vector" in profile, false);
   }
+});
+
+test("one audited city exposes distinct list, detail and share media without changing its score", async () => {
+  const { profiles } = await fixtures();
+  const profile = profiles.get("2643743");
+  const city = contractCity({
+    id: profile.city_id, zh: profile.city_name_zh, en: profile.city_name_en,
+    rank: 1, index: 91, tier: "top", very_close: false,
+    tags: profile.core_tags, media: profile.media,
+    match_reasons: { short: "测试" }, content: unavailableContent("TEST_AI_OFFLINE"), share_line: "测试"
+  });
+  assert.equal(city.compatibility_index, 91);
+  assert.equal(city.thumbnail.url, profile.media.derivatives.thumbnail);
+  assert.equal(city.hero_media.url, profile.media.derivatives.detail);
+  assert.equal(city.share_media.url, profile.media.derivatives.share);
+  assert.equal(city.content.status, "unavailable");
 });
 
 test("a real birth input completes BaZi, interpretation, R2 and 100-city matching without storing raw input", async () => {

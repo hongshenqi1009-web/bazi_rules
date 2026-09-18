@@ -93,7 +93,7 @@ async function mediaDataUrl(url) {
 
 export async function downloadShareCard(result) {
   let heroDataUrl = null;
-  try { heroDataUrl = await mediaDataUrl(result.rankedCities[0]?.heroMedia?.url); } catch { /* keep the branded fallback */ }
+  try { heroDataUrl = await mediaDataUrl(result.rankedCities[0]?.shareMedia?.url || result.rankedCities[0]?.heroMedia?.url); } catch { /* keep the branded fallback */ }
   const svg = buildShareCardSvg(result, { heroDataUrl });
   const blob = new Blob([svg], { type: "image/svg+xml;charset=utf-8" });
   const url = URL.createObjectURL(blob);

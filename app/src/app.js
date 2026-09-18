@@ -399,7 +399,7 @@ function renderCityDetail() {
         <section class="content-unavailable" role="status">
           <h2>详细解读暂时不可用</h2>
           <p>${city.city_profile_status === "not_yet_published" ? "这座城市的正式资料仍在审核中；核心匹配结果不受影响。" : "用户五行、Top 3 与契合指数已经完成真实计算，可以稍后重试城市解读。"}</p>
-          ${city.city_profile_status === "reviewed" ? `<button class="secondary-button" type="button" data-action="retry-content" ${state.contentRetrying ? "disabled" : ""}>${state.contentRetrying ? "正在重试…" : "重试详细解读"}</button>` : ""}
+          ${city.city_profile_status === "reviewed" && city.contentRetryable !== false ? `<button class="secondary-button" type="button" data-action="retry-content" ${state.contentRetrying ? "disabled" : ""}>${state.contentRetrying ? "正在重试…" : "重试详细解读"}</button>` : ""}
         </section>`}
       <div class="detail-actions">
         <button class="secondary-button" type="button" data-action="back-cities">返回榜单</button>

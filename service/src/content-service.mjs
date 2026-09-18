@@ -66,7 +66,7 @@ export class CityContentService {
 
   async generate(personal, city, profile) {
     if (!profile) return unavailable("CITY_PROFILE_NOT_PUBLISHED", false);
-    if (!this.apiKey || !this.model) return unavailable("CONTENT_SERVICE_NOT_CONFIGURED");
+    if (!this.apiKey || !this.model) return unavailable("CONTENT_SERVICE_NOT_CONFIGURED", false);
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), this.timeoutMs);
     try {
@@ -93,7 +93,7 @@ export class CityContentService {
           }
         })
       });
-      if (!response.ok) return unavailable(`CONTENT_UPSTREAM_${response.status}`);
+      if (!response.ok) return unavailable(`CONTENT_UPSTREAM_${response.status}`, response.status === 429 || response.status >= 500);
       const payload = await response.json();
       const text = extractOutputText(payload);
       const parsed = JSON.parse(text);
@@ -104,7 +104,12 @@ export class CityContentService {
         generated_by: "ai",
         model: this.model,
         prompt_version: "city-detail-ai-v0.1",
-        source_profile_version: "city-profile-mvp-v0.2"
+        source_profile_version: "city-profile-mvp-v0.2",
+        usage: payload.usage ? {
+          input_tokens: payload.usage.input_tokens,
+          output_tokens: payload.usage.output_tokens,
+          total_tokens: payload.usage.total_tokens
+        } : null
       };
     } catch (error) {
       return unavailable(error?.name === "AbortError" ? "CONTENT_TIMEOUT" : "CONTENT_GENERATION_FAILED");

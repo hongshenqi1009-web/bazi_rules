@@ -43,7 +43,7 @@ const readings = new ReadingStore({
 
 const mimeTypes = {
   ".css": "text/css; charset=utf-8", ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8",
-  ".json": "application/json; charset=utf-8", ".svg": "image/svg+xml; charset=utf-8", ".png": "image/png"
+  ".json": "application/json; charset=utf-8", ".svg": "image/svg+xml; charset=utf-8", ".png": "image/png", ".webp": "image/webp", ".jpg": "image/jpeg"
 };
 const securityHeaders = {
   "Content-Security-Policy": "default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' data:; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'",
@@ -94,6 +94,7 @@ async function serveStatic(pathname, response) {
     const info = await stat(filePath);
     if (info.isDirectory()) throw new Error("directory");
   } catch {
+    if (extname(requested)) throw new ServiceError("ASSET_NOT_FOUND", "资源不存在。", { status: 404, retryable: false });
     filePath = resolve(APP_ROOT, "index.html");
   }
   const isHtml = extname(filePath) === ".html";
@@ -128,7 +129,7 @@ async function handler(request, response) {
       return response.end(svg);
     }
     if (url.pathname.startsWith("/api/")) throw new ServiceError("NOT_FOUND", "接口不存在。", { status: 404 });
-    return serveStatic(url.pathname, response);
+    return await serveStatic(url.pathname, response);
   } catch (error) {
     const body = publicError(error);
     return sendJson(response, error instanceof ServiceError ? error.status : 500, { error: body });

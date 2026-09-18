@@ -25,8 +25,10 @@
 - 发布实现：新增单容器入口、生产 HTTPS/公开 URL 校验及香港`.com`部署方案；关键静态资产保持自托管边界。
 - 视觉素材（2026-09-15）：按 D-027 整理完整 Logo 与简化 icon；生成 London、Vancouver、Tokyo、Singapore、New York、Barcelona、Shanghai、Kyoto 8 张统一 1536 × 1024 城市意象候选图，记录提示、地标、替代文本、焦点与 SHA-256，并接通服务端媒体字段、城市详情、榜单和分享卡预览。未引入来源不明的外部图片。
 - 域名与部署（2026-09-15）：正式主域名确认为`https://mydestinycity.com/`；生产配置、二维码、canonical 与 OG URL 已统一，`www`采用 308 到根域名。新增香港 Caddy/Compose 生产与受控 staging 配置，以及 DNS、证书和上线验收清单。
-- 尚未满足的完成闸门：域名尚待实际 DNS/证书和香港环境绑定，仍缺生产 AI 密钥/模型真实上游验收、8 城候选图最终品牌方/适用条款与移动裁切压缩验收，以及大陆三网与海外真机网络验收。因此 T-009 保持 In Progress，不把“配置就绪”误写为“已经可公开发布”。
-- 结果链接：`service/`、`data/city_profiles_mvp.json`、`data/CITY_PROFILE_SOURCES.md`、`design/assets/`、`app/assets/`、`deploy/`、`product/frontend_interface_contract.md`、`product/t009_release_and_privacy.md`、`app/QA.md`
+- 2026-09-18 工程收尾：完成 8 城三场景 WebP 压缩裁切与 1200 × 630 OG JPEG，母版保留；API 分别返回榜单、详情、分享媒体。修复缺图 404 导致进程退出的问题；本地完整计算链、媒体 MIME、缺图恢复与 AI 401/429/5xx/超时/畸形输出回归通过，`service` 17/17、`app` 14/14。
+- 2026-09-18 公网核验：Google DNS 对正式域名返回 NXDOMAIN，`.com` 注册局 RDAP 返回 404；本环境无香港云或生产 AI 凭据，无法真实部署或调用。已写`deploy/OWNER_ACTION_REQUIRED.md`、`deploy/verify-production.mjs`和 8 城 AI 验收脚本，严格区分本地模拟与公网实测。
+- 尚未满足的完成闸门：确认注册商订单/NS并完成香港生产与独立 staging 的实际 DNS、证书和服务部署；生产 AI 真实上游/成本验收；8 城候选图、Logo/OG 的品牌方/适用条款与真机裁切签收；海外 iPhone/Android 与大陆移动/联通/电信网络实测及完整用户链 QA。T-009 保持 In Progress，不把“配置就绪”误写为“已经可公开发布”。
+- 结果链接：`service/`、`data/city_profiles_mvp.json`、`data/CITY_PROFILE_SOURCES.md`、`design/assets/`、`app/assets/`、`deploy/OWNER_ACTION_REQUIRED.md`、`deploy/verify-production.mjs`、`product/frontend_interface_contract.md`、`product/t009_release_and_privacy.md`、`app/QA.md`
 
 ## Done
 

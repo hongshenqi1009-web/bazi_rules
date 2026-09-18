@@ -42,15 +42,18 @@ function copyCity(city) {
   };
 }
 
-function contractCity(city) {
+export function contractCity(city) {
   const copied = copyCity(city);
   const media = copied.media ? {
-    url: copied.media.url,
     alt_zh: copied.media.alt_zh,
     asset_id: copied.media.asset_id,
     attribution: copied.media.attribution,
     type: copied.media.type,
     focal_point: copied.media.focal_point
+  } : null;
+  const mediaFor = (variant) => media ? {
+    ...media,
+    url: copied.media.derivatives?.[variant] || copied.media.url
   } : null;
   return {
     rank: copied.rank,
@@ -62,8 +65,9 @@ function contractCity(city) {
     very_close_match: copied.veryClose,
     core_mood_tags: copied.tags,
     scene: copied.scene,
-    thumbnail: media,
-    hero_media: media,
+    thumbnail: mediaFor("thumbnail"),
+    hero_media: mediaFor("detail"),
+    share_media: mediaFor("share"),
     city_profile_status: copied.city_profile_status,
     data_confidence: copied.data_confidence,
     match_reason_summary: copied.match_reasons?.short || "",

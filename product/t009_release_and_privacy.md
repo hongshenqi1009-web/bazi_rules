@@ -1,7 +1,7 @@
 # T-009 真实服务、隐私与部署方案
 
-- 状态：实现完成，发布条件待补
-- 最后更新：2026-09-15
+- 状态：本地技术候选完成，公开发布条件未通过
+- 最后更新：2026-09-18
 - 适用范围：山河有应免费娱乐传播版 MVP
 
 ## 1. 真实服务编排
@@ -27,7 +27,7 @@
 
 - BaZi、解释或匹配失败：整次核心计算失败，用户看到可重试提示；不得返回固定结果。
 - AI 文案超时、上游错误、结构校验失败或尚无已发布 City Profile：Top 3、契合指数、五行画像和标签照常展示；详情显示“详细解读暂时不可用，可稍后重试”。
-- AI 重试只重做该城市内容，不重新排盘或改变排名。
+- AI 自动重试为 0 次；429、5xx、超时等可恢复错误允许用户手动单城重试，401/403 或未配置不提供无效重试。重试只重做该城市内容，不重新排盘或改变排名。
 - 结果过期：返回 `READING_EXPIRED`，引导重新开始；不伪造恢复结果。
 - 分享二维码只接受服务端配置的公开入口，不能让请求方注入任意 URL。
 
@@ -61,7 +61,7 @@
 
 ## 4. 首批 City Profile 发布边界
 
-`data/city_profiles_mvp.json` 首批发布 London、Vancouver、Tokyo、Singapore、New York、Barcelona、Shanghai、Kyoto 共 8 城。每条 Profile 保存：
+`data/city_profiles_mvp.json` 首批候选 London、Vancouver、Tokyo、Singapore、New York、Barcelona、Shanghai、Kyoto 共 8 城。每条 Profile 保存：
 
 - 核心气质标签；
 - 具体地理、气候和城市生活事实；
@@ -69,7 +69,7 @@
 - 来源 URL、发布者、访问日期、许可或使用边界、置信度；
 - 媒体状态。
 
-Profile 不含匹配权重，也不修改城市向量、分数或排名。当前事实文本允许摘要和事实性转述；原网页图片没有随数据进入仓库。`facts_reviewed_media_candidate` 表示文字事实已审，并已绑定从零生成的城市意象候选图；生成图不是纪实摄影或事实证据，仍须在公开发布前完成品牌方与适用条款验收。
+Profile 不含匹配权重，也不修改城市向量、分数或排名。当前事实文本允许摘要和事实性转述；原网页图片没有随数据进入仓库。`facts_reviewed_media_candidate` 表示文字事实已审，并已绑定从零生成的城市意象候选图；生成图不是纪实摄影或事实证据，仍须在公开发布前完成品牌方与适用条款验收。2026-09-18 已生成 8 城 × 榜单/详情/分享三场景共 24 张 WebP 衍生版，母版保留；产品签收与真机验收仍未完成。
 
 ## 5. AI 内容约束
 
@@ -79,7 +79,7 @@ AI 必须按 JSON Schema 返回三个段落：
 2. `why`：为什么契合，解释五行组合和匹配理由，不生硬直译；
 3. `feeling`：它会带来的感受，把城市气息与用户已有优势连接，不作宿命或成功承诺。
 
-任何无法通过结构校验的输出都视为不可用，不展示半成品。AI 不参与排盘、分数和排序。
+任何无法通过结构校验的输出都视为不可用，不展示半成品。AI 不参与排盘、分数和排序。结构约束和提示不能数学上保证没有事实幻觉，因此正式生产模型输出仍须用 8 城核验事实逐条抽查；未完成前不能宣称内容事实验收通过。
 
 ## 6. 境内外可访问部署方案
 
@@ -115,16 +115,31 @@ READING_TTL_MINUTES=15
 代码和本地真实链已经就绪，但公开发布必须同时满足：
 
 - [x] 正式域名确认为`mydestinycity.com`，生产配置与二维码入口已固定为`https://mydestinycity.com/`；
-- [ ] 在域名 DNS 控制台把根域名、`www`及可选`staging`记录指向香港入口，并完成证书签发；
+- [ ] 核对注册商订单与权威 NS：2026-09-18 公网 DNS 为 NXDOMAIN、`.com` RDAP 404；然后把根域名、`www`及独立`staging`记录指向香港入口并完成证书签发；
 - [ ] 选择香港云账号/区域并完成 HTTPS、备份、告警和限流；
 - [ ] 注入可用 AI 模型与服务端密钥，跑一次真实上游内容验收；
 - [x] 整理完整 Logo、简化 icon 与首批 8 城统一尺寸的上线候选图，记录生成方式、哈希和使用边界；
-- [ ] 产品方逐张确认 8 城图，并完成压缩衍生、移动裁切、AI 素材披露/商用条款与最终公开构建审核；
+- [x] 完成 8 城榜单/详情/分享 WebP 压缩衍生与 OG JPEG，保留母版并做桌面裁切总览检查；
+- [ ] 产品方逐张确认 8 城图、Logo、OG，完成实际手机裁切、AI 素材披露/商用条款与最终公开构建审核；
 - [ ] 在大陆三网与至少一个海外网络完成真机流程和二维码扫描；
 - [ ] 完成适用法域的隐私、免责声明和第三方处理者审核；
-- [ ] 确认 GeoNames 署名展示位置，并保留 8 城来源台账。
+- [x] GeoNames 署名与 CC BY 4.0 链接在出生地点选择页可见，8 城来源台账保留；
 
 在上述条件补齐前，版本是“真实链路发布候选”，不是可公开上线版本。
+
+### 2026-09-18 生产 AI 验收参数与实际状态
+
+| 项目 | 当前状态 |
+|---|---|
+| 实际生产模型 / 密钥 | **未配置、未实测**；不能把建议模型写成已上线模型。 |
+| 建议首测模型 | `gpt-5.6-luna`，其官方模型页列明 Responses 与 Structured Outputs；若质量不达标，再由实测决定替换。 |
+| 单城调用 | `POST /v1/responses`，`store:false`、`background:false`、`max_output_tokens:850`。 |
+| 超时 / 重试 | 每次 18,000 ms；自动重试 0 次；用户仅在可恢复错误时手动重试该城市。 |
+| fallback | 仅显示“详细解读暂时不可用”；保留已真实计算的画像、Top 3、指数、标签；绝不回退样板文案。 |
+| token / 成本 | 生产实际值 **未知**。`service/scripts/smoke-ai.mjs` 已可逐城记录 API `usage`；以 Luna 当前公开价与假设的 1,000 输入 + 500 输出 token 举例，约 $0.0008/城，非真实计费记录。 |
+| 故障验证 | 本地模拟 401、429、500、503、超时、格式错误均通过；生产真实成功、限流/上游错误及密钥权限仍未验收。 |
+
+公开 DNS/TLS、生产 AI、视觉签收、设备网络的真实证据与所有者动作见 `deploy/OWNER_ACTION_REQUIRED.md`；逐项测试状态见 `app/QA.md`。
 
 ## 8. 可重复验证
 
@@ -149,6 +164,7 @@ docker run --rm -p 4173:4173 \
 - GeoNames 数据与许可：<https://www.geonames.org/export/>、<https://www.geonames.org/export/web-services.html>
 - OpenAI Responses API：<https://developers.openai.com/api/reference/cli/resources/responses/methods/create>
 - OpenAI API 数据控制：<https://developers.openai.com/api/docs/guides/your-data>
+- OpenAI GPT-5.6 Luna 模型/价格/结构化输出能力：<https://developers.openai.com/api/docs/models/gpt-5.6-luna>
 - 阿里云 ICP 备案要求：<https://www.alibabacloud.com/help/en/icp-filing/basic-icp-service/product-overview/icp-filing-requirements-for-a-regular-website>
 - 阿里云 ECS 区域（含中国香港）：<https://www.alibabacloud.com/help/en/ecs/user-guide/regions-and-zones>
 - 阿里云 CDN 加速区域：<https://www.alibabacloud.com/help/en/cdn/user-guide/change-the-accelerated-region>

@@ -43,6 +43,7 @@
 - `design/references/`：六类已确认视觉方向的参考图目录与元数据要求；原图待补。
 - `app/`：移动端纵向 MVP；默认连接 T-009 真实服务，显式`?demo=1`仅保留结构回归。
 - `service/`：T-009 服务端编排、GeoNames 地点索引、BaZi/Interpretation/Personal Need/Matching 适配、AI 内容隔离与测试。
+- `deploy/OWNER_ACTION_REQUIRED.md`：域名订单、香港实例、DNS 精确字段、AI 密钥、视觉签收与真机测试的所有者动作；`deploy/verify-production.mjs`为实际发布后核验脚本。
 
 ## 本地预览真实链路
 
@@ -64,7 +65,7 @@ cd ../app
 pnpm test
 ```
 
-默认入口使用真实计算和地点服务，不会在失败时伪装样板结果。只有`/?demo=1`是明确标记的结构演示。完整 Logo、简化 icon 与首批 8 城生成图已作为可追溯候选接入；公开发布前还需完成产品方素材确认、适用条款与裁切压缩复核，以及`product/t009_release_and_privacy.md`列出的域名、香港部署、AI 密钥与真机网络验收门槛。
+默认入口使用真实计算和地点服务，不会在失败时伪装样板结果。只有`/?demo=1`是明确标记的结构演示。完整 Logo、简化 icon、首批 8 城主图及三场景 WebP 衍生版已作为可追溯候选接入；公开发布前还需完成产品方素材/条款签收，以及`product/t009_release_and_privacy.md`列出的域名、香港部署、AI 密钥与真机网络验收门槛。
 
 ## 状态标签
 
@@ -83,4 +84,4 @@ pnpm test
 
 ## 当前边界
 
-当前 T-009 已完成本地真实计算链、34,135 条标准地点、8 城 City Profile、AI 失败隔离、15 分钟临时结果、首批视觉候选及`mydestinycity.com`生产域名配置；R2 继续作为当前 preferred exposure 方案。公开发布仍受香港 DNS/HTTPS 实际绑定、AI 生产凭据、视觉候选最终验收以及大陆三网真机验收约束。专业付费版、复杂参数研究和商业化继续延后；具体状态以 `PROJECT_STATUS.md` 与 `TASKS.md` 为准。
+当前 T-009 已完成本地真实计算链、34,135 条标准地点、8 城 City Profile、AI 失败隔离、15 分钟临时结果、首批视觉衍生及`mydestinycity.com`生产配置；R2 继续作为当前 preferred exposure 方案。2026-09-18 公网查询发现正式域名仍为 NXDOMAIN/注册局 RDAP 404，须先核对注册订单，且香港部署、生产 AI、视觉最终确认和大陆三网真机均未验收。**T-009 仍是 In Progress，不是公开发布版。**具体动作见`deploy/OWNER_ACTION_REQUIRED.md`。
